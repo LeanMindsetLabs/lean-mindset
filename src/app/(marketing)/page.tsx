@@ -1,9 +1,13 @@
+import Image from "next/image";
 import Link from "next/link";
 import { labs } from "@/data/labs";
 import { blogPosts } from "@/data/blogs";
 import { getSessionProfile } from "@/lib/auth/role";
 import { SiteHeader } from "@/components/marketing/SiteHeader";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
+import { media } from "@/lib/media";
+import { AreaSparkline, RadarScore, WeekBars } from "@/components/ui/Charts";
+import { weekAdherence } from "@/data/dashboard";
 
 export default async function MarketingPage() {
   let signedIn = false;
@@ -16,30 +20,32 @@ export default async function MarketingPage() {
 
   const previewLabs = labs.slice(0, 3);
   const teaserPosts = blogPosts.slice(0, 3);
+  const labImages = [media.ui.dashboard, media.ui.train, media.marketing.lifestyle];
+  const blogImages = [media.ui.blog, media.ui.nutrition, media.ui.progress];
 
   return (
     <div className="min-h-dvh bg-background text-foreground">
       <SiteHeader signedIn={signedIn} />
 
-      {/* Hero — brand first, full-bleed athletic */}
       <section className="relative isolate overflow-hidden">
-        <div
-          className="absolute inset-0 -z-10"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,107,0,0.35), transparent 55%), radial-gradient(ellipse 60% 50% at 100% 40%, rgba(255,107,0,0.12), transparent 50%), linear-gradient(180deg, #0a0a0a 0%, #000 60%)",
-          }}
+        <Image
+          src={media.marketing.hero}
+          alt=""
+          fill
+          priority
+          className="object-cover object-[center_20%] opacity-55"
+          sizes="100vw"
         />
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-2/3 opacity-40"
+          className="absolute inset-0 -z-[0]"
           style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff6b00' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.75) 45%, #000 100%), radial-gradient(ellipse 70% 50% at 70% 20%, rgba(255,107,0,0.35), transparent 55%)",
           }}
         />
 
-        <div className="mx-auto flex min-h-[92dvh] max-w-6xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 lg:justify-center lg:pb-24 lg:pt-32">
-          <p className="font-display text-5xl uppercase leading-none tracking-wide text-white sm:text-7xl lg:text-8xl">
+        <div className="relative mx-auto flex min-h-[92dvh] max-w-6xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 lg:justify-center lg:pb-24 lg:pt-32">
+          <p className="lm-fade-in font-display text-5xl uppercase leading-none tracking-wide text-white sm:text-7xl lg:text-8xl">
             Lean Mindset
           </p>
           <h1 className="mt-5 max-w-xl text-xl font-semibold leading-snug text-white/95 sm:text-2xl">
@@ -74,7 +80,6 @@ export default async function MarketingPage() {
             )}
           </div>
 
-          {/* Hero metric strip — visual, not text wall */}
           <div className="mt-12 grid grid-cols-3 gap-2 sm:max-w-lg sm:gap-3">
             {[
               { k: "6", v: "week labs" },
@@ -83,7 +88,7 @@ export default async function MarketingPage() {
             ].map((m) => (
               <div
                 key={m.v}
-                className="rounded-[var(--lm-radius-md)] border border-white/10 bg-black/40 px-3 py-4 text-center backdrop-blur"
+                className="rounded-[var(--lm-radius-md)] border border-white/10 bg-black/50 px-3 py-4 text-center backdrop-blur"
               >
                 <p className="font-display text-3xl text-accent sm:text-4xl">{m.k}</p>
                 <p className="mt-1 text-[10px] uppercase tracking-wide text-foreground-muted sm:text-xs">
@@ -95,7 +100,6 @@ export default async function MarketingPage() {
         </div>
       </section>
 
-      {/* Promise */}
       <section id="program" className="border-t border-border bg-background-elevated">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center lg:py-24">
           <div>
@@ -106,21 +110,34 @@ export default async function MarketingPage() {
             <p className="mt-4 text-sm text-foreground-muted sm:text-base">
               Lean Mindset labs combine a 4-meal precision plan, adaptive training, hydration targets, and chat-first daily check-ins — so you stay on track without living in a spreadsheet.
             </p>
+            <div className="mt-6 rounded-[var(--lm-radius-lg)] border border-border bg-background-card p-4">
+              <p className="mb-2 text-xs font-semibold text-foreground-muted">Sample adherence</p>
+              <WeekBars data={weekAdherence} />
+            </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
             {[
-              { t: "Nutrition", d: "4 meals · timing · swaps", g: "linear-gradient(135deg,#2a1508,#ff6b00)" },
-              { t: "Training", d: "Foundation → HIIT", g: "linear-gradient(145deg,#1a0a0a,#ff6b00)" },
-              { t: "Hydration", d: "~3.5L checkpoints", g: "linear-gradient(140deg,#0a1a2a,#ff8533)" },
-              { t: "Coaching", d: "Daily chat check-ins", g: "linear-gradient(150deg,#1a1020,#ff6b00)" },
+              { t: "Nutrition", d: "4 meals · timing · swaps", img: media.ui.nutrition, pos: "30% 20%" },
+              { t: "Training", d: "Foundation → HIIT", img: media.ui.train, pos: "60% 30%" },
+              { t: "Hydration", d: "~3.5L checkpoints", img: media.ui.progress, pos: "40% 40%" },
+              { t: "Coaching", d: "Daily chat check-ins", img: media.ui.dashboard, pos: "25% 15%" },
             ].map((c) => (
               <div
                 key={c.t}
-                className="overflow-hidden rounded-[var(--lm-radius-lg)] border border-border"
+                className="lm-card-lift relative overflow-hidden rounded-[var(--lm-radius-lg)] border border-border"
               >
-                <div className="aspect-[4/3]" style={{ background: c.g }}>
-                  <div className="flex h-full flex-col justify-end bg-gradient-to-t from-black/70 to-transparent p-3">
-                    <p className="font-semibold">{c.t}</p>
+                <div className="relative aspect-[4/3]">
+                  <Image
+                    src={c.img}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    style={{ objectPosition: c.pos }}
+                    sizes="(max-width: 768px) 50vw, 280px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-3">
+                    <p className="font-semibold text-white">{c.t}</p>
                     <p className="text-xs text-white/75">{c.d}</p>
                   </div>
                 </div>
@@ -130,7 +147,6 @@ export default async function MarketingPage() {
         </div>
       </section>
 
-      {/* Labs preview */}
       <section id="labs" className="border-t border-border">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
           <div className="flex items-end justify-between gap-4">
@@ -143,20 +159,27 @@ export default async function MarketingPage() {
             </Link>
           </div>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {previewLabs.map((lab) => (
+            {previewLabs.map((lab, i) => (
               <li key={lab.slug}>
                 <Link
                   href={`/labs/${lab.slug}`}
-                  className="group block overflow-hidden rounded-[var(--lm-radius-lg)] border border-border bg-background-card transition hover:border-accent"
+                  className="group lm-card-lift block overflow-hidden rounded-[var(--lm-radius-lg)] border border-border bg-background-card transition hover:border-accent"
                 >
-                  <div
-                    className="aspect-[16/10] transition group-hover:scale-[1.02]"
-                    style={{
-                      background: `linear-gradient(135deg,#111,${lab.accent})`,
-                    }}
-                  />
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <Image
+                      src={labImages[i % labImages.length]}
+                      alt=""
+                      fill
+                      className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                      style={{ objectPosition: `${30 + i * 20}% ${20 + i * 10}%` }}
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                  </div>
                   <div className="p-4">
-                    <p className="text-xs text-accent">{lab.durationWeeks} weeks · {lab.level}</p>
+                    <p className="text-xs text-accent">
+                      {lab.durationWeeks} weeks · {lab.level}
+                    </p>
                     <h3 className="mt-1 font-semibold">{lab.name}</h3>
                     <p className="mt-1 text-xs text-foreground-muted line-clamp-2">{lab.tagline}</p>
                   </div>
@@ -167,49 +190,79 @@ export default async function MarketingPage() {
         </div>
       </section>
 
-      {/* How it works */}
       <section id="how" className="border-t border-border bg-background-elevated">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
           <p className="text-xs font-bold uppercase tracking-widest text-accent">How it works</p>
           <h2 className="mt-2 font-display text-4xl uppercase leading-none">Three moves</h2>
           <ol className="mt-10 grid gap-4 sm:grid-cols-3">
             {[
-              { n: "01", t: "Join a lab", d: "Get your eating schedule, grocery list, workouts, and water plan." },
-              { n: "02", t: "Check in daily", d: "Chat your weight, meals, water, and blockers — coach sees the trend." },
-              { n: "03", t: "Adjust weekly", d: "Fine-tune portions and training as the lab progresses." },
+              {
+                n: "01",
+                t: "Join a lab",
+                d: "Get your eating schedule, grocery list, workouts, and water plan.",
+                img: media.marketing.lift,
+              },
+              {
+                n: "02",
+                t: "Check in daily",
+                d: "Chat your weight, meals, water, and blockers — coach sees the trend.",
+                img: media.ui.dashboard,
+              },
+              {
+                n: "03",
+                t: "Adjust weekly",
+                d: "Fine-tune portions and training as the lab progresses.",
+                img: media.ui.progress,
+              },
             ].map((s) => (
               <li
                 key={s.n}
-                className="relative overflow-hidden rounded-[var(--lm-radius-lg)] border border-border bg-background-card p-5"
+                className="relative overflow-hidden rounded-[var(--lm-radius-lg)] border border-border bg-background-card"
               >
-                <span className="font-display text-5xl text-accent/30">{s.n}</span>
-                <h3 className="mt-2 text-lg font-semibold">{s.t}</h3>
-                <p className="mt-2 text-sm text-foreground-muted">{s.d}</p>
+                <div className="relative h-28">
+                  <Image
+                    src={s.img}
+                    alt=""
+                    fill
+                    className="object-cover opacity-70"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background-card to-transparent" />
+                </div>
+                <div className="p-5 pt-0">
+                  <span className="font-display text-5xl text-accent/40">{s.n}</span>
+                  <h3 className="mt-1 text-lg font-semibold">{s.t}</h3>
+                  <p className="mt-2 text-sm text-foreground-muted">{s.d}</p>
+                </div>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      {/* Check-in angle */}
       <section className="border-t border-border">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center lg:py-24">
-          <div
-            className="relative aspect-[4/5] overflow-hidden rounded-[var(--lm-radius-xl)] border border-border sm:aspect-[16/12] lg:aspect-auto lg:min-h-[380px]"
-            style={{
-              background:
-                "linear-gradient(160deg,#1a0a00 0%,#3a1800 40%,#ff6b00 120%)",
-            }}
-          >
-            <div className="absolute inset-4 flex flex-col justify-end rounded-[var(--lm-radius-lg)] border border-white/10 bg-black/50 p-4 backdrop-blur-md">
-              <p className="text-[10px] font-bold uppercase tracking-wide text-accent">Daily check-in</p>
-              <p className="mt-2 text-sm text-white/90">Day 12 · 178.4 lb · Water 2.3L · 4 meals ✓</p>
-              <div className="mt-4 flex gap-1">
-                {[40, 70, 55, 90, 65, 80, 45].map((h, i) => (
-                  <div key={i} className="flex h-12 flex-1 items-end rounded-sm bg-white/10">
-                    <div className="w-full rounded-sm bg-accent" style={{ height: `${h}%` }} />
-                  </div>
-                ))}
+          <div className="relative min-h-[380px] overflow-hidden rounded-[var(--lm-radius-xl)] border border-border">
+            <Image
+              src={media.ui.dashboard}
+              alt="Member dashboard preview"
+              fill
+              className="object-cover object-[20%_10%]"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
+            <div className="absolute inset-4 flex flex-col justify-end rounded-[var(--lm-radius-lg)] border border-white/10 bg-black/55 p-4 backdrop-blur-md">
+              <p className="text-[10px] font-bold uppercase tracking-wide text-accent">
+                Daily check-in
+              </p>
+              <p className="mt-2 text-sm text-white/90">
+                Day 12 · 178.4 lb · Water 2.3L · 4 meals ✓
+              </p>
+              <div className="mt-3">
+                <AreaSparkline
+                  values={[182, 181, 180.5, 180.2, 179.4, 178.9, 178.4]}
+                  height={56}
+                />
               </div>
             </div>
           </div>
@@ -221,6 +274,18 @@ export default async function MarketingPage() {
             <p className="mt-4 text-sm text-foreground-muted sm:text-base">
               No video calls required. Send your daily check-in in chat — your coach reviews weight trends, adherence, and blockers, then replies with clear next steps.
             </p>
+            <div className="mt-6 max-w-xs rounded-[var(--lm-radius-lg)] border border-border bg-background-card p-3">
+              <RadarScore
+                axes={[
+                  { label: "Meals", value: 80 },
+                  { label: "Protein", value: 62 },
+                  { label: "Water", value: 70 },
+                  { label: "Train", value: 55 },
+                  { label: "Sleep", value: 72 },
+                ]}
+                size={180}
+              />
+            </div>
             <Link
               href={signedIn ? "/check-in" : "/signup"}
               className="mt-6 inline-block rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-white hover:bg-accent-hover"
@@ -231,7 +296,6 @@ export default async function MarketingPage() {
         </div>
       </section>
 
-      {/* Blog teaser */}
       <section id="blog" className="border-t border-border bg-background-elevated">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-24">
           <div className="flex items-end justify-between">
@@ -244,13 +308,23 @@ export default async function MarketingPage() {
             </Link>
           </div>
           <ul className="mt-8 grid gap-4 sm:grid-cols-3">
-            {teaserPosts.map((post) => (
+            {teaserPosts.map((post, i) => (
               <li key={post.slug}>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="block overflow-hidden rounded-[var(--lm-radius-lg)] border border-border bg-background-card hover:border-accent"
+                  className="lm-card-lift block overflow-hidden rounded-[var(--lm-radius-lg)] border border-border bg-background-card hover:border-accent"
                 >
-                  <div className="aspect-[16/10]" style={{ background: post.imageGradient }} />
+                  <div className="relative aspect-[16/10]">
+                    <Image
+                      src={blogImages[i % blogImages.length]}
+                      alt=""
+                      fill
+                      className="object-cover"
+                      style={{ objectPosition: `${25 + i * 15}% center` }}
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                  </div>
                   <div className="p-3">
                     <p className="text-[10px] uppercase text-accent">{post.category}</p>
                     <h3 className="mt-1 text-sm font-semibold leading-snug">{post.title}</h3>
@@ -262,9 +336,16 @@ export default async function MarketingPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 lg:py-24">
+      <section className="relative overflow-hidden border-t border-border">
+        <Image
+          src={media.marketing.lifestyle}
+          alt=""
+          fill
+          className="object-cover opacity-30"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/90 to-black" />
+        <div className="relative mx-auto max-w-6xl px-4 py-16 text-center sm:px-6 lg:py-24">
           <h2 className="font-display text-4xl uppercase leading-none sm:text-5xl">
             Ready to run your lab?
           </h2>
@@ -280,7 +361,7 @@ export default async function MarketingPage() {
             </Link>
             <Link
               href="/labs"
-              className="rounded-full border border-border px-8 py-3 text-sm font-semibold hover:border-accent"
+              className="rounded-full border border-border bg-black/40 px-8 py-3 text-sm font-semibold backdrop-blur hover:border-accent"
             >
               Browse labs
             </Link>

@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getSession } from "@/data/training";
+import { getSession, trainingSessions } from "@/data/training";
 import { AiBadge } from "@/components/ui/VisualKit";
 import { ProgressRing } from "@/components/ui/ProgressRing";
+import { trainThumbs } from "@/lib/media";
 
 export default async function TrainSessionPage({
   params,
@@ -12,6 +14,7 @@ export default async function TrainSessionPage({
   const { id } = await params;
   const session = getSession(id);
   if (!session) notFound();
+  const thumbIdx = Math.max(0, trainingSessions.findIndex((s) => s.id === id));
 
   return (
     <div className="flex flex-col gap-4 pt-2">
@@ -19,17 +22,19 @@ export default async function TrainSessionPage({
         ← Training
       </Link>
 
-      <div
-        className="relative overflow-hidden rounded-[var(--lm-radius-xl)] border border-border"
-        style={{
-          background:
-            session.phase === "acceleration"
-              ? "linear-gradient(145deg,#1a0500,#ff6b00)"
-              : "linear-gradient(145deg,#051520,#ff8533)",
-        }}
-      >
-        <div className="aspect-[16/9] p-5">
-          <div className="flex h-full flex-col justify-between">
+      <div className="relative overflow-hidden rounded-[var(--lm-radius-xl)] border border-border">
+        <div className="relative aspect-[16/9]">
+          <Image
+            src={trainThumbs[thumbIdx % trainThumbs.length]}
+            alt=""
+            fill
+            className="object-cover"
+            style={{ objectPosition: `${30 + (thumbIdx % 4) * 12}% 30%` }}
+            sizes="512px"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/25" />
+          <div className="absolute inset-0 flex flex-col justify-between p-5">
             <div className="flex gap-2">
               {session.aiSuggested && <AiBadge />}
               <span className="rounded-full bg-black/40 px-2 py-0.5 text-[10px] font-semibold text-white">

@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getRecipe } from "@/data/recipes";
+import { getRecipe, recipes } from "@/data/recipes";
 import { AiBadge } from "@/components/ui/VisualKit";
 import { MiniRing } from "@/components/ui/ProgressRing";
+import { recipeThumbs } from "@/lib/media";
 
 export default async function RecipeDetailPage({
   params,
@@ -12,6 +14,7 @@ export default async function RecipeDetailPage({
   const { id } = await params;
   const recipe = getRecipe(id);
   if (!recipe) notFound();
+  const thumbIdx = Math.max(0, recipes.findIndex((r) => r.id === id));
 
   return (
     <div className="flex flex-col gap-4 pt-2">
@@ -19,12 +22,19 @@ export default async function RecipeDetailPage({
         ← Recipes
       </Link>
 
-      <div
-        className="relative overflow-hidden rounded-[var(--lm-radius-xl)] border border-border"
-        style={{ background: recipe.imageGradient }}
-      >
-        <div className="aspect-[4/3] p-5">
-          <div className="flex h-full flex-col justify-between">
+      <div className="relative overflow-hidden rounded-[var(--lm-radius-xl)] border border-border">
+        <div className="relative aspect-[4/3]">
+          <Image
+            src={recipeThumbs[thumbIdx % recipeThumbs.length]}
+            alt=""
+            fill
+            className="object-cover"
+            style={{ objectPosition: `${20 + (thumbIdx % 4) * 15}% center` }}
+            sizes="512px"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/20" />
+          <div className="absolute inset-0 flex flex-col justify-between p-5">
             <div>{recipe.aiSuggested && <AiBadge />}</div>
             <div>
               <h1 className="font-display text-3xl uppercase text-white">{recipe.title}</h1>

@@ -121,3 +121,93 @@ body {
   transform-origin: bottom;
   animation: lm-eq 0.7s ease-in-out infinite alternate;
 }
+
+@keyframes lm-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lm-pulse-soft {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes lm-bar-rise {
+  from {
+    transform: scaleY(0.15);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes lm-bar-fill {
+  from {
+    width: 0%;
+  }
+}
+
+@keyframes lm-ring-draw {
+  from {
+    stroke-dashoffset: 400;
+  }
+}
+
+.lm-fade-in {
+  animation: lm-fade-up 0.55s ease-out both;
+}
+
+.lm-pulse {
+  transform-origin: center;
+  animation: lm-pulse-soft 2.2s ease-in-out infinite;
+}
+
+.lm-bar-rise {
+  transform-origin: bottom;
+  animation: lm-bar-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.lm-bar-fill {
+  animation: lm-bar-fill 0.85s ease-out both;
+}
+
+.lm-ring-draw {
+  animation: lm-ring-draw 1s ease-out both;
+}
+
+.lm-card-lift {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lm-card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(255, 107, 0, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lm-eq-bar,
+  .lm-fade-in,
+  .lm-pulse,
+  .lm-bar-rise,
+  .lm-bar-fill,
+  .lm-ring-draw {
+    animation: none !important;
+  }
+
+  .lm-card-lift:hover {
+    transform: none;
+  }
+}

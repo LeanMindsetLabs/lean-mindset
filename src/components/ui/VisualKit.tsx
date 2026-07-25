@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -20,7 +21,9 @@ export function CalendarStrip({
           className={`flex min-w-[44px] flex-col items-center rounded-[var(--lm-radius-md)] border px-2 py-2 ${
             d.isToday
               ? "border-accent bg-accent text-white"
-              : "border-border bg-background-card"
+              : d.hasCheckIn
+                ? "border-accent/40 bg-accent-soft"
+                : "border-border bg-background-card"
           }`}
         >
           <span
@@ -84,6 +87,7 @@ export function MetricTile({
   hint,
   href,
   warn,
+  chart,
 }: {
   icon: ReactNode;
   label: string;
@@ -91,6 +95,7 @@ export function MetricTile({
   hint?: string;
   href?: string;
   warn?: boolean;
+  chart?: ReactNode;
 }) {
   const inner = (
     <>
@@ -104,6 +109,7 @@ export function MetricTile({
         {value}
       </p>
       {hint && <p className="mt-1 text-[10px] text-foreground-muted">{hint}</p>}
+      {chart && <div className="mt-2">{chart}</div>}
     </>
   );
 
@@ -120,9 +126,11 @@ export function MetricTile({
   return <div className={cls}>{inner}</div>;
 }
 
-/** Decorative fitness silhouette / photo placeholder */
+/** Photo or gradient card — never empty gray */
 export function MediaCard({
   gradient,
+  image,
+  imagePosition = "center",
   title,
   subtitle,
   badge,
@@ -130,6 +138,8 @@ export function MediaCard({
   aspect = "photo",
 }: {
   gradient: string;
+  image?: string;
+  imagePosition?: string;
   title: string;
   subtitle?: string;
   badge?: ReactNode;
@@ -140,34 +150,34 @@ export function MediaCard({
     aspect === "wide" ? "aspect-[16/9]" : aspect === "square" ? "aspect-square" : "aspect-[4/3]";
 
   const body = (
-    <article className="overflow-hidden rounded-[var(--lm-radius-lg)] border border-border bg-background-card transition hover:border-accent">
-      <div
-        className={`relative ${aspectClass} w-full`}
-        style={{ background: gradient }}
-      >
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 30% 40%, rgba(255,255,255,0.25), transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,107,0,0.4), transparent 40%)",
-          }}
-        />
-        <svg
-          className="absolute bottom-2 right-2 h-16 w-16 text-white/20"
-          viewBox="0 0 64 64"
-          fill="currentColor"
-          aria-hidden
-        >
-          <path d="M32 8c-4 0-7 3-7 7v4h-4c-2 0-4 2-4 4v6c0 8 5 14 12 16v7h-5c-1.5 0-3 1.5-3 3v3h20v-3c0-1.5-1.5-3-3-3h-5v-7c7-2 12-8 12-16v-6c0-2-2-4-4-4h-4v-4c0-4-3-7-7-7z" />
-        </svg>
-        {badge && <div className="absolute left-2 top-2">{badge}</div>}
+    <article className="lm-card-lift overflow-hidden rounded-[var(--lm-radius-lg)] border border-border bg-background-card transition hover:border-accent">
+      <div className={`relative ${aspectClass} w-full`} style={{ background: gradient }}>
+        {image ? (
+          <Image
+            src={image}
+            alt=""
+            fill
+            className="object-cover"
+            style={{ objectPosition: imagePosition }}
+            sizes="(max-width: 430px) 50vw, 200px"
+          />
+        ) : null}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+        {!image && (
+          <div
+            className="absolute inset-0 opacity-40"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 30% 40%, rgba(255,255,255,0.25), transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,107,0,0.45), transparent 40%)",
+            }}
+          />
+        )}
+        {badge && <div className="absolute left-2 top-2 z-10">{badge}</div>}
       </div>
       <div className="p-3">
         <h3 className="text-sm font-semibold leading-snug">{title}</h3>
         {subtitle && (
-          <p className="mt-1 text-xs text-foreground-muted line-clamp-2">
-            {subtitle}
-          </p>
+          <p className="mt-1 text-xs text-foreground-muted line-clamp-2">{subtitle}</p>
         )}
       </div>
     </article>
@@ -181,4 +191,41 @@ export function MediaCard({
     );
   }
   return body;
+}
+
+/** Full-bleed image panel with overlay content */
+export function ImageBanner({
+  src,
+  alt = "",
+  children,
+  className = "",
+  heightClass = "aspect-[16/9]",
+  position = "center",
+}: {
+  src: string;
+  alt?: string;
+  children?: ReactNode;
+  className?: string;
+  heightClass?: string;
+  position?: string;
+}) {
+  return (
+    <div
+      className={`relative overflow-hidden rounded-[var(--lm-radius-lg)] border border-border ${heightClass} ${className}`}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover"
+        style={{ objectPosition: position }}
+        sizes="(max-width: 512px) 100vw, 512px"
+        priority={false}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/20" />
+      {children && (
+        <div className="absolute inset-0 z-10 flex flex-col justify-end p-4">{children}</div>
+      )}
+    </div>
+  );
 }

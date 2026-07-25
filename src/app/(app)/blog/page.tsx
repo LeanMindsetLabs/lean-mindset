@@ -1,5 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { blogPosts } from "@/data/blogs";
+import { blogThumbs, media } from "@/lib/media";
+import { ImageBanner } from "@/components/ui/VisualKit";
 
 export default function BlogListPage() {
   return (
@@ -12,17 +15,32 @@ export default function BlogListPage() {
         <p className="text-sm text-foreground-muted">Program mindset & habits</p>
       </header>
 
+      <ImageBanner
+        src={media.ui.blog}
+        position="40% 20%"
+        heightClass="aspect-[21/9] min-h-[100px]"
+      >
+        <p className="text-[10px] font-bold uppercase tracking-widest text-accent">Reads</p>
+        <p className="text-sm font-semibold text-white">Mindset that sticks</p>
+      </ImageBanner>
+
       <ul className="flex flex-col gap-4">
-        {blogPosts.map((post) => (
+        {blogPosts.map((post, i) => (
           <li key={post.slug}>
             <Link
               href={`/blog/${post.slug}`}
-              className="block overflow-hidden rounded-[var(--lm-radius-lg)] border border-border bg-background-card transition hover:border-accent"
+              className="lm-card-lift block overflow-hidden rounded-[var(--lm-radius-lg)] border border-border bg-background-card transition hover:border-accent"
             >
-              <div
-                className="relative aspect-[16/9]"
-                style={{ background: post.imageGradient }}
-              >
+              <div className="relative aspect-[16/9]">
+                <Image
+                  src={blogThumbs[i % blogThumbs.length]}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  style={{ objectPosition: `${25 + i * 12}% ${20 + i * 8}%` }}
+                  sizes="512px"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-3 left-3 rounded-full bg-black/50 px-2 py-0.5 text-[10px] font-bold uppercase text-accent backdrop-blur">
                   {post.category}
                 </div>

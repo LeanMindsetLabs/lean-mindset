@@ -2,8 +2,11 @@ import Link from "next/link";
 import { eatingSchedule } from "@/data/program";
 import { nutritionRingsMock } from "@/data/dashboard";
 import { ProgressRing, MiniRing } from "@/components/ui/ProgressRing";
-import { HorizontalBar } from "@/components/ui/Charts";
+import { CalorieGauge, MacroGauges, WeekBars } from "@/components/ui/Charts";
+import { ImageBanner } from "@/components/ui/VisualKit";
 import { getMemberMetrics } from "@/lib/member-metrics";
+import { media } from "@/lib/media";
+import { weekAdherence } from "@/data/dashboard";
 
 export default async function NutritionPage() {
   const metrics = await getMemberMetrics();
@@ -13,6 +16,9 @@ export default async function NutritionPage() {
     metrics.water != null
       ? Math.min(100, Math.round((metrics.water / 3.5) * 100))
       : nutritionRingsMock.waterPct;
+
+  const kcalCurrent = 900 + mealsDone * 420;
+  const kcalTarget = 2200;
 
   const nowHour = new Date().getHours();
   const nextMeal =
@@ -33,7 +39,28 @@ export default async function NutritionPage() {
         <p className="text-sm text-foreground-muted">Today · 4-meal precision</p>
       </header>
 
-      <section className="relative overflow-hidden rounded-[var(--lm-radius-lg)] border border-border bg-background-card p-5">
+      <ImageBanner
+        src={media.ui.nutrition}
+        position="35% 15%"
+        heightClass="aspect-[21/9] min-h-[110px]"
+      >
+        <p className="text-[10px] font-bold uppercase tracking-widest text-accent">
+          Fuel day
+        </p>
+        <p className="text-sm font-semibold text-white">Macros · timing · water</p>
+      </ImageBanner>
+
+      <section className="lm-fade-in rounded-[var(--lm-radius-lg)] border border-border bg-background-card p-5">
+        <CalorieGauge
+          current={kcalCurrent}
+          target={kcalTarget}
+          proteinPct={38}
+          carbsPct={37}
+          fatPct={25}
+        />
+      </section>
+
+      <section className="relative overflow-hidden rounded-[var(--lm-radius-lg)] border border-border bg-background-elevated p-5">
         <div
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
@@ -49,11 +76,24 @@ export default async function NutritionPage() {
           />
           <div>
             <p className="text-xs font-semibold uppercase text-accent">When to eat</p>
-            <p className="mt-1 text-lg font-bold">{nextMeal.name.replace(/^Meal \d+ — /, "")}</p>
-            <p className="text-2xl font-display text-accent">{nextMeal.time}</p>
+            <p className="mt-1 text-lg font-bold">
+              {nextMeal.name.replace(/^Meal \d+ — /, "")}
+            </p>
+            <p className="font-display text-2xl text-accent">{nextMeal.time}</p>
             <p className="mt-1 text-xs text-foreground-muted">{nextMeal.focus}</p>
           </div>
         </div>
+      </section>
+
+      <section className="rounded-[var(--lm-radius-lg)] border border-border bg-background-card p-4">
+        <h2 className="mb-3 text-sm font-semibold">Macro gauges</h2>
+        <MacroGauges
+          macros={[
+            { label: "Protein", value: 78, max: 140, color: "#ff6b00" },
+            { label: "Carbs", value: 95, max: 180, color: "#3b82f6" },
+            { label: "Fat", value: 32, max: 65, color: "#fbbf24" },
+          ]}
+        />
       </section>
 
       <section className="grid grid-cols-3 gap-2">
@@ -77,22 +117,24 @@ export default async function NutritionPage() {
         ))}
       </section>
 
-      <section className="rounded-[var(--lm-radius-lg)] border border-border bg-background-card p-4">
-        <HorizontalBar label="Meals logged" value={mealsDone} max={mealsTarget} />
-        <div className="mt-3">
-          <HorizontalBar
-            label="Water (L)"
-            value={metrics.water ?? 2.3}
-            max={3.5}
-            unit=""
-          />
+      <section className="rounded-[var(--lm-radius-lg)] border border-border bg-background-elevated p-4">
+        <div className="mb-2 flex items-center justify-between">
+          <h2 className="text-sm font-semibold">Weekly fuel adherence</h2>
+          <span className="text-[10px] text-foreground-subtle">%</span>
         </div>
+        <WeekBars data={weekAdherence} />
       </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="text-sm font-semibold">Today&apos;s schedule</h2>
         {eatingSchedule.meals.map((meal, i) => {
           const done = i < mealsDone;
+          const thumbs = [
+            media.marketing.lifestyle,
+            media.ui.recipe1,
+            media.ui.recipe2,
+            media.ui.nutrition,
+          ];
           return (
             <article
               key={meal.name}
@@ -100,22 +142,27 @@ export default async function NutritionPage() {
                 done ? "border-accent/50" : "border-border"
               } bg-background-card`}
             >
-              <div
-                className="h-2 w-full"
-                style={{
-                  background: done
-                    ? "linear-gradient(90deg,#ff6b00,#ff8533)"
-                    : "var(--border)",
-                }}
-              />
-              <div className="flex items-center gap-3 p-4">
+              <div className="relative h-16 w-full overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={thumbs[i % thumbs.length]}
+                  alt=""
+                  className="h-full w-full object-cover"
+                  style={{ objectPosition: `${20 + i * 15}% ${30 + i * 10}%` }}
+                />
                 <div
-                  className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full font-display text-lg ${
-                    done ? "bg-accent text-white" : "bg-accent-soft text-accent"
-                  }`}
-                >
+                  className="absolute inset-0"
+                  style={{
+                    background: done
+                      ? "linear-gradient(90deg,rgba(255,107,0,0.55),transparent)"
+                      : "linear-gradient(90deg,rgba(0,0,0,0.65),transparent)",
+                  }}
+                />
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 font-display text-2xl text-white">
                   {i + 1}
-                </div>
+                </span>
+              </div>
+              <div className="flex items-center gap-3 p-4">
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-2">
                     <h3 className="truncate font-semibold">

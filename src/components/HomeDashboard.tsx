@@ -1,10 +1,17 @@
 import Link from "next/link";
 import { ProgressRing, MiniRing } from "@/components/ui/ProgressRing";
-import { WeekBars, SparkBars, HorizontalBar } from "@/components/ui/Charts";
-import { CalendarStrip, MetricTile } from "@/components/ui/VisualKit";
+import {
+  WeekBars,
+  SparkBars,
+  HorizontalBar,
+  AreaSparkline,
+  RadarScore,
+} from "@/components/ui/Charts";
+import { CalendarStrip, MetricTile, ImageBanner } from "@/components/ui/VisualKit";
 import { weekAdherence, buildCalendarStrip, nutritionRingsMock } from "@/data/dashboard";
 import { dashboardMock } from "@/components/homeMock";
 import type { MemberMetrics } from "@/lib/member-metrics";
+import { media } from "@/lib/media";
 
 export function HomeDashboard({
   firstName,
@@ -24,20 +31,36 @@ export function HomeDashboard({
   const mealsLeft = Math.max(0, m.mealsTarget - mealsDone);
   const streak = metrics?.streakHint || m.streakDays;
   const weightLabel =
-    metrics?.weightLb != null ? `${metrics.weightLb}` : "—";
+    metrics?.weightLb != null ? `${metrics.weightLb}` : "178.4";
   const calendar = buildCalendarStrip();
+  const weights = metrics?.weights?.length
+    ? metrics.weights
+    : [182, 181.2, 180.5, 180.8, 179.4, 178.9, 178.4];
+  const fitnessScore = Math.round(55 + pct * 0.35);
 
   return (
     <div className="flex flex-col gap-3">
-      <section className="relative overflow-hidden rounded-[var(--lm-radius-lg)] border border-border bg-background-card p-5">
+      <ImageBanner
+        src={media.ui.dashboard}
+        position="28% 20%"
+        heightClass="aspect-[21/9] min-h-[120px]"
+      >
+        <p className="text-[10px] font-bold uppercase tracking-widest text-accent">
+          Lean Mindset lab
+        </p>
+        <p className="font-display text-2xl uppercase leading-none text-white">
+          Good day, {firstName}
+        </p>
+      </ImageBanner>
+
+      <section className="lm-fade-in relative overflow-hidden rounded-[var(--lm-radius-lg)] border border-border bg-background-card p-5">
         <div
           className="pointer-events-none absolute -right-8 -top-8 h-40 w-40 rounded-full opacity-30"
           style={{
             background: "radial-gradient(circle, rgba(255,107,0,0.5), transparent 70%)",
           }}
         />
-        <p className="text-sm text-foreground-muted">Good day, {firstName}</p>
-        <div className="mt-4 flex items-center gap-5">
+        <div className="flex items-center gap-5">
           <ProgressRing percent={pct} label={`${pct}%`} sublabel="on track" />
           <div className="min-w-0 flex-1">
             <p className="text-xs font-semibold uppercase tracking-wide text-accent">
@@ -68,12 +91,46 @@ export function HomeDashboard({
         </div>
       </section>
 
+      <section className="grid grid-cols-2 gap-2">
+        <div className="rounded-[var(--lm-radius-lg)] border border-accent/40 bg-accent p-4 text-white">
+          <p className="text-[10px] font-bold uppercase tracking-wide text-white/80">
+            Mindset score
+          </p>
+          <p className="font-display mt-1 text-5xl leading-none">{fitnessScore}</p>
+          <p className="mt-1 text-xs text-white/85">Average fitness · climbing</p>
+        </div>
+        <div className="rounded-[var(--lm-radius-lg)] border border-border bg-background-elevated p-3">
+          <p className="text-[10px] font-semibold uppercase text-foreground-subtle">Weight</p>
+          <p className="mt-1 text-xl font-bold">{weightLabel} lb</p>
+          <SparkBars
+            values={weights.map((w) => 200 - w)}
+            height={40}
+          />
+        </div>
+      </section>
+
       <section className="rounded-[var(--lm-radius-lg)] border border-border bg-background-elevated p-4">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="text-sm font-semibold">This week</h2>
           <span className="text-[10px] text-foreground-subtle">Adherence %</span>
         </div>
         <WeekBars data={weekAdherence} />
+      </section>
+
+      <section className="rounded-[var(--lm-radius-lg)] border border-border bg-background-card p-4">
+        <div className="mb-2 flex items-center justify-between">
+          <h2 className="text-sm font-semibold">Score breakdown</h2>
+          <span className="text-[10px] text-accent">vs goal</span>
+        </div>
+        <RadarScore
+          axes={[
+            { label: "Meals", value: (mealsDone / m.mealsTarget) * 100 },
+            { label: "Protein", value: nutritionRingsMock.proteinPct },
+            { label: "Water", value: (waterDone / waterTarget) * 100 },
+            { label: "Train", value: m.workoutLogged ? 90 : 35 },
+            { label: "Sleep", value: 72 },
+          ]}
+        />
       </section>
 
       <section className="rounded-[var(--lm-radius-lg)] border border-border bg-background-card p-4">
@@ -106,6 +163,7 @@ export function HomeDashboard({
           value={`${waterLeft} L`}
           hint={`${waterDone} / ${waterTarget} L`}
           icon={<DropIcon />}
+          chart={<SparkBars values={[40, 55, 50, 70, 65, 80, Math.round((waterDone / waterTarget) * 100)]} height={28} />}
         />
         <MetricTile
           href="/nutrition"
@@ -113,6 +171,7 @@ export function HomeDashboard({
           value={`${mealsLeft}`}
           hint={`${mealsDone} of ${m.mealsTarget}`}
           icon={<PlateIcon />}
+          chart={<SparkBars values={[100, 75, 50, 25].slice(0, mealsDone + 1)} height={28} />}
         />
         <MetricTile
           href="/profile"
@@ -120,6 +179,7 @@ export function HomeDashboard({
           value={weightLabel}
           hint={metrics?.changeLb != null ? `${metrics.changeLb} lb` : "lb"}
           icon={<ScaleIcon />}
+          chart={<SparkBars values={weights.map((w) => 200 - w)} height={28} />}
         />
         <MetricTile
           href="/train"
@@ -128,6 +188,7 @@ export function HomeDashboard({
           hint={m.workoutLogged ? "Logged" : "Not logged"}
           warn={!m.workoutLogged}
           icon={<BoltIcon />}
+          chart={<SparkBars values={[30, 50, 40, 70, 60, 55, m.workoutLogged ? 90 : 20]} height={28} />}
         />
       </section>
 
@@ -165,23 +226,26 @@ export function HomeDashboard({
             {metrics?.weights?.length ? "From check-ins" : "Mock until logged"}
           </span>
         </div>
-        <SparkBars
-          values={
-            metrics?.weights?.length
-              ? metrics.weights
-              : [182, 181.2, 180.5, 180.8, 179.4, 178.9, 178.4]
-          }
-          height={48}
-        />
+        <AreaSparkline values={weights} height={80} />
         <div className="mt-3">
-          <HorizontalBar
-            label="Lab day progress"
-            value={day}
-            max={totalDays}
-            unit=""
-          />
+          <HorizontalBar label="Lab day progress" value={day} max={totalDays} unit="" />
         </div>
       </section>
+
+      <div className="grid grid-cols-2 gap-2 pb-1">
+        <ImageBanner src={media.ui.train} position="60% 30%" heightClass="aspect-[4/5]">
+          <p className="text-[10px] font-bold uppercase text-accent">Train</p>
+          <Link href="/train" className="text-sm font-bold text-white">
+            Today&apos;s session →
+          </Link>
+        </ImageBanner>
+        <ImageBanner src={media.marketing.lifestyle} position="70% 40%" heightClass="aspect-[4/5]">
+          <p className="text-[10px] font-bold uppercase text-accent">Recipes</p>
+          <Link href="/recipes" className="text-sm font-bold text-white">
+            Plate ideas →
+          </Link>
+        </ImageBanner>
+      </div>
     </div>
   );
 }
