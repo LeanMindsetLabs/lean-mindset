@@ -16,7 +16,21 @@ npm install
 npm run dev
 ```
 
-5. In Supabase SQL Editor, run `supabase/schema.sql`
+5. In Supabase SQL Editor, run `supabase/schema.sql`, then `supabase/checkin.sql`
+
+## Promote coach (v1 — one account owner)
+
+```sql
+update public.profiles
+set role = 'coach'
+where id = (select id from auth.users where email = 'you@example.com');
+
+-- Create default cohort (clients auto-join on first check-in)
+insert into public.cohorts (name, coach_id)
+select 'Lean Mindset Cohort', id from public.profiles where role = 'coach' limit 1;
+```
+
+Optional: set `COACH_EMAILS=you@example.com` in `.env.local` / Vercel as an extra middleware allowlist (still requires `profiles.role = 'coach'`).
 
 ## Vercel deploy
 
@@ -36,6 +50,9 @@ npm run dev
 |---|---|
 | `/`, `/labs`, `/labs/[slug]` | Public |
 | `/login`, `/signup` | Public |
-| `/program/*`, `/add`, `/profile` | Requires login |
+| `/program/*`, `/add`, `/profile`, `/check-in` | Requires login |
+| `/coach`, `/coach/[id]` | Requires login + `profiles.role = 'coach'` (+ optional `COACH_EMAILS`) |
 
 Program pages: guide, eating schedule, grocery, supplements, workouts, water, trackers.
+
+Check-in: WhatsApp-style daily chat with template chip. Coach inbox at `/coach`.

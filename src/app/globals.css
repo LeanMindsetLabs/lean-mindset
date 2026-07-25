@@ -99,3 +99,25 @@ body {
   background: var(--background);
   position: relative;
 }
+
+@media (min-width: 768px) {
+  .app-frame {
+    max-width: 512px;
+    border-inline: 1px solid var(--border);
+    box-shadow: 0 0 80px rgba(255, 107, 0, 0.06);
+  }
+}
+
+@keyframes lm-eq {
+  from {
+    transform: scaleY(0.45);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.lm-eq-bar {
+  transform-origin: bottom;
+  animation: lm-eq 0.7s ease-in-out infinite alternate;
+}

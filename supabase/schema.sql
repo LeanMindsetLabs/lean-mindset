@@ -1,17 +1,38 @@
 -- Lean Mindset — run in Supabase SQL Editor
 
 -- Profiles (extends auth.users)
+-- role is server/SQL authority only — never trust client metadata for /coach access.
+-- Optional: COACH_EMAILS env (comma-separated) as an extra middleware allowlist.
 create table if not exists public.profiles (
   id uuid primary key references auth.users (id) on delete cascade,
   full_name text,
+  email text,
+  role text not null default 'client' check (role in ('client', 'coach')),
   created_at timestamptz not null default now()
 );
 
 alter table public.profiles enable row level security;
 
-create policy "Profiles are viewable by owner"
+-- security definer avoids recursive RLS when coaches read other profiles
+create or replace function public.is_coach()
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select exists (
+    select 1 from public.profiles
+    where id = auth.uid() and role = 'coach'
+  );
+$$;
+
+revoke all on function public.is_coach() from public;
+grant execute on function public.is_coach() to authenticated;
+
+create policy "Profiles are viewable by owner or coach"
   on public.profiles for select
-  using (auth.uid() = id);
+  using (auth.uid() = id or public.is_coach());
 
 create policy "Profiles are upsertable by owner"
   on public.profiles for insert
@@ -28,9 +49,16 @@ language plpgsql
 security definer set search_path = public
 as $$
 begin
-  insert into public.profiles (id, full_name)
-  values (new.id, coalesce(new.raw_user_meta_data->>'full_name', ''))
-  on conflict (id) do nothing;
+  insert into public.profiles (id, full_name, email, role)
+  values (
+    new.id,
+    coalesce(new.raw_user_meta_data->>'full_name', ''),
+    new.email,
+    'client'
+  )
+  on conflict (id) do update
+    set email = excluded.email,
+        full_name = coalesce(nullif(excluded.full_name, ''), public.profiles.full_name);
   return new;
 end;
 $$;
@@ -88,3 +116,9 @@ insert into public.labs (slug, name, tagline, duration_weeks, focus, level) valu
   ('post-holiday-reset', 'Post-Holiday Reset', 'Reset after the season — structure, hydration, and quick wins.', 6, 'Reset + habits', 'Beginner'),
   ('foundation-lab', 'Foundation Lab', 'The core Lean Mindset 6-week system — no starving, no chemicals.', 6, 'Core program', 'All levels')
 on conflict (slug) do nothing;
+
+-- Phase 1 check-in chat (cohorts, conversations, messages, RLS):
+-- run supabase/checkin.sql in the SQL Editor after this file.
+-- Promote coach:
+--   update public.profiles set role = 'coach'
+--   where id = (select id from auth.users where email = 'you@example.com');

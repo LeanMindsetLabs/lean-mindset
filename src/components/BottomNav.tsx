@@ -11,10 +11,10 @@ type Tab = {
 };
 
 const tabs: Tab[] = [
-  { href: "/", label: "Home", icon: HomeIcon },
+  { href: "/home", label: "Home", icon: HomeIcon },
   { href: "/labs", label: "Labs", icon: LabsIcon },
-  { href: "/add", label: "Add", icon: PlusIcon, center: true },
-  { href: "/program", label: "Program", icon: ProgramIcon },
+  { href: "/check-in", label: "Check-in", icon: PlusIcon, center: true },
+  { href: "/more", label: "More", icon: MoreIcon },
   { href: "/profile", label: "Profile", icon: ProfileIcon },
 ];
 
@@ -23,15 +23,15 @@ export function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] -translate-x-1/2 border-t border-border bg-background-elevated/95 backdrop-blur-md"
+      className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] -translate-x-1/2 border-t border-border bg-background-elevated/95 backdrop-blur-md md:max-w-lg"
       style={{ paddingBottom: "var(--safe-bottom)" }}
       aria-label="Main"
     >
       <ul className="grid h-[var(--nav-height)] grid-cols-5 items-center px-1">
         {tabs.map((tab) => {
           const active =
-            tab.href === "/"
-              ? pathname === "/"
+            tab.href === "/home"
+              ? pathname === "/home"
               : pathname.startsWith(tab.href);
 
           if (tab.center) {
@@ -109,15 +109,12 @@ function PlusIcon({ className }: { className?: string }) {
   );
 }
 
-function ProgramIcon({ className }: { className?: string }) {
+function MoreIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M6 4.5h9.5A2.5 2.5 0 0 1 18 7v12.5l-3-1.5-3 1.5-3-1.5-3 1.5V7A2.5 2.5 0 0 1 6 4.5Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <circle cx="5" cy="12" r="2" />
+      <circle cx="12" cy="12" r="2" />
+      <circle cx="19" cy="12" r="2" />
     </svg>
   );
 }

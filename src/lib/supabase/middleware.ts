@@ -1,6 +1,23 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+function coachEmailAllowlist(): string[] {
+  return (process.env.COACH_EMAILS || "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+function passesCoachGate(
+  role: string | null | undefined,
+  email: string | null | undefined,
+): boolean {
+  if (role !== "coach") return false;
+  const allow = coachEmailAllowlist();
+  if (allow.length === 0) return true;
+  return Boolean(email && allow.includes(email.toLowerCase()));
+}
+
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
@@ -34,10 +51,14 @@ export async function updateSession(request: NextRequest) {
 
   const path = request.nextUrl.pathname;
   const isAuthPage = path.startsWith("/login") || path.startsWith("/signup");
+  const isCoachRoute = path === "/coach" || path.startsWith("/coach/");
   const isProtected =
     path.startsWith("/program") ||
     path.startsWith("/add") ||
-    path.startsWith("/profile");
+    path.startsWith("/profile") ||
+    path.startsWith("/check-in") ||
+    path.startsWith("/logs") ||
+    isCoachRoute;
 
   if (!user && isProtected) {
     const redirectUrl = request.nextUrl.clone();
@@ -46,9 +67,27 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(redirectUrl);
   }
 
+  if (user && isCoachRoute) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    if (!passesCoachGate(profile?.role, user.email)) {
+      const redirectUrl = request.nextUrl.clone();
+      redirectUrl.pathname = "/";
+      redirectUrl.search = "";
+      return NextResponse.redirect(redirectUrl);
+    }
+  }
+
   if (user && isAuthPage) {
+    const next = request.nextUrl.searchParams.get("next");
     const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = "/";
+    redirectUrl.pathname =
+      next && next.startsWith("/") && !next.startsWith("//") ? next : "/";
+    redirectUrl.search = "";
     return NextResponse.redirect(redirectUrl);
   }
 

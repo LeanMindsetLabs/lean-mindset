@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getLab } from "@/data/labs";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function LabDetailPage({
   params,
@@ -10,6 +11,22 @@ export default async function LabDetailPage({
   const { slug } = await params;
   const lab = getLab(slug);
   if (!lab) notFound();
+
+  let signedIn = false;
+  if (
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  ) {
+    try {
+      const supabase = await createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      signedIn = Boolean(user);
+    } catch {
+      signedIn = false;
+    }
+  }
 
   return (
     <div className="flex flex-col gap-5">
@@ -61,18 +78,29 @@ export default async function LabDetailPage({
         </ul>
       </section>
 
-      <Link
-        href={`/signup?next=${encodeURIComponent("/program")}`}
-        className="rounded-[var(--lm-radius-md)] bg-accent px-4 py-3.5 text-center text-sm font-semibold text-white hover:bg-accent-hover"
-      >
-        Create account to join →
-      </Link>
-      <Link
-        href={`/login?next=${encodeURIComponent("/program")}`}
-        className="text-center text-sm text-foreground-muted"
-      >
-        Already have an account? Log in
-      </Link>
+      {signedIn ? (
+        <Link
+          href="/program"
+          className="rounded-[var(--lm-radius-md)] bg-accent px-4 py-3.5 text-center text-sm font-semibold text-white hover:bg-accent-hover"
+        >
+          Open program hub →
+        </Link>
+      ) : (
+        <>
+          <Link
+            href={`/signup?next=${encodeURIComponent("/program")}`}
+            className="rounded-[var(--lm-radius-md)] bg-accent px-4 py-3.5 text-center text-sm font-semibold text-white hover:bg-accent-hover"
+          >
+            Create account to join →
+          </Link>
+          <Link
+            href={`/login?next=${encodeURIComponent("/program")}`}
+            className="text-center text-sm text-foreground-muted"
+          >
+            Already have an account? Log in
+          </Link>
+        </>
+      )}
     </div>
   );
 }

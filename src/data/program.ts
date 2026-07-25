@@ -76,24 +76,40 @@ export const eatingSchedule = {
       time: "8:00 AM",
       focus: "Protein + complex carb",
       example: "Egg whites / tofu scramble, oats or fruit, black coffee or tea",
+      swaps: [
+        "Travel: Greek yogurt + banana + protein bar",
+        "Event morning: egg-white omelette + fruit at the hotel",
+      ],
     },
     {
       name: "Meal 2 — Midday",
       time: "12:00 PM",
       focus: "Protein + vegetables",
       example: "Grilled chicken or lentils, large salad, olive oil drizzle",
+      swaps: [
+        "Restaurant: grilled protein + double veg, sauce on the side",
+        "Desk day: leftover protein + bagged salad",
+      ],
     },
     {
       name: "Meal 3 — Afternoon",
       time: "3:30 PM",
       focus: "Protein + controlled carb",
       example: "Greek yogurt or cottage cheese, berries, handful of nuts",
+      swaps: [
+        "On the go: cottage cheese cup + apple",
+        "Meeting snack: protein shake + handful of almonds",
+      ],
     },
     {
       name: "Meal 4 — Evening",
       time: "7:00 PM",
       focus: "Protein + vegetables",
       example: "Fish or paneer, steamed veggies, optional small sweet potato",
+      swaps: [
+        "Dinner out: fish/chicken + veggies; skip the bread basket",
+        "Late night: lean protein + cucumber/tomato plate",
+      ],
     },
   ],
   notes: [
@@ -291,10 +307,13 @@ export const trackers = {
 
 export const programNav = [
   { href: "/program/guide", label: "Program guide", desc: "Phases, rules, expectations" },
+  { href: "/nutrition", label: "Nutrition day", desc: "Rings · when to eat" },
   { href: "/program/eating-schedule", label: "Eating schedule", desc: "4-meal daily timing" },
   { href: "/program/grocery", label: "Grocery list", desc: "Shopping blueprint" },
   { href: "/program/supplements", label: "Supplements", desc: "Core + optional" },
-  { href: "/program/workouts", label: "Workouts", desc: "Foundation → HIIT" },
+  { href: "/train", label: "Training", desc: "Sessions + AI picks" },
+  { href: "/program/workouts", label: "Workout list", desc: "Foundation → HIIT" },
   { href: "/program/water", label: "Water", desc: "Daily hydration plan" },
   { href: "/program/trackers", label: "Trackers", desc: "Weight, habits, reviews" },
+  { href: "/recipes", label: "Recipes", desc: "Plate card grid" },
 ] as const;
