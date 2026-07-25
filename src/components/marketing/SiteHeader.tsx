@@ -22,25 +22,10 @@ export function SiteHeader({ signedIn }: { signedIn: boolean }) {
           </Link>
         </nav>
         <div className="flex items-center gap-2">
-          {/* Mobile quick menu chips */}
-          <nav className="flex items-center gap-1 md:hidden" aria-label="Quick">
-            <Link
-              href="/labs"
-              className="rounded-full border border-white/10 px-2.5 py-1 text-[10px] font-semibold text-white/80"
-            >
-              Labs
-            </Link>
-            <Link
-              href="/blog"
-              className="rounded-full border border-white/10 px-2.5 py-1 text-[10px] font-semibold text-white/80"
-            >
-              Blog
-            </Link>
-          </nav>
           {signedIn ? (
             <Link
               href="/home"
-              className="rounded-full bg-accent px-3 py-1.5 text-xs font-bold text-white hover:bg-accent-hover"
+              className="rounded-full bg-accent px-3.5 py-1.5 text-xs font-bold text-white hover:bg-accent-hover"
             >
               App
             </Link>
@@ -48,13 +33,13 @@ export function SiteHeader({ signedIn }: { signedIn: boolean }) {
             <>
               <Link
                 href="/login"
-                className="hidden rounded-full px-3 py-1.5 text-xs font-semibold text-foreground-muted hover:text-white sm:inline"
+                className="rounded-full px-3 py-1.5 text-xs font-semibold text-foreground-muted hover:text-white"
               >
                 Log in
               </Link>
               <Link
                 href="/signup"
-                className="rounded-full bg-accent px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_0_18px_rgba(255,107,0,0.35)] hover:bg-accent-hover"
+                className="rounded-full bg-accent px-3.5 py-1.5 text-xs font-bold text-white hover:bg-accent-hover"
               >
                 Sign up
               </Link>
