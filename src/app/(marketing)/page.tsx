@@ -35,10 +35,26 @@ const LAB_IMAGES: Record<string, string> = {
 
 /**
  * Marketing pricing placeholders — no Stripe prices in repo.
- * Coaching docs list cohort Founder ~$250 / Standard ~$600 (5 weeks).
- * Site shows Monthly $49 / Yearly $399 (Save 32%) until checkout is wired.
+ * Lab price from coaching docs Founder cohort ~$250 / 5 weeks → shown as $250 per Lab (6 weeks).
+ * Membership: Monthly $49 / Yearly $399 (Save 32%) until checkout is wired.
  */
 const PLANS = [
+  {
+    id: "lab",
+    name: "Lab",
+    price: "$250",
+    period: "per lab",
+    highlight: false,
+    badge: null as string | null,
+    features: [
+      "One 6-week lab focus",
+      "Meals, training & water targets",
+      "Daily check-in coaching",
+      "Grocery list + meal swaps",
+    ],
+    cta: "Start lab",
+    note: "One lab. One focus. Six weeks.",
+  },
   {
     id: "monthly",
     name: "Monthly",
@@ -47,7 +63,7 @@ const PLANS = [
     highlight: false,
     badge: null as string | null,
     features: [
-      "Full lab access",
+      "Full lab library access",
       "Daily check-in coaching",
       "Grocery list + meal swaps",
       "Workouts & water targets",
@@ -133,8 +149,9 @@ export default async function MarketingPage() {
             alt=""
             fill
             priority
-            className="object-cover object-[72%_35%] brightness-[0.82] contrast-[0.9] sm:object-[center_28%] lg:object-[58%_30%]"
+            className="object-cover object-[72%_35%] brightness-[0.88] contrast-[1.05] sm:object-[center_28%] lg:object-[58%_30%]"
             sizes="100vw"
+            quality={90}
           />
           <div
             className="absolute inset-0"
@@ -189,10 +206,11 @@ export default async function MarketingPage() {
                     src={step.img}
                     alt=""
                     fill
-                    className="object-cover"
+                    className="object-cover object-center"
                     sizes="(max-width: 640px) 100vw, 33vw"
+                    quality={90}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
                   <span className="absolute left-3 top-3 font-display text-sm font-bold text-accent">
                     {step.n}
                   </span>
@@ -236,10 +254,11 @@ export default async function MarketingPage() {
                       src={LAB_IMAGES[lab.slug] ?? media.marketing.hero}
                       alt=""
                       fill
-                      className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                      className="object-cover object-center transition duration-500 group-hover:scale-[1.03]"
                       sizes="(max-width: 640px) 100vw, 33vw"
+                      quality={90}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                     <div className="absolute inset-x-0 bottom-0 p-5">
                       <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-accent">
                         {lab.durationWeeks} weeks
@@ -259,15 +278,15 @@ export default async function MarketingPage() {
 
       {/* ═══ PRICING ═══ */}
       <section id="pricing" className="border-t border-white/10 bg-black py-16 sm:py-20">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <h2 className="text-center font-display text-2xl uppercase tracking-wide text-white sm:text-3xl">
             Pricing
           </h2>
           <p className="mx-auto mt-2 max-w-md text-center text-sm text-white/55">
-            Lab access with coaching built in. Pick monthly or save with yearly.
+            Buy a single Lab, or unlock membership monthly or yearly.
           </p>
 
-          <ul className="mt-10 grid gap-5 sm:grid-cols-2">
+          <ul className="mt-10 grid gap-5 sm:grid-cols-3">
             {PLANS.map((plan) => (
               <li
                 key={plan.id}
