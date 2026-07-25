@@ -54,7 +54,7 @@ export function SiteHeader({ signedIn }: { signedIn: boolean }) {
               </Link>
               <Link
                 href="/signup"
-                className="rounded-full bg-accent px-3 py-1.5 text-xs font-bold text-white hover:bg-accent-hover"
+                className="rounded-full bg-accent px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_0_18px_rgba(255,107,0,0.35)] hover:bg-accent-hover"
               >
                 Sign up
               </Link>

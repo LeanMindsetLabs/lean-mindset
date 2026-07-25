@@ -28,6 +28,7 @@ const sections = [
       { href: "/program", label: "Program hub", desc: "Guide · grocery · more", img: media.cards.dashScore, pos: "center" },
       { href: "/program/supplements", label: "Supplements", desc: "Core + optional", img: media.cards.mealPesto, pos: "center" },
       { href: "/program/trackers", label: "Trackers", desc: "What to log", img: media.cards.dashRadar, pos: "center" },
+      { href: "/reviews", label: "Coach reviews", desc: "Ratings · filters", img: media.cards.coach, pos: "center 20%" },
     ],
   },
 ];
