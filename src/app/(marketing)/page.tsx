@@ -55,14 +55,14 @@ export default async function MarketingPage() {
             alt=""
             fill
             priority
-            className="object-cover object-[72%_35%] sm:object-[center_28%] lg:object-[58%_30%]"
+            className="object-cover object-[72%_35%] brightness-[0.82] contrast-[0.9] sm:object-[center_28%] lg:object-[58%_30%]"
             sizes="100vw"
           />
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.78) 100%), linear-gradient(90deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.25) 55%, rgba(0,0,0,0.45) 100%)",
+                "linear-gradient(180deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.48) 40%, rgba(0,0,0,0.85) 100%), linear-gradient(90deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0.55) 100%)",
             }}
           />
         </div>
