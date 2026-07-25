@@ -7,7 +7,7 @@ export function SiteFooter() {
         <div className="text-center sm:text-left">
           <p className="font-display text-lg uppercase tracking-wide text-accent">Lean Mindset</p>
           <p className="mt-1 text-xs text-white/40">
-            Educational wellness guidance — not medical advice.
+            6-week labs. Real food. Daily coaching.
           </p>
         </div>
         <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-white/55">

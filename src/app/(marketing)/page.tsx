@@ -206,7 +206,7 @@ export default async function MarketingPage() {
                     src={step.img}
                     alt=""
                     fill
-                    className="object-cover object-center"
+                    className="object-cover object-center grayscale contrast-[1.2] brightness-[0.9]"
                     sizes="(max-width: 640px) 100vw, 33vw"
                     quality={90}
                   />
@@ -254,7 +254,7 @@ export default async function MarketingPage() {
                       src={LAB_IMAGES[lab.slug] ?? media.marketing.hero}
                       alt=""
                       fill
-                      className="object-cover object-center transition duration-500 group-hover:scale-[1.03]"
+                      className="object-cover object-center grayscale contrast-[1.25] brightness-[0.88] transition duration-500 group-hover:scale-[1.03]"
                       sizes="(max-width: 640px) 100vw, 33vw"
                       quality={90}
                     />
