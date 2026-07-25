@@ -11,11 +11,11 @@ export function SiteHeader({ signedIn }: { signedIn: boolean }) {
           <Link href="/labs" className="hover:text-accent">
             Labs
           </Link>
+          <Link href="/#pricing" className="hover:text-accent">
+            Pricing
+          </Link>
           <Link href="/blog" className="hover:text-accent">
             Blog
-          </Link>
-          <Link href={signedIn ? "/nutrition" : "/signup"} className="hover:text-accent">
-            Program
           </Link>
           <Link href={signedIn ? "/check-in" : "/signup"} className="hover:text-accent">
             Coaching

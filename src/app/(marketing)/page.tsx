@@ -78,7 +78,7 @@ const PLANS = [
 const FAQS = [
   {
     q: "How long is a lab?",
-    a: "Each lab runs 6 weeks — structured meals, training, water targets, and daily check-ins from day one.",
+    a: "A Lab is a 6-week program (same idea as a challenge) — structured meals, training, water targets, and daily check-ins from day one.",
   },
   {
     q: "Is this just another calorie tracker?",
