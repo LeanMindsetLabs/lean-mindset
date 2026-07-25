@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { aiRecipes } from "@/data/recipes";
 import { AiBadge, MediaCard } from "@/components/ui/VisualKit";
+import { recipeThumbs } from "@/lib/media";
 
 export default function AiRecipesPage() {
   const list = aiRecipes();
@@ -21,11 +22,12 @@ export default function AiRecipesPage() {
       </header>
 
       <div className="grid grid-cols-2 gap-3">
-        {list.map((r) => (
+        {list.map((r, i) => (
           <MediaCard
             key={r.id}
             href={`/recipes/${r.id}`}
             gradient={r.imageGradient}
+            image={recipeThumbs[i % recipeThumbs.length]}
             title={r.title}
             subtitle={`${r.minutes} min · Meal ${r.meal}`}
             badge={<AiBadge />}

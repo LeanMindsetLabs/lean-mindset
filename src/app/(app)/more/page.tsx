@@ -6,28 +6,28 @@ const sections = [
   {
     title: "Daily",
     items: [
-      { href: "/nutrition", label: "Nutrition day", desc: "Rings · meal timing", img: media.ui.nutrition, pos: "30% 20%" },
-      { href: "/train", label: "Training", desc: "Sessions · AI picks", img: media.ui.train, pos: "55% 30%" },
-      { href: "/program/water", label: "Water", desc: "Hydration gauges", img: media.ui.progress, pos: "40% 40%" },
+      { href: "/nutrition", label: "Nutrition day", desc: "Rings · meal timing", img: media.cards.mealEggs, pos: "center" },
+      { href: "/train", label: "Training", desc: "Sessions · AI picks", img: media.cards.trainAction, pos: "center 25%" },
+      { href: "/program/water", label: "Water", desc: "Hydration gauges", img: media.cards.mealSmoothie, pos: "center" },
     ],
   },
   {
     title: "Discover",
     items: [
-      { href: "/recipes", label: "Recipes", desc: "Card grid", img: media.marketing.lifestyle, pos: "70% 35%" },
-      { href: "/recipes/ai", label: "AI recipes", desc: "Suggested plates", img: media.ui.recipe1, pos: "40% 30%" },
-      { href: "/train/ai", label: "AI exercises", desc: "Suggested sessions", img: media.ui.trainCard, pos: "50% 40%" },
-      { href: "/blog", label: "Blog", desc: "Mindset articles", img: media.ui.blog, pos: "35% 25%" },
-      { href: "/music", label: "Music", desc: "Workout playlists", img: media.ui.progress, pos: "60% 20%" },
+      { href: "/recipes", label: "Recipes", desc: "Card grid", img: media.cards.mealChicken, pos: "center" },
+      { href: "/recipes/ai", label: "AI recipes", desc: "Suggested plates", img: media.cards.mealSalad, pos: "center" },
+      { href: "/train/ai", label: "AI exercises", desc: "Suggested sessions", img: media.cards.athlete, pos: "center 20%" },
+      { href: "/blog", label: "Blog", desc: "Mindset articles", img: media.cards.mealBowls, pos: "center" },
+      { href: "/music", label: "Music", desc: "Workout playlists", img: media.cards.dashChart, pos: "center" },
     ],
   },
   {
     title: "Logs & program",
     items: [
-      { href: "/logs", label: "Logs hub", desc: "Running · workouts", img: media.ui.train, pos: "45% 50%" },
-      { href: "/program", label: "Program hub", desc: "Guide · grocery · more", img: media.ui.dashboard, pos: "25% 15%" },
-      { href: "/program/supplements", label: "Supplements", desc: "Core + optional", img: media.ui.nutrition, pos: "60% 50%" },
-      { href: "/program/trackers", label: "Trackers", desc: "What to log", img: media.ui.progress, pos: "30% 60%" },
+      { href: "/logs", label: "Logs hub", desc: "Running · workouts", img: media.cards.trainHiit, pos: "center" },
+      { href: "/program", label: "Program hub", desc: "Guide · grocery · more", img: media.cards.dashScore, pos: "center" },
+      { href: "/program/supplements", label: "Supplements", desc: "Core + optional", img: media.cards.mealPesto, pos: "center" },
+      { href: "/program/trackers", label: "Trackers", desc: "What to log", img: media.cards.dashRadar, pos: "center" },
     ],
   },
 ];
@@ -43,7 +43,7 @@ export default function MoreHubPage() {
       <div className="relative overflow-hidden rounded-[var(--lm-radius-lg)] border border-border">
         <div className="relative aspect-[21/9] min-h-[96px]">
           <Image
-            src={media.marketing.hero}
+            src={media.cards.athlete}
             alt=""
             fill
             className="object-cover object-[center_25%]"

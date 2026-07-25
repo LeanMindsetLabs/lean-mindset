@@ -2,70 +2,75 @@ import Link from "next/link";
 import { signOut } from "@/app/auth/actions";
 import { getSessionProfile, passesCoachGate } from "@/lib/auth/role";
 import { getMemberMetrics } from "@/lib/member-metrics";
-import { ProgressRing } from "@/components/ui/ProgressRing";
 import { SparkBars, HorizontalBar } from "@/components/ui/Charts";
 import { dashboardMock } from "@/components/homeMock";
 
 export default async function ProfilePage() {
   const session = await getSessionProfile();
   const email = session?.email ?? null;
-  const name = session?.profile?.full_name ?? null;
+  const name = session?.profile?.full_name ?? email?.split("@")[0] ?? "Member";
   const isCoach = passesCoachGate(session?.profile?.role, email);
   const metrics = await getMemberMetrics();
 
   const day = metrics.day ?? dashboardMock.day;
   const pct = Math.min(100, Math.round((day / dashboardMock.totalDays) * 100));
+  const fitnessScore = Math.round(55 + pct * 0.35);
+  const streak = metrics.streakHint || dashboardMock.streakDays;
   const weights =
     metrics.weights.length > 0
       ? metrics.weights
       : [182, 181.2, 180.5, 180.8, 179.4, 178.9, 178.4];
 
   return (
-    <div className="flex min-h-[60dvh] flex-col gap-4 pt-4">
-      <h1 className="font-display text-3xl uppercase">Profile</h1>
-
-      <div className="relative overflow-hidden rounded-[var(--lm-radius-lg)] border border-border bg-background-card p-4">
-        <div
-          className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full opacity-40"
-          style={{
-            background: "radial-gradient(circle, rgba(255,107,0,0.45), transparent 70%)",
-          }}
-        />
-        <p className="text-sm text-foreground-muted">Signed in as</p>
-        <p className="mt-1 text-lg font-semibold">{name || "Member"}</p>
-        <p className="text-sm text-foreground-muted">{email || "Not connected"}</p>
+    <div className="flex flex-col gap-3 pt-1">
+      <header className="flex items-center gap-3">
+        <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-accent text-lg font-bold text-white">
+          {name.slice(0, 1).toUpperCase()}
+          <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-background bg-emerald-400" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <h1 className="truncate text-xl font-bold">{name}</h1>
+          <p className="truncate text-xs text-foreground-muted">{email || "Guest"}</p>
+        </div>
         {isCoach && (
-          <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-accent">
+          <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-bold uppercase text-accent">
             Coach
-          </p>
+          </span>
         )}
-      </div>
+      </header>
 
-      <section className="flex items-center gap-4 rounded-[var(--lm-radius-lg)] border border-border bg-background-elevated p-4">
-        <ProgressRing percent={pct} size={88} stroke={9} sublabel="lab" />
-        <div className="flex-1">
-          <p className="text-xs font-semibold uppercase text-accent">Metrics</p>
-          <p className="font-display text-3xl">Day {day}</p>
-          <p className="text-sm text-foreground-muted">
-            {metrics.weightLb != null
-              ? `${metrics.weightLb} lb`
-              : "Log weight in check-in"}
-            {metrics.changeLb != null ? ` · ${metrics.changeLb} lb` : ""}
-          </p>
-          <p className="mt-1 text-xs text-foreground-subtle">
-            Streak hint: {metrics.streakHint || dashboardMock.streakDays} days
+      <Link
+        href="/home/score"
+        className="flex items-center gap-3 rounded-2xl bg-accent p-3 text-white shadow-[0_12px_28px_rgba(255,107,0,0.25)]"
+      >
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-black/20">
+          <span className="font-display text-3xl leading-none">{fitnessScore}</span>
+        </div>
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-bold">Lean Mindset Score</p>
+          <p className="text-xs text-white/85">
+            Day {day}/{dashboardMock.totalDays} · {streak}-day streak
           </p>
         </div>
-      </section>
+        <span className="text-white/80">›</span>
+      </Link>
 
-      <section className="rounded-[var(--lm-radius-lg)] border border-border bg-background-card p-4">
+      <section className="rounded-2xl border border-border bg-background-card p-3">
         <div className="mb-2 flex items-center justify-between">
-          <h2 className="text-sm font-semibold">Weight sparkline</h2>
+          <h2 className="text-sm font-semibold">Weight</h2>
           <span className="text-[10px] text-foreground-subtle">
-            {metrics.weights.length ? "Live" : "Mock"}
+            {metrics.weights.length ? "Live" : "Mock until logged"}
           </span>
         </div>
-        <SparkBars values={weights} height={52} />
+        <p className="text-xl font-bold">
+          {metrics.weightLb != null ? `${metrics.weightLb} lb` : "178.4 lb"}
+          {metrics.changeLb != null ? (
+            <span className="ml-2 text-sm font-semibold text-accent">{metrics.changeLb} lb</span>
+          ) : null}
+        </p>
+        <div className="mt-2">
+          <SparkBars values={weights.map((w) => 200 - w)} height={40} />
+        </div>
         <div className="mt-3">
           <HorizontalBar label="Lab progress" value={day} max={dashboardMock.totalDays} />
         </div>
@@ -74,48 +79,31 @@ export default async function ProfilePage() {
       <div className="grid grid-cols-2 gap-2">
         <Link
           href="/program"
-          className="overflow-hidden rounded-[var(--lm-radius-md)] border border-border"
+          className="rounded-2xl border border-border bg-background-elevated px-3 py-3 text-sm font-semibold"
         >
-          <div
-            className="flex aspect-[2/1] items-end p-3"
-            style={{ background: "linear-gradient(135deg,#1a1408,#ff6b00)" }}
-          >
-            <span className="text-sm font-bold text-white">Program</span>
-          </div>
+          Program →
         </Link>
         <Link
           href="/check-in"
-          className="overflow-hidden rounded-[var(--lm-radius-md)] border border-border"
+          className="rounded-2xl border border-border bg-background-elevated px-3 py-3 text-sm font-semibold"
         >
-          <div
-            className="flex aspect-[2/1] items-end p-3"
-            style={{ background: "linear-gradient(135deg,#0a1a2a,#ff8533)" }}
-          >
-            <span className="text-sm font-bold text-white">Check-in</span>
-          </div>
+          Check-in →
         </Link>
       </div>
 
       {isCoach && (
         <Link
           href="/coach"
-          className="rounded-[var(--lm-radius-md)] border border-accent/40 bg-accent-soft px-4 py-3 text-sm font-semibold text-accent"
+          className="rounded-2xl border border-accent/40 bg-accent-soft px-4 py-3 text-sm font-semibold text-accent"
         >
           Coach inbox →
         </Link>
       )}
 
-      <div className="rounded-[var(--lm-radius-lg)] border border-border bg-background-card p-4">
-        <p className="text-sm text-foreground-muted">Coming soon</p>
-        <p className="mt-1 text-xs text-foreground-subtle">
-          Body-scan AI · video calls · hardware BP/HR — stub only
-        </p>
-      </div>
-
       <form action={signOut}>
         <button
           type="submit"
-          className="w-full rounded-[var(--lm-radius-md)] border border-border px-4 py-3 text-sm font-medium text-foreground-muted hover:border-danger hover:text-danger"
+          className="w-full rounded-2xl border border-border px-4 py-3 text-sm font-medium text-foreground-muted hover:border-danger hover:text-danger"
         >
           Log out
         </button>

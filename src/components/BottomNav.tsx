@@ -10,12 +10,13 @@ type Tab = {
   center?: boolean;
 };
 
+/** Phone-first destinations — Nutrition & Train in nav, not buried in scroll */
 const tabs: Tab[] = [
   { href: "/home", label: "Home", icon: HomeIcon },
-  { href: "/labs", label: "Labs", icon: LabsIcon },
+  { href: "/nutrition", label: "Meals", icon: MealsIcon },
   { href: "/check-in", label: "Check-in", icon: PlusIcon, center: true },
+  { href: "/train", label: "Train", icon: TrainIcon },
   { href: "/more", label: "More", icon: MoreIcon },
-  { href: "/profile", label: "Profile", icon: ProfileIcon },
 ];
 
 export function BottomNav() {
@@ -82,16 +83,28 @@ function HomeIcon({ className }: { className?: string }) {
   );
 }
 
-function LabsIcon({ className }: { className?: string }) {
+function MealsIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
       <path
-        d="M9 3v6.2L4.2 18a2 2 0 0 0 1.7 3h12.2a2 2 0 0 0 1.7-3L15 9.2V3"
+        d="M4 11h16v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8Z"
         stroke="currentColor"
         strokeWidth="1.8"
-        strokeLinejoin="round"
       />
-      <path d="M9 3h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
+function TrainIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M6.5 8.5h11M6.5 15.5h11M4 10.5v3M20 10.5v3M8 8.5v7M16 8.5v7"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
@@ -115,20 +128,6 @@ function MoreIcon({ className }: { className?: string }) {
       <circle cx="5" cy="12" r="2" />
       <circle cx="12" cy="12" r="2" />
       <circle cx="19" cy="12" r="2" />
-    </svg>
-  );
-}
-
-function ProfileIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle cx="12" cy="8" r="3.5" stroke="currentColor" strokeWidth="1.8" />
-      <path
-        d="M5.5 19.5c1.4-3 3.7-4.5 6.5-4.5s5.1 1.5 6.5 4.5"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
     </svg>
   );
 }

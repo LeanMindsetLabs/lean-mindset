@@ -7,21 +7,36 @@ export function SiteHeader({ signedIn }: { signedIn: boolean }) {
         <Link href="/" className="font-display text-lg uppercase tracking-wide text-white">
           Lean Mindset
         </Link>
-        <nav className="hidden items-center gap-6 text-sm text-foreground-muted md:flex">
-          <a href="#program" className="hover:text-accent">
-            Program
-          </a>
-          <a href="#labs" className="hover:text-accent">
+        <nav className="hidden items-center gap-5 text-sm text-foreground-muted md:flex">
+          <Link href="/labs" className="hover:text-accent">
             Labs
-          </a>
-          <a href="#how" className="hover:text-accent">
-            How it works
-          </a>
+          </Link>
           <Link href="/blog" className="hover:text-accent">
             Blog
           </Link>
+          <Link href={signedIn ? "/nutrition" : "/signup"} className="hover:text-accent">
+            Program
+          </Link>
+          <Link href={signedIn ? "/check-in" : "/signup"} className="hover:text-accent">
+            Coaching
+          </Link>
         </nav>
         <div className="flex items-center gap-2">
+          {/* Mobile quick menu chips */}
+          <nav className="flex items-center gap-1 md:hidden" aria-label="Quick">
+            <Link
+              href="/labs"
+              className="rounded-full border border-white/10 px-2.5 py-1 text-[10px] font-semibold text-white/80"
+            >
+              Labs
+            </Link>
+            <Link
+              href="/blog"
+              className="rounded-full border border-white/10 px-2.5 py-1 text-[10px] font-semibold text-white/80"
+            >
+              Blog
+            </Link>
+          </nav>
           {signedIn ? (
             <Link
               href="/home"

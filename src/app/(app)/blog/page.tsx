@@ -16,8 +16,8 @@ export default function BlogListPage() {
       </header>
 
       <ImageBanner
-        src={media.ui.blog}
-        position="40% 20%"
+        src={media.cards.mealEggs}
+        position="center"
         heightClass="aspect-[21/9] min-h-[100px]"
       >
         <p className="text-[10px] font-bold uppercase tracking-widest text-accent">Reads</p>

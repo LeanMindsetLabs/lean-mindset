@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { aiSessions } from "@/data/training";
 import { AiBadge, MediaCard } from "@/components/ui/VisualKit";
+import { trainThumbs } from "@/lib/media";
 
 export default function AiTrainPage() {
   const list = aiSessions();
@@ -21,7 +22,7 @@ export default function AiTrainPage() {
       </header>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        {list.map((s) => (
+        {list.map((s, i) => (
           <MediaCard
             key={s.id}
             href={`/train/${s.id}`}
@@ -30,6 +31,7 @@ export default function AiTrainPage() {
                 ? "linear-gradient(135deg,#2a0a0a,#ff6b00)"
                 : "linear-gradient(135deg,#0a1a2a,#ff8533)"
             }
+            image={trainThumbs[i % trainThumbs.length]}
             title={s.name}
             subtitle={`${s.duration} · ${s.focus} · ${s.caloriesHint}`}
             badge={<AiBadge />}

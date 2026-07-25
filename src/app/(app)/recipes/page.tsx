@@ -15,8 +15,8 @@ export default function RecipesPage() {
       </header>
 
       <ImageBanner
-        src={media.marketing.lifestyle}
-        position="65% 35%"
+        src={media.cards.mealEggs}
+        position="center"
         heightClass="aspect-[21/9] min-h-[100px]"
       >
         <p className="text-[10px] font-bold uppercase tracking-widest text-accent">Kitchen</p>
