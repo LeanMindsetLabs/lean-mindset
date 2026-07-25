@@ -4,7 +4,6 @@ import { getSessionProfile } from "@/lib/auth/role";
 import { SiteHeader } from "@/components/marketing/SiteHeader";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { labs } from "@/data/labs";
-import { blogPosts } from "@/data/blogs";
 import { media } from "@/lib/media";
 
 const STEPS = [
@@ -28,42 +27,82 @@ const STEPS = [
   },
 ] as const;
 
-const PROMISE = [
-  {
-    title: "Nutrition",
-    body: "Four precise meals. Real food. Travel swaps built in.",
-    img: "/marketing/sections/promise-nutrition.jpg",
-  },
-  {
-    title: "Training",
-    body: "Walks to HIIT — progressive, not punishing.",
-    img: "/marketing/sections/promise-training.jpg",
-  },
-  {
-    title: "Hydration",
-    body: "Clear daily water targets with simple checkpoints.",
-    img: "/marketing/sections/promise-hydration.jpg",
-  },
-  {
-    title: "Coaching",
-    body: "Daily check-ins that keep you honest and moving.",
-    img: "/marketing/sections/promise-coaching.jpg",
-  },
-] as const;
-
 const LAB_IMAGES: Record<string, string> = {
   "summer-lab": "/marketing/sections/lab-summer.jpg",
   "bikini-body-lab": "/marketing/sections/lab-bikini.jpg",
   "executive-reset": "/marketing/sections/lab-executive.jpg",
 };
 
-const BLOG_IMAGES: Record<string, string> = {
-  Nutrition: "/marketing/sections/blog-nutrition.jpg",
-  Habits: "/marketing/sections/blog-habits.jpg",
-  Training: "/marketing/sections/blog-training.jpg",
-};
+/**
+ * Marketing pricing placeholders — no Stripe prices in repo.
+ * Coaching docs list cohort Founder ~$250 / Standard ~$600 (5 weeks).
+ * Site shows Monthly $49 / Yearly $399 (Save 32%) until checkout is wired.
+ */
+const PLANS = [
+  {
+    id: "monthly",
+    name: "Monthly",
+    price: "$49",
+    period: "per month",
+    highlight: false,
+    badge: null as string | null,
+    features: [
+      "Full lab access",
+      "Daily check-in coaching",
+      "Grocery list + meal swaps",
+      "Workouts & water targets",
+      "Cancel anytime",
+    ],
+    cta: "Start monthly",
+    note: null as string | null,
+  },
+  {
+    id: "yearly",
+    name: "Yearly",
+    price: "$399",
+    period: "per year",
+    highlight: true,
+    badge: "Save 32%",
+    features: [
+      "Everything in Monthly",
+      "Best value (~$33/mo)",
+      "All current & new labs",
+      "Priority coach reviews",
+      "Cancel anytime",
+    ],
+    cta: "Start yearly",
+    note: "Billed annually. Cancel anytime.",
+  },
+] as const;
 
-/** Marketing `/` — clean hero + below-fold real photo cards */
+const FAQS = [
+  {
+    q: "How long is a lab?",
+    a: "Each lab runs 6 weeks — structured meals, training, water targets, and daily check-ins from day one.",
+  },
+  {
+    q: "Is this just another calorie tracker?",
+    a: "No. You follow a clear plan with swaps when life happens. Check-ins keep you accountable without logging every bite forever.",
+  },
+  {
+    q: "Who is Lean Mindset for?",
+    a: "Busy adults who want fat loss or composition change with real food — not crash diets or endless spreadsheet tracking.",
+  },
+  {
+    q: "What does coaching include?",
+    a: "Daily chat check-ins plus coach review of your progress. You get accountability and course-correction, not a one-off PDF.",
+  },
+  {
+    q: "Can I cancel anytime?",
+    a: "Yes. Monthly and yearly plans can be canceled anytime. Yearly is billed once per year at the rate shown.",
+  },
+  {
+    q: "Is my data private?",
+    a: "Account and check-in data are used only to run labs and coaching. We don’t sell personal information. See Privacy for details.",
+  },
+] as const;
+
+/** Marketing `/` — hero, how it works, labs, pricing, FAQ, short footer */
 export default async function MarketingPage() {
   let signedIn = false;
   try {
@@ -81,13 +120,12 @@ export default async function MarketingPage() {
     : { href: "/login", label: "Log in" };
 
   const featuredLabs = labs.slice(0, 3);
-  const featuredPosts = blogPosts.slice(0, 3);
 
   return (
     <div className="min-h-dvh bg-black text-foreground">
       <SiteHeader signedIn={signedIn} />
 
-      {/* ═══ HERO — brand, one line, CTAs, muted athletic ═══ */}
+      {/* ═══ HERO ═══ */}
       <section className="relative isolate min-h-[100dvh] overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -134,7 +172,7 @@ export default async function MarketingPage() {
         </div>
       </section>
 
-      {/* ═══ HOW IT WORKS — 3 photo cards ═══ */}
+      {/* ═══ HOW IT WORKS ═══ */}
       <section className="border-t border-white/10 bg-black py-16 sm:py-20">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <h2 className="font-display text-2xl uppercase tracking-wide text-white sm:text-3xl">
@@ -144,7 +182,7 @@ export default async function MarketingPage() {
             {STEPS.map((step) => (
               <li
                 key={step.n}
-                className="overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a]"
+                className="overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] shadow-[0_12px_40px_rgba(0,0,0,0.45)]"
               >
                 <div className="relative aspect-[4/3]">
                   <Image
@@ -169,42 +207,7 @@ export default async function MarketingPage() {
         </div>
       </section>
 
-      {/* ═══ PROMISE 2×2 ═══ */}
-      <section className="border-t border-white/10 bg-black py-16 sm:py-20">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <h2 className="font-display text-2xl uppercase tracking-wide text-white sm:text-3xl">
-            The promise
-          </h2>
-          <p className="mt-2 max-w-lg text-sm text-white/55">
-            One system — meals, training, water, and coaching — without living in a spreadsheet.
-          </p>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-            {PROMISE.map((item) => (
-              <li
-                key={item.title}
-                className="relative overflow-hidden rounded-2xl border border-white/10"
-              >
-                <div className="relative aspect-[16/10]">
-                  <Image
-                    src={item.img}
-                    alt=""
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/20" />
-                  <div className="absolute inset-x-0 bottom-0 p-5">
-                    <p className="text-lg font-semibold text-white">{item.title}</p>
-                    <p className="mt-1 text-sm text-white/70">{item.body}</p>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ═══ LABS — large lifestyle cards ═══ */}
+      {/* ═══ LABS ═══ */}
       <section className="border-t border-white/10 bg-black py-16 sm:py-20">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="flex items-end justify-between gap-4">
@@ -254,51 +257,86 @@ export default async function MarketingPage() {
         </div>
       </section>
 
-      {/* ═══ BLOG — mindset reads ═══ */}
-      <section className="border-t border-white/10 bg-black py-16 sm:py-20">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <div className="flex items-end justify-between gap-4">
-            <h2 className="font-display text-2xl uppercase tracking-wide text-white sm:text-3xl">
-              Mindset reads
-            </h2>
-            <Link
-              href="/blog"
-              className="shrink-0 text-sm font-semibold text-accent hover:text-accent-hover"
-            >
-              All posts →
-            </Link>
-          </div>
-          <ul className="mt-10 grid gap-5 sm:grid-cols-3">
-            {featuredPosts.map((post) => (
-              <li key={post.slug}>
+      {/* ═══ PRICING ═══ */}
+      <section id="pricing" className="border-t border-white/10 bg-black py-16 sm:py-20">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <h2 className="text-center font-display text-2xl uppercase tracking-wide text-white sm:text-3xl">
+            Pricing
+          </h2>
+          <p className="mx-auto mt-2 max-w-md text-center text-sm text-white/55">
+            Lab access with coaching built in. Pick monthly or save with yearly.
+          </p>
+
+          <ul className="mt-10 grid gap-5 sm:grid-cols-2">
+            {PLANS.map((plan) => (
+              <li
+                key={plan.id}
+                className={`relative flex flex-col rounded-2xl bg-[#0a0a0a] p-6 shadow-[0_12px_40px_rgba(0,0,0,0.4)] ${
+                  plan.highlight
+                    ? "border-2 border-accent"
+                    : "border border-white/10"
+                }`}
+              >
+                {plan.badge ? (
+                  <span className="absolute right-4 top-4 rounded-full bg-accent/20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-accent">
+                    {plan.badge}
+                  </span>
+                ) : null}
+                <p className="font-display text-xl uppercase tracking-wide text-white">
+                  {plan.name}
+                </p>
+                <p className="mt-3 flex items-baseline gap-2">
+                  <span className="text-4xl font-bold text-white">{plan.price}</span>
+                  <span className="text-sm text-white/50">{plan.period}</span>
+                </p>
+                <ul className="mt-6 flex-1 space-y-3 border-t border-white/10 pt-5">
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2.5 text-sm text-white/75">
+                      <span className="mt-0.5 text-accent" aria-hidden>
+                        ✓
+                      </span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
                 <Link
-                  href={`/blog/${post.slug}`}
-                  className="group block overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a]"
+                  href={signedIn ? "/home" : "/signup"}
+                  className="mt-7 block rounded-full bg-accent py-3 text-center text-sm font-bold text-white transition hover:bg-accent-hover"
                 >
-                  <div className="relative aspect-[16/10]">
-                    <Image
-                      src={
-                        BLOG_IMAGES[post.category] ??
-                        "/marketing/sections/blog-habits.jpg"
-                      }
-                      alt=""
-                      fill
-                      className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                      sizes="(max-width: 640px) 100vw, 33vw"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-accent">
-                      {post.category}
-                    </p>
-                    <p className="mt-1.5 text-sm font-semibold leading-snug text-white">
-                      {post.title}
-                    </p>
-                    <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-white/50">
-                      {post.excerpt}
-                    </p>
-                  </div>
+                  {plan.cta}
                 </Link>
+                {plan.note ? (
+                  <p className="mt-3 text-center text-[11px] text-white/40">{plan.note}</p>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ═══ FAQ ═══ */}
+      <section id="faq" className="border-t border-white/10 bg-black py-16 sm:py-20">
+        <div className="mx-auto max-w-2xl px-4 sm:px-6">
+          <h2 className="text-center font-display text-2xl uppercase tracking-wide text-white sm:text-3xl">
+            FAQ
+          </h2>
+          <ul className="mt-10 space-y-3">
+            {FAQS.map((item) => (
+              <li key={item.q}>
+                <details className="group rounded-2xl border border-white/10 bg-[#0a0a0a] open:border-accent/40">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-white marker:content-none [&::-webkit-details-marker]:hidden">
+                    <span>{item.q}</span>
+                    <span
+                      className="shrink-0 text-lg font-light text-accent transition group-open:rotate-45"
+                      aria-hidden
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p className="border-t border-white/10 px-5 pb-4 pt-3 text-sm leading-relaxed text-white/60">
+                    {item.a}
+                  </p>
+                </details>
               </li>
             ))}
           </ul>

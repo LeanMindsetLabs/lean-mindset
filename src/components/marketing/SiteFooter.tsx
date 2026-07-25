@@ -2,28 +2,31 @@ import Link from "next/link";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-black">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-        <div>
-          <p className="font-display text-xl uppercase text-accent">Lean Mindset</p>
-          <p className="mt-1 text-xs text-foreground-subtle">
+    <footer className="border-t border-white/10 bg-black">
+      <div className="mx-auto flex max-w-5xl flex-col items-center gap-5 px-4 py-10 sm:flex-row sm:justify-between sm:px-6">
+        <div className="text-center sm:text-left">
+          <p className="font-display text-lg uppercase tracking-wide text-accent">Lean Mindset</p>
+          <p className="mt-1 text-xs text-white/40">
             Educational wellness guidance — not medical advice.
           </p>
         </div>
-        <div className="flex flex-wrap gap-4 text-xs text-foreground-muted">
-          <Link href="/labs" className="hover:text-accent">
-            Labs
+        <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-white/55">
+          <Link href="/privacy" className="hover:text-accent">
+            Privacy
           </Link>
-          <Link href="/blog" className="hover:text-accent">
-            Blog
+          <Link href="/terms" className="hover:text-accent">
+            Terms
           </Link>
-          <Link href="/login" className="hover:text-accent">
-            Log in
+          <a href="mailto:hello@leanmindset.app" className="hover:text-accent">
+            Contact
+          </a>
+          <Link
+            href="/signup"
+            className="rounded-full bg-accent px-4 py-1.5 text-xs font-bold text-white hover:bg-accent-hover"
+          >
+            Start lab
           </Link>
-          <Link href="/signup" className="hover:text-accent">
-            Sign up
-          </Link>
-        </div>
+        </nav>
       </div>
     </footer>
   );
