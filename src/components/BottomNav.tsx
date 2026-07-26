@@ -19,12 +19,14 @@ const tabs: Tab[] = [
   { href: "/more", label: "More", icon: MoreIcon },
 ];
 
-export function BottomNav() {
+export function BottomNav({ wide = false }: { wide?: boolean }) {
   const pathname = usePathname();
 
   return (
     <nav
-      className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] -translate-x-1/2 border-t border-border bg-background-elevated/95 backdrop-blur-md md:max-w-lg"
+      className={`fixed bottom-0 left-1/2 z-50 w-full -translate-x-1/2 border-t border-border bg-background-elevated/95 backdrop-blur-md ${
+        wide ? "max-w-[720px] md:max-w-3xl" : "max-w-[430px] md:max-w-lg"
+      }`}
       style={{ paddingBottom: "var(--safe-bottom)" }}
       aria-label="Main"
     >

@@ -61,13 +61,17 @@ export const trainThumbs = [
   media.marketing.lift,
 ] as const;
 
+/** Moody B&W editorial covers — no UI screenshots, no baked-in title text */
 export const blogThumbs = [
-  media.cards.mealEggs,
-  media.cards.mealSmoothie,
-  media.cards.trainAction,
-  media.cards.mealSalad,
-  media.cards.dashChart,
+  "/marketing/blog/editorial-01-athlete.jpg",
+  "/marketing/blog/editorial-02-water.jpg",
+  "/marketing/blog/editorial-03-train.jpg",
+  "/marketing/blog/editorial-07-silhouette.jpg",
+  "/marketing/blog/editorial-05-focus.jpg",
+  "/marketing/blog/editorial-06-still.jpg",
 ] as const;
+
+export const blogHero = "/marketing/blog/editorial-08-grip.jpg";
 
 export const musicThumbs = [
   media.cards.dashChart,

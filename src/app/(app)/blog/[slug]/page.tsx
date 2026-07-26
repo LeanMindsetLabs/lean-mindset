@@ -23,7 +23,14 @@ export default async function BlogArticlePage({
 
       <div className="relative overflow-hidden rounded-[var(--lm-radius-xl)] border border-border">
         <div className="relative aspect-[16/10]">
-          <Image src={thumb} alt="" fill className="object-cover" sizes="512px" priority />
+          <Image
+            src={thumb}
+            alt=""
+            fill
+            className="lm-editorial-thumb object-cover"
+            sizes="(max-width: 768px) 100vw, 768px"
+            priority
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
           <div className="absolute inset-0 flex flex-col justify-end p-5">
             <span className="w-fit rounded-full bg-black/40 px-2 py-0.5 text-[10px] font-bold uppercase text-accent backdrop-blur">

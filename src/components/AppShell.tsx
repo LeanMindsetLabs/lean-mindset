@@ -1,8 +1,14 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { BottomNav } from "./BottomNav";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const isBlog = pathname.startsWith("/blog");
+
   return (
-    <div className="app-frame">
+    <div className={isBlog ? "app-frame app-frame--wide" : "app-frame"}>
       <div
         className="pointer-events-none fixed inset-0 -z-10 hidden md:block"
         style={{
@@ -14,7 +20,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <main className="px-4 pb-[calc(var(--nav-height)+var(--safe-bottom)+16px)] pt-4">
         {children}
       </main>
-      <BottomNav />
+      <BottomNav wide={isBlog} />
     </div>
   );
 }

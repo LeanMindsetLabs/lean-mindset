@@ -100,12 +100,28 @@ body {
   position: relative;
 }
 
+/* Blog: standard content width — not phone chrome in a black void */
+.app-frame.app-frame--wide {
+  max-width: 720px;
+}
+
 @media (min-width: 768px) {
   .app-frame {
     max-width: 512px;
     border-inline: 1px solid var(--border);
     box-shadow: 0 0 80px rgba(255, 107, 0, 0.06);
   }
+
+  .app-frame.app-frame--wide {
+    max-width: 768px;
+    border-inline: none;
+    box-shadow: none;
+  }
+}
+
+/* Moody B&W editorial thumbs — cohesive with dark + orange UI */
+.lm-editorial-thumb {
+  filter: grayscale(1) contrast(1.2) brightness(0.92);
 }
 
 @keyframes lm-eq {

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { blogPosts } from "@/data/blogs";
-import { blogThumbs, media } from "@/lib/media";
+import { blogHero, blogThumbs } from "@/lib/media";
 import { ImageBanner } from "@/components/ui/VisualKit";
 
 export default function BlogListPage() {
@@ -16,9 +16,10 @@ export default function BlogListPage() {
       </header>
 
       <ImageBanner
-        src={media.cards.mealEggs}
+        src={blogHero}
         position="center"
         heightClass="aspect-[21/9] min-h-[100px]"
+        imageClassName="lm-editorial-thumb"
       >
         <p className="text-[10px] font-bold uppercase tracking-widest text-accent">Reads</p>
         <p className="text-sm font-semibold text-white">Mindset that sticks</p>
@@ -36,11 +37,10 @@ export default function BlogListPage() {
                   src={blogThumbs[i % blogThumbs.length]}
                   alt=""
                   fill
-                  className="object-cover"
-                  style={{ objectPosition: `${25 + i * 12}% ${20 + i * 8}%` }}
-                  sizes="512px"
+                  className="lm-editorial-thumb object-cover"
+                  sizes="(max-width: 768px) 100vw, 768px"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
                 <div className="absolute bottom-3 left-3 rounded-full bg-black/50 px-2 py-0.5 text-[10px] font-bold uppercase text-accent backdrop-blur">
                   {post.category}
                 </div>

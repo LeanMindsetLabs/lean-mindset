@@ -201,6 +201,7 @@ export function ImageBanner({
   className = "",
   heightClass = "aspect-[16/9]",
   position = "center",
+  imageClassName = "",
 }: {
   src: string;
   alt?: string;
@@ -208,6 +209,7 @@ export function ImageBanner({
   className?: string;
   heightClass?: string;
   position?: string;
+  imageClassName?: string;
 }) {
   return (
     <div
@@ -217,9 +219,9 @@ export function ImageBanner({
         src={src}
         alt={alt}
         fill
-        className="object-cover"
+        className={`object-cover ${imageClassName}`.trim()}
         style={{ objectPosition: position }}
-        sizes="(max-width: 512px) 100vw, 512px"
+        sizes="(max-width: 768px) 100vw, 768px"
         priority={false}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/20" />
