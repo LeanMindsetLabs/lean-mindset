@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "activate:lean-mindset": "powershell -ExecutionPolicy Bypass -File ./scripts/activate-lean-mindset.ps1",
     "push:lean-mindset": "powershell -ExecutionPolicy Bypass -File ./scripts/push-lean-mindset.ps1"
   },
   "dependencies": {
