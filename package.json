@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "push:lean-mindset": "powershell -ExecutionPolicy Bypass -File ./scripts/push-lean-mindset.ps1"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.3",
