@@ -19,7 +19,7 @@ export const blogPosts: BlogPost[] = [
     category: "Nutrition",
     readMinutes: 5,
     published: "2026-07-10",
-    imageGradient: "linear-gradient(135deg,#1a1008,#ff6b00)",
+    imageGradient: "linear-gradient(135deg,#1a1008,var(--accent))",
     body: [
       "Lean Mindset labs run on a simple idea: four meals, clear timing, consistent portions — no starvation, no extreme restriction.",
       "Meal 1 anchors the morning with protein + complex carb. Meals 2 and 4 emphasize protein + vegetables. Meal 3 is a controlled protein snack that keeps energy stable through afternoon meetings.",
@@ -34,7 +34,7 @@ export const blogPosts: BlogPost[] = [
     category: "Habits",
     readMinutes: 4,
     published: "2026-07-12",
-    imageGradient: "linear-gradient(145deg,#0a1a2a,#1a4a5a,#ff6b00)",
+    imageGradient: "linear-gradient(145deg,#0a1a2a,#1a4a5a,var(--accent))",
     body: [
       "Your water target is a daily rhythm, not a contest. Front-load earlier if evening intake disrupts sleep.",
       "Use checkpoints: wake-up, between meals, and a final pour 60–90 minutes before bed.",
@@ -49,7 +49,7 @@ export const blogPosts: BlogPost[] = [
     category: "Training",
     readMinutes: 6,
     published: "2026-07-14",
-    imageGradient: "linear-gradient(120deg,#1a0a0a,#3a1010,#ff6b00)",
+    imageGradient: "linear-gradient(120deg,#1a0a0a,#3a1010,var(--accent))",
     body: [
       "Early lab weeks prioritize Walk + Core, Full Body Light, and Mobility. The goal is adherence and recovery, not max effort.",
       "Acceleration weeks introduce HIIT circuits and strength work with controlled tempo. NEAT (steps) days keep calorie burn without frying your nervous system.",
@@ -64,7 +64,7 @@ export const blogPosts: BlogPost[] = [
     category: "Lifestyle",
     readMinutes: 5,
     published: "2026-07-16",
-    imageGradient: "linear-gradient(150deg,#121212,#2a1a10,#ff8533)",
+    imageGradient: "linear-gradient(150deg,#121212,#2a1a10,var(--accent-hover))",
     body: [
       "Prioritize protein + vegetables. Sauce on the side. Skip the bread basket by default — not as punishment, as a simple default.",
       "Travel mornings: Greek yogurt + fruit + protein bar can cover Meal 1. Hotel omelettes work if you keep portions honest.",
@@ -79,7 +79,7 @@ export const blogPosts: BlogPost[] = [
     category: "Accountability",
     readMinutes: 4,
     published: "2026-07-18",
-    imageGradient: "linear-gradient(135deg,#0a0a1a,#1a1a3a,#ff6b00)",
+    imageGradient: "linear-gradient(135deg,#0a0a1a,#1a1a3a,var(--accent))",
     body: [
       "Weight trends matter more than single mornings. Measure weekly, same conditions.",
       "Daily check-ins capture meals, water, energy, and challenges. Your coach uses them for adjustments — not judgment.",
@@ -94,7 +94,7 @@ export const blogPosts: BlogPost[] = [
     category: "Wellness",
     readMinutes: 3,
     published: "2026-07-20",
-    imageGradient: "linear-gradient(140deg,#1a1a0a,#3a3a10,#ff6b00)",
+    imageGradient: "linear-gradient(140deg,#1a1a0a,#3a3a10,var(--accent))",
     body: [
       "A multivitamin, omega-3, and vitamin D (if deficient) cover common gaps during a deficit. Always consult your doctor first.",
       "Protein powder is a convenience tool — not a meal-replacement lifestyle.",

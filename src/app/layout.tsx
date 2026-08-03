@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { Oswald, Plus_Jakarta_Sans } from "next/font/google";
+import { ThemeApplier } from "@/components/ThemeApplier";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -46,6 +48,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jakarta.variable} ${oswald.variable} h-full`}>
       <body className="min-h-full bg-background text-foreground antialiased">
+        <Suspense fallback={null}>
+          <ThemeApplier />
+        </Suspense>
         {children}
       </body>
     </html>

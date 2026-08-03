@@ -20,7 +20,7 @@ export const labs: Lab[] = [
     durationWeeks: 6,
     focus: "Fat loss + energy",
     level: "All levels",
-    accent: "#ff6b00",
+    accent: "#2563eb",
     highlights: ["4-meal precision plan", "Daily check-ins", "Travel / event swaps"],
     whoFor: "Busy professionals who want a leaner summer without crash dieting.",
     includes: [
@@ -115,7 +115,7 @@ export const labs: Lab[] = [
     durationWeeks: 6,
     focus: "Core program",
     level: "All levels",
-    accent: "#ff6b00",
+    accent: "#2563eb",
     highlights: ["Prep week", "4-meal system", "WhatsApp-style accountability"],
     whoFor: "First-time Lean Mindset clients starting the flagship cohort.",
     includes: [

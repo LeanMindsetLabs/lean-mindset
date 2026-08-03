@@ -8,13 +8,15 @@
   --foreground: #ffffff;
   --foreground-muted: #a3a3a3;
   --foreground-subtle: #6b6b6b;
-  --accent: #ff6b00;
-  --accent-hover: #ff8533;
-  --accent-soft: rgba(255, 107, 0, 0.16);
+  /* Trust Blue — default accent (Linear / iOS lane). Override with ?theme=a|c for previews. */
+  --accent: #2563eb;
+  --accent-hover: #3b82f6;
+  --accent-soft: rgba(37, 99, 235, 0.16);
+  --accent-rgb: 37, 99, 235;
   --border: #2a2a2a;
   --danger: #ef4444;
   --success: #22c55e;
-  --ring: #ff6b00;
+  --ring: #2563eb;
 
   --lm-radius-sm: 12px;
   --lm-radius-md: 16px;
@@ -32,11 +34,66 @@ html.light {
   --foreground: #0a0a0a;
   --foreground-muted: #525252;
   --foreground-subtle: #8a8a8a;
-  --accent: #ff6b00;
-  --accent-hover: #e85f00;
-  --accent-soft: rgba(255, 107, 0, 0.12);
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-soft: rgba(37, 99, 235, 0.12);
+  --accent-rgb: 37, 99, 235;
   --border: #e5e5e5;
-  --ring: #ff6b00;
+  --ring: #2563eb;
+}
+
+/* Iteration A — Royal Violet (Discord / Notion lane) */
+:root.theme-a,
+.lm-theme-a {
+  --accent: #7c3aed;
+  --accent-hover: #8b5cf6;
+  --accent-soft: rgba(124, 58, 237, 0.16);
+  --accent-rgb: 124, 58, 237;
+  --ring: #7c3aed;
+}
+
+html.light.theme-a {
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --accent-soft: rgba(124, 58, 237, 0.12);
+  --accent-rgb: 124, 58, 237;
+  --ring: #7c3aed;
+}
+
+/* Iteration B — Trust Blue (Linear / iOS lane) */
+:root.theme-b,
+.lm-theme-b {
+  --accent: #2563eb;
+  --accent-hover: #3b82f6;
+  --accent-soft: rgba(37, 99, 235, 0.16);
+  --accent-rgb: 37, 99, 235;
+  --ring: #2563eb;
+}
+
+html.light.theme-b {
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-soft: rgba(37, 99, 235, 0.12);
+  --accent-rgb: 37, 99, 235;
+  --ring: #2563eb;
+}
+
+/* Iteration C — Indigo Pro (Figma / Stripe lane) */
+:root.theme-c,
+.lm-theme-c {
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --accent-soft: rgba(99, 102, 241, 0.16);
+  --accent-rgb: 99, 102, 241;
+  --ring: #6366f1;
+}
+
+html.light.theme-c {
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --accent-soft: rgba(99, 102, 241, 0.12);
+  --accent-rgb: 99, 102, 241;
+  --ring: #6366f1;
 }
 
 @theme inline {
@@ -109,7 +166,7 @@ body {
   .app-frame {
     max-width: 512px;
     border-inline: 1px solid var(--border);
-    box-shadow: 0 0 80px rgba(255, 107, 0, 0.06);
+    box-shadow: 0 0 80px rgba(var(--accent-rgb), 0.06);
   }
 
   .app-frame.app-frame--wide {
@@ -119,7 +176,27 @@ body {
   }
 }
 
-/* Moody B&W editorial thumbs — cohesive with dark + orange UI */
+.lm-shadow-accent-md {
+  box-shadow: 0 8px 24px rgba(var(--accent-rgb), 0.35);
+}
+
+.lm-shadow-accent-lg {
+  box-shadow: 0 12px 32px rgba(var(--accent-rgb), 0.28);
+}
+
+.lm-shadow-accent-card {
+  box-shadow: 0 12px 28px rgba(var(--accent-rgb), 0.25);
+}
+
+.lm-glow-accent-sm {
+  filter: drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.65));
+}
+
+.lm-glow-radial {
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.4) 0%, transparent 70%);
+}
+
+/* Moody B&W editorial thumbs — cohesive with dark + accent UI */
 .lm-editorial-thumb {
   filter: grayscale(1) contrast(1.2) brightness(0.92);
 }
@@ -210,7 +287,7 @@ body {
 
 .lm-card-lift:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(255, 107, 0, 0.12);
+  box-shadow: 0 10px 28px rgba(var(--accent-rgb), 0.12);
 }
 
 @media (prefers-reduced-motion: reduce) {

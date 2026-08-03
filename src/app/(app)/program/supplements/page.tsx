@@ -21,7 +21,7 @@ export default function SupplementsPage() {
               <div
                 className="h-16"
                 style={{
-                  background: `linear-gradient(135deg,#1a1a0a ${i * 10}%,#ff6b00)`,
+                  background: `linear-gradient(135deg,#1a1a0a ${i * 10}%,var(--accent))`,
                 }}
               />
               <div className="p-4">
@@ -47,7 +47,7 @@ export default function SupplementsPage() {
               <div
                 className="h-12"
                 style={{
-                  background: `linear-gradient(120deg,#121212,#ff8533 ${40 + i * 20}%)`,
+                  background: `linear-gradient(120deg,#121212,var(--accent-hover) ${40 + i * 20}%)`,
                 }}
               />
               <div className="p-4">

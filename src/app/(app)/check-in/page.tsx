@@ -48,6 +48,10 @@ export default async function CheckInPage() {
 
   return (
     <div>
+      <header className="mb-3">
+        <h1 className="text-xl font-bold">Check-in</h1>
+        <p className="text-xs text-[#94a3b8]">Day 12 · Summer Lab</p>
+      </header>
       {weights.length > 0 && (
         <div className="mb-3 rounded-[var(--lm-radius-md)] border border-border bg-background-card px-3 py-2.5">
           <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-foreground-subtle">

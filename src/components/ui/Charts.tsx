@@ -17,7 +17,7 @@ export function WeekBars({
               style={{
                 height: `${Math.max(8, d.pct)}%`,
                 animationDelay: `${i * 0.06}s`,
-                boxShadow: d.pct > 70 ? "0 0 12px rgba(255,107,0,0.35)" : undefined,
+                boxShadow: d.pct > 70 ? "0 0 12px rgba(var(--accent-rgb), 0.35)" : undefined,
               }}
             />
           </div>
@@ -113,7 +113,7 @@ export function AreaSparkline({
   values,
   width = 280,
   height = 72,
-  color = "#ff6b00",
+  color = "var(--accent)",
 }: {
   values: number[];
   width?: number;
@@ -302,11 +302,11 @@ export function RadarScore({
           </g>
         );
       })}
-      <polygon points={goal} fill="rgba(59,130,246,0.12)" stroke="#3b82f6" strokeWidth="1.5" strokeDasharray="4 3" />
-      <polygon points={poly} fill="rgba(255,107,0,0.28)" stroke="#ff6b00" strokeWidth="2" />
+      <polygon points={goal} fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5" strokeDasharray="4 3" />
+      <polygon points={poly} fill="rgba(var(--accent-rgb), 0.28)" stroke="var(--accent)" strokeWidth="2" />
       {axes.map((a, i) => {
         const p = point(i, a.value);
-        return <circle key={a.label} cx={p.x} cy={p.y} r="3.5" fill="#ff6b00" />;
+        return <circle key={a.label} cx={p.x} cy={p.y} r="3.5" fill="var(--accent)" />;
       })}
     </svg>
   );

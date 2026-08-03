@@ -16,7 +16,7 @@ export const playlists: Playlist[] = [
     tracks: 18,
     minutes: 42,
     vibe: "High BPM drops for circuit days",
-    gradient: "linear-gradient(135deg,#2a0800,#ff6b00)",
+    gradient: "linear-gradient(135deg,#2a0800,var(--accent))",
   },
   {
     id: "steady-state",
@@ -25,7 +25,7 @@ export const playlists: Playlist[] = [
     tracks: 22,
     minutes: 55,
     vibe: "Mid-tempo focus for foundation weeks",
-    gradient: "linear-gradient(145deg,#0a1a2a,#1a4a6a,#ff8533)",
+    gradient: "linear-gradient(145deg,#0a1a2a,#1a4a6a,var(--accent-hover))",
   },
   {
     id: "mobility-flow",
@@ -34,7 +34,7 @@ export const playlists: Playlist[] = [
     tracks: 12,
     minutes: 28,
     vibe: "Soft pulse for stretch & reset",
-    gradient: "linear-gradient(150deg,#1a1020,#3a2050,#ff6b00)",
+    gradient: "linear-gradient(150deg,#1a1020,#3a2050,var(--accent))",
   },
   {
     id: "kitchen-prep",
@@ -43,7 +43,7 @@ export const playlists: Playlist[] = [
     tracks: 16,
     minutes: 40,
     vibe: "Upbeat grooves while you batch Meal 2–4",
-    gradient: "linear-gradient(130deg,#0a2a14,#1a4a28,#ff6b00)",
+    gradient: "linear-gradient(130deg,#0a2a14,#1a4a28,var(--accent))",
   },
   {
     id: "deep-focus",
@@ -52,7 +52,7 @@ export const playlists: Playlist[] = [
     tracks: 20,
     minutes: 60,
     vibe: "Low distraction for walk-meeting days",
-    gradient: "linear-gradient(140deg,#121212,#2a2a2a,#ff6b00)",
+    gradient: "linear-gradient(140deg,#121212,#2a2a2a,var(--accent))",
   },
   {
     id: "sunday-reset",
@@ -61,7 +61,7 @@ export const playlists: Playlist[] = [
     tracks: 14,
     minutes: 35,
     vibe: "Calm energy for reflection + grocery run",
-    gradient: "linear-gradient(135deg,#1a1408,#3a2810,#ff8533)",
+    gradient: "linear-gradient(135deg,#1a1408,#3a2810,var(--accent-hover))",
   },
 ];
 

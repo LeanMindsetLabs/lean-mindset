@@ -22,7 +22,7 @@ export const recipes: Recipe[] = [
     minutes: 12,
     calories: 340,
     proteinG: 32,
-    imageGradient: "linear-gradient(135deg,#2a1a0a,#ff6b00 70%)",
+    imageGradient: "linear-gradient(135deg,#2a1a0a,var(--accent) 70%)",
     ingredients: [
       "6 egg whites",
       "1/2 cup dry oats",
@@ -44,7 +44,7 @@ export const recipes: Recipe[] = [
     minutes: 20,
     calories: 420,
     proteinG: 45,
-    imageGradient: "linear-gradient(145deg,#0a2a14,#1a3a20 40%,#ff6b00)",
+    imageGradient: "linear-gradient(145deg,#0a2a14,#1a3a20 40%,var(--accent))",
     ingredients: [
       "6 oz chicken breast",
       "Large mixed greens",
@@ -67,7 +67,7 @@ export const recipes: Recipe[] = [
     minutes: 5,
     calories: 280,
     proteinG: 28,
-    imageGradient: "linear-gradient(160deg,#1a1028,#3a2048,#ff6b00)",
+    imageGradient: "linear-gradient(160deg,#1a1028,#3a2048,var(--accent))",
     ingredients: [
       "1 cup plain Greek yogurt",
       "1/2 cup berries",
@@ -90,7 +90,7 @@ export const recipes: Recipe[] = [
     minutes: 25,
     calories: 480,
     proteinG: 40,
-    imageGradient: "linear-gradient(120deg,#0a1a2a,#1a3a4a,#ff8533)",
+    imageGradient: "linear-gradient(120deg,#0a1a2a,#1a3a4a,var(--accent-hover))",
     ingredients: [
       "5–6 oz salmon",
       "Broccoli + zucchini",
@@ -112,7 +112,7 @@ export const recipes: Recipe[] = [
     minutes: 15,
     calories: 360,
     proteinG: 26,
-    imageGradient: "linear-gradient(135deg,#1a2a0a,#3a4a1a,#ff6b00)",
+    imageGradient: "linear-gradient(135deg,#1a2a0a,#3a4a1a,var(--accent))",
     ingredients: [
       "6 oz firm tofu",
       "Spinach + peppers",
@@ -135,7 +135,7 @@ export const recipes: Recipe[] = [
     minutes: 18,
     calories: 400,
     proteinG: 24,
-    imageGradient: "linear-gradient(150deg,#2a1408,#4a2810,#ff6b00)",
+    imageGradient: "linear-gradient(150deg,#2a1408,#4a2810,var(--accent))",
     ingredients: [
       "1 cup cooked lentils",
       "Roasted peppers + greens",
@@ -157,7 +157,7 @@ export const recipes: Recipe[] = [
     minutes: 3,
     calories: 250,
     proteinG: 26,
-    imageGradient: "linear-gradient(140deg,#121212,#2a2a2a,#ff6b00)",
+    imageGradient: "linear-gradient(140deg,#121212,#2a2a2a,var(--accent))",
     ingredients: ["1 cup cottage cheese", "1 apple", "Cinnamon"],
     steps: ["Portion cottage cheese.", "Slice apple.", "Dust cinnamon and eat."],
     tags: ["quick", "travel"],
@@ -171,7 +171,7 @@ export const recipes: Recipe[] = [
     minutes: 22,
     calories: 450,
     proteinG: 32,
-    imageGradient: "linear-gradient(130deg,#2a0a1a,#4a1a2a,#ff8533)",
+    imageGradient: "linear-gradient(130deg,#2a0a1a,#4a1a2a,var(--accent-hover))",
     ingredients: [
       "5 oz paneer",
       "Mixed vegetables",

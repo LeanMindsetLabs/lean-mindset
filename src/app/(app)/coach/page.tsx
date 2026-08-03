@@ -114,7 +114,7 @@ function StatusBadge({
     },
     needs_reply: {
       label: "Needs reply",
-      className: "border-orange-500/50 bg-orange-500/15 text-orange-300",
+      className: "border-accent/50 bg-accent-soft text-accent",
     },
   } as const;
   const cfg = map[status];

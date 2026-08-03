@@ -28,8 +28,8 @@ export default function AiTrainPage() {
             href={`/train/${s.id}`}
             gradient={
               s.phase === "acceleration"
-                ? "linear-gradient(135deg,#2a0a0a,#ff6b00)"
-                : "linear-gradient(135deg,#0a1a2a,#ff8533)"
+                ? "linear-gradient(135deg,#2a0a0a,var(--accent))"
+                : "linear-gradient(135deg,#0a1a2a,var(--accent-hover))"
             }
             image={trainThumbs[i % trainThumbs.length]}
             title={s.name}

@@ -13,8 +13,7 @@ function PhoneChrome({ children, width }: { children: ReactNode; width: string }
   return (
     <div className={`relative mx-auto ${width}`}>
       <div
-        className="absolute -inset-6 -z-10 rounded-full opacity-60 blur-3xl"
-        style={{ background: "radial-gradient(circle, rgba(255,107,0,0.4) 0%, transparent 70%)" }}
+        className="absolute -inset-6 -z-10 rounded-full opacity-60 blur-3xl lm-glow-radial"
         aria-hidden
       />
       <div className="overflow-hidden rounded-[2.1rem] border border-white/20 bg-[#0a0a0a] shadow-[0_32px_64px_rgba(0,0,0,0.75)]">
@@ -29,7 +28,7 @@ function PhoneChrome({ children, width }: { children: ReactNode; width: string }
   );
 }
 
-/** Circular orange score — matches hero mock (not a blank orange box) */
+/** Circular score orb — matches hero mock */
 function ScoreOrb({ score = 72 }: { score?: number }) {
   return (
     <div className="relative mx-auto flex h-[7.25rem] w-[7.25rem] items-center justify-center">
@@ -40,15 +39,15 @@ function ScoreOrb({ score = 72 }: { score?: number }) {
           cy="58"
           r="52"
           fill="none"
-          stroke="#ff6b00"
+          stroke="var(--accent)"
           strokeWidth="8"
           strokeLinecap="round"
           strokeDasharray={`${2 * Math.PI * 52}`}
           strokeDashoffset={`${2 * Math.PI * 52 * 0.28}`}
-          style={{ filter: "drop-shadow(0 0 10px rgba(255,107,0,0.65))" }}
+          className="lm-glow-accent-sm"
         />
       </svg>
-      <div className="flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center rounded-full bg-accent text-white shadow-[0_0_28px_rgba(255,107,0,0.55)]">
+      <div className="flex h-[5.5rem] w-[5.5rem] flex-col items-center justify-center rounded-full bg-accent text-white lm-shadow-accent-md">
         <p className="font-display text-[2.35rem] leading-none">{score}</p>
         <p className="mt-0.5 text-[7px] font-bold uppercase tracking-wider text-white/85">Score</p>
       </div>
@@ -100,7 +99,7 @@ export function MarketingPhoneMock({
           <p className="font-display text-3xl leading-none text-white">1,745</p>
           <p className="text-[10px] text-white/55">kcal · 312 left today</p>
           <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-white/10">
-            <div className="h-full w-[78%] rounded-full bg-accent shadow-[0_0_12px_rgba(255,107,0,0.5)]" />
+            <div className="h-full w-[78%] rounded-full bg-accent lm-shadow-accent-md" />
           </div>
           <div className="mt-3 grid grid-cols-3 gap-1.5">
             {[
@@ -159,7 +158,7 @@ export function MarketingPhoneMock({
       <PhoneChrome width={width}>
         <div className="flex flex-col items-center px-3 pb-5 pt-2 text-center">
           <p className="text-[9px] font-bold uppercase tracking-widest text-accent">Goal reached</p>
-          <div className="mt-3 flex h-24 w-24 items-center justify-center rounded-full bg-accent shadow-[0_0_40px_rgba(255,107,0,0.55)]">
+          <div className="mt-3 flex h-24 w-24 items-center justify-center rounded-full bg-accent lm-shadow-accent-lg">
             <span className="font-display text-4xl text-white">✓</span>
           </div>
           <p className="mt-3 text-base font-bold text-white">2,187 kcal</p>

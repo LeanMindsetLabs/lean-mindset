@@ -41,7 +41,7 @@ export default async function ProfilePage() {
 
       <Link
         href="/home/score"
-        className="flex items-center gap-3 rounded-2xl bg-accent p-3 text-white shadow-[0_12px_28px_rgba(255,107,0,0.25)]"
+        className="flex items-center gap-3 rounded-2xl bg-accent p-3 text-white lm-shadow-accent-card"
       >
         <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-black/20">
           <span className="font-display text-3xl leading-none">{fitnessScore}</span>

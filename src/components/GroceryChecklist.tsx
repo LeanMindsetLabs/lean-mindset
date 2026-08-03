@@ -213,7 +213,7 @@ export function GroceryChecklist({ sections }: { sections: GrocerySection[] }) {
         <button
           type="button"
           onClick={() => setTab("yours")}
-          className="pointer-events-auto flex w-full items-center justify-between rounded-full bg-accent px-5 py-3.5 text-sm font-semibold text-white shadow-[0_8px_28px_rgba(255,107,0,0.35)]"
+          className="pointer-events-auto flex w-full items-center justify-between rounded-full bg-accent px-5 py-3.5 text-sm font-semibold text-white lm-shadow-accent-md"
         >
           <span>Your List</span>
           <span className="rounded-full bg-black/25 px-2.5 py-0.5 text-xs">

@@ -18,7 +18,7 @@ export default async function WaterPage() {
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             background:
-              "radial-gradient(ellipse at 70% 30%, rgba(255,107,0,0.25), transparent 55%)",
+              "radial-gradient(ellipse at 70% 30%, rgba(var(--accent-rgb), 0.25), transparent 55%)",
           }}
         />
         <div className="relative flex items-center gap-5">

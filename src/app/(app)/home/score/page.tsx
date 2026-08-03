@@ -33,7 +33,7 @@ export default async function ScoreBreakdownPage() {
         <span className="w-10" aria-hidden />
       </header>
 
-      <section className="rounded-2xl bg-accent p-4 text-white shadow-[0_12px_32px_rgba(255,107,0,0.25)]">
+      <section className="rounded-2xl bg-accent p-4 text-white lm-shadow-accent-card">
         <p className="text-[10px] font-bold uppercase tracking-wide text-white/80">
           Lean Mindset Score
         </p>
@@ -45,7 +45,7 @@ export default async function ScoreBreakdownPage() {
 
       <section className="rounded-2xl border border-border bg-background-card p-4">
         <p className="mb-2 text-center text-xs text-foreground-muted">
-          Orange = you · Blue dashed = goal band
+          Solid = you · Dashed = goal band
         </p>
         <RadarScore axes={axes} size={240} />
       </section>

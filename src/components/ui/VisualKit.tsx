@@ -168,7 +168,7 @@ export function MediaCard({
             className="absolute inset-0 opacity-40"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 30% 40%, rgba(255,255,255,0.25), transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,107,0,0.45), transparent 40%)",
+                "radial-gradient(circle at 30% 40%, rgba(255,255,255,0.25), transparent 50%), radial-gradient(circle at 80% 20%, rgba(var(--accent-rgb),0.45), transparent 40%)",
             }}
           />
         )}

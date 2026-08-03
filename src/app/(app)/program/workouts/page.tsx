@@ -12,7 +12,7 @@ export default function WorkoutsPage() {
       >
         <div
           className="flex aspect-[5/2] flex-col justify-end p-4"
-          style={{ background: "linear-gradient(120deg,#1a0800,#ff6b00)" }}
+          style={{ background: "linear-gradient(120deg,#1a0800,var(--accent))" }}
         >
           <p className="font-display text-2xl uppercase text-white">Open Train hub</p>
           <p className="text-xs text-white/80">Session cards · AI picks · log</p>
@@ -30,7 +30,7 @@ export default function WorkoutsPage() {
                   className="h-14"
                   style={{
                     background:
-                      "linear-gradient(90deg,rgba(255,107,0,0.35),transparent)",
+                      "linear-gradient(90deg,rgba(var(--accent-rgb),0.35),transparent)",
                   }}
                 />
                 <div className="-mt-6 px-4 pb-4">

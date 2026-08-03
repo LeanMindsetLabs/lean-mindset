@@ -41,7 +41,7 @@ export default async function NutritionPage() {
     <div className="flex flex-col gap-3 pt-1">
       <header className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold">Nutrition</h1>
+          <h1 className="text-xl font-bold">Meals</h1>
           <p className="text-xs text-foreground-muted">Today · 4-meal precision</p>
         </div>
         <Link href="/program/eating-schedule" className="text-xs font-semibold text-accent">
@@ -78,7 +78,7 @@ export default async function NutritionPage() {
           </div>
         </div>
         <div className="mt-4 space-y-2.5">
-          <HorizontalBar label="Protein" value={protein.value} max={protein.max} unit="g" color="#ff6b00" />
+          <HorizontalBar label="Protein" value={protein.value} max={protein.max} unit="g" color="var(--accent)" />
           <HorizontalBar label="Fat" value={fat.value} max={fat.max} unit="g" color="#fbbf24" />
           <HorizontalBar label="Carbs" value={carbs.value} max={carbs.max} unit="g" color="#3b82f6" />
         </div>
@@ -132,34 +132,36 @@ export default async function NutritionPage() {
         </div>
       </section>
 
-      {/* Compact meal list */}
+      {/* Meal list — photo left, full-width ellipse pill */}
       <section>
         <h2 className="mb-2 text-sm font-semibold">Today&apos;s meals</h2>
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-2.5">
           {eatingSchedule.meals.map((meal, i) => {
             const done = i < mealsDone;
+            const label = meal.name.replace(/^Meal \d+ — /, "");
             return (
               <li key={meal.name}>
-                <article
-                  className={`flex overflow-hidden rounded-xl border ${
-                    done ? "border-accent/45" : "border-border"
-                  } bg-background-card`}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={recipeThumbs[i % recipeThumbs.length] ?? media.cards.mealEggs}
-                    alt=""
-                    className="h-[4.25rem] w-[4.25rem] shrink-0 object-cover"
-                  />
-                  <div className="flex min-w-0 flex-1 items-center gap-2 p-2.5">
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center justify-between gap-2">
-                        <h3 className="truncate text-sm font-semibold">
-                          {meal.name.replace(/^Meal \d+ — /, "")}
-                        </h3>
-                        <span className="shrink-0 text-[11px] font-bold text-accent">{meal.time}</span>
-                      </div>
-                      <p className="truncate text-[11px] text-foreground-muted">{meal.focus}</p>
+                <article className="flex items-center gap-2">
+                  <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl border border-border/80">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={recipeThumbs[i % recipeThumbs.length] ?? media.cards.mealEggs}
+                      alt=""
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="flex h-12 min-w-0 flex-1 items-center justify-between gap-2 rounded-full border border-border bg-background-card px-4">
+                    <div className="min-w-0">
+                      <h3 className="truncate text-sm font-semibold leading-tight">{label}</h3>
+                      <p className="truncate text-[10px] text-foreground-muted">{meal.focus}</p>
+                    </div>
+                    <div className="shrink-0 border-l border-border/60 pl-3 text-right">
+                      <p className="whitespace-nowrap text-[10px] font-medium text-foreground-muted">
+                        {meal.time}
+                      </p>
+                      {done ? (
+                        <p className="text-[9px] font-medium text-foreground-subtle">Logged</p>
+                      ) : null}
                     </div>
                   </div>
                 </article>
