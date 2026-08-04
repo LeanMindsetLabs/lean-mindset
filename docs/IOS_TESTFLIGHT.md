@@ -19,14 +19,48 @@ If a password was pasted in chat, **rotate it** in Apple ID immediately.
 
 IPA archive + TestFlight upload need **macOS + Xcode**, or **Codemagic**.
 
+## ASC API key (create Identifier + App)
+
+Use the App Store Connect API instead of the browser for Identifier registration and app lookup. **Never** put Apple ID passwords or `.p8` contents in git.
+
+### Required env (`web/.env.local` — gitignored)
+
+| Variable | Purpose |
+|----------|---------|
+| `APP_STORE_CONNECT_ISSUER_ID` | Issuer ID from Users and Access → Integrations → App Store Connect API |
+| `APP_STORE_CONNECT_API_KEY_ID` | Key ID (e.g. `AB12CD34EF`) |
+| `APP_STORE_CONNECT_API_KEY_PATH` | Path to downloaded `AuthKey_*.p8` (prefer relative under `web/`, e.g. `secrets/AuthKey_….p8` — keep `secrets/` gitignored) |
+
+Optional: `APP_STORE_CONNECT_PRIVATE_KEY` = full PEM text (only if you cannot use a path; still never commit).
+
+### Create the API key (4 steps)
+
+1. Open [App Store Connect → Users and Access → Integrations → App Store Connect API](https://appstoreconnect.apple.com/access/integrations/api) (team with Admin).
+2. Note the **Issuer ID**, then **Generate API Key** → name e.g. `Lean Mindset ASC` → role **Admin** → Generate.
+3. Copy the **Key ID**, download the `.p8` once, save it outside git (e.g. `web/secrets/AuthKey_XXXX.p8`).
+4. Paste into `web/.env.local` (placeholders also in `.env.local.example`):
+
+```env
+APP_STORE_CONNECT_ISSUER_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+APP_STORE_CONNECT_API_KEY_ID=XXXXXXXXXX
+APP_STORE_CONNECT_API_KEY_PATH=secrets/AuthKey_XXXXXXXXXX.p8
+```
+
+Then from `web/`:
+
+```bash
+npm run asc:create-app
+# or: node scripts/asc-create-lean-mindset.mjs
+```
+
+The script ensures Identifier `app.leanmindset.labs`, creates or finds app **Lean Mindset** / SKU `leanmindset-ios`, and prints the App Store Connect app id + URL.
+
+**Note:** Apple often forbids `CREATE` on `/v1/apps` (GET/UPDATE only). If the script reports that, create the app once in **My Apps → +** with the same name / bundle / SKU, then re-run to print the id/URL. Bundle ID creation via API still works.
+
 ## Path A - Codemagic (recommended from Windows)
 
-1. Create app in [App Store Connect](https://appstoreconnect.apple.com) → **My Apps** → **+**  
-   - Name: Lean Mindset  
-   - Bundle ID: `app.leanmindset.labs` (register in Certificates, Identifiers & Profiles first)  
-   - SKU: `leanmindset-ios`
-2. Create an **App Store Connect API key** (Users and Access → Keys) with Access to Certificates/Profiles.  
-   Download `.p8` once. Store only in Codemagic / password manager - not in this repo.
+1. Ensure Identifier + app exist (run `npm run asc:create-app` after env is set, or create in ASC UI as above).
+2. Use the same **App Store Connect API key** in Codemagic (or a dedicated CI key). Download `.p8` once. Store only in Codemagic / password manager — not in this repo.
 3. In [Codemagic](https://codemagic.io): add `LeanMindsetLabs/lean-mindset`, point workflow file to `web/codemagic.yaml`, attach ASC integration named `VeriXLabs`.
 4. Set signing: automatic App Store distribution for `app.leanmindset.labs`.
 5. Run **Lean Mindset · TestFlight**. Add yourself + friends to a TestFlight group named **Friends** (or edit `beta_groups` in yaml).

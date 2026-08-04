@@ -11,7 +11,8 @@
     "configure:domain": "powershell -ExecutionPolicy Bypass -File ./scripts/configure-production-domain.ps1",
     "push:lean-mindset": "powershell -ExecutionPolicy Bypass -File ./scripts/push-lean-mindset.ps1",
     "cap:sync": "npx cap sync ios",
-    "cap:open:ios": "npx cap open ios"
+    "cap:open:ios": "npx cap open ios",
+    "asc:create-app": "node scripts/asc-create-lean-mindset.mjs"
   },
   "dependencies": {
     "@capacitor/app": "^8.1.1",
