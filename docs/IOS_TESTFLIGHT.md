@@ -61,9 +61,12 @@ The script ensures Identifier `app.leanmindset.labs`, creates or finds app **Lea
 
 1. Ensure Identifier + app exist (run `npm run asc:create-app` after env is set, or create in ASC UI as above).
 2. Use the same **App Store Connect API key** in Codemagic (or a dedicated CI key). Download `.p8` once. Store only in Codemagic / password manager — not in this repo.
-3. In [Codemagic](https://codemagic.io): add `LeanMindsetLabs/lean-mindset`, point workflow file to `web/codemagic.yaml`, attach ASC integration named `VeriXLabs`.
-4. Set signing: automatic App Store distribution for `app.leanmindset.labs`.
+3. In [Codemagic](https://codemagic.io): add `LeanMindsetLabs/lean-mindset`, point workflow file to `web/codemagic.yaml`, attach ASC integration named **`VeriXLabs`**.
+4. In Codemagic → lean-mindset → **App settings → Environment variables**, create group **`ios_credentials`** with secret:
+   - `CERTIFICATE_PRIVATE_KEY` = PEM of an RSA private key (generate once; Codemagic creates the Apple Distribution cert from it). Example: `openssl genrsa 2048`. Keep the key in `web/secrets/` (gitignored) — never commit. (Personal-account global vars are read-only; use app-level vars.)
 5. Run **Lean Mindset · TestFlight**. Add yourself + friends to a TestFlight group named **Friends** (or edit `beta_groups` in yaml).
+
+Workflow signs via `app-store-connect fetch-signing-files` (creates/fetches App Store profile for `app.leanmindset.labs`), then uploads IPA to TestFlight.
 
 ## Path B - Mac + Xcode
 

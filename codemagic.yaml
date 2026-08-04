@@ -1,6 +1,13 @@
 # Codemagic - Lean Mindset iOS → TestFlight
 # Repo root = web/. Connect GitHub LeanMindsetLabs/lean-mindset + App Store Connect API key in Codemagic UI.
-# Never put Apple passwords in this repo.
+# Never put Apple passwords or .p8 / private keys in this repo.
+#
+# Required in Codemagic:
+# 1) Team Integrations → Developer Portal → key named exactly "VeriXLabs"
+# 2) lean-mindset → App settings → Environment variables → group "ios_credentials"
+#      (personal-account global vars are read-only — use app-level vars)
+#      CERTIFICATE_PRIVATE_KEY = PEM of an RSA private key (Secret)
+#    Codemagic uses it to create/fetch Apple Distribution cert + App Store profile
 
 workflows:
   ios-testflight:
@@ -10,12 +17,12 @@ workflows:
     integrations:
       app_store_connect: VeriXLabs
     environment:
-      ios_signing:
-        distribution_type: app_store
-        bundle_identifier: app.leanmindset.labs
+      groups:
+        - ios_credentials
       vars:
         XCODE_PROJECT: ios/App/App.xcodeproj
         XCODE_SCHEME: App
+        BUNDLE_ID: app.leanmindset.labs
       node: 22
     scripts:
       - name: Install JS deps
@@ -24,6 +31,20 @@ workflows:
       - name: Capacitor sync
         script: |
           npx cap sync ios
+      - name: Set up keychain
+        script: |
+          keychain initialize
+      - name: Fetch signing files from Apple
+        script: |
+          app-store-connect fetch-signing-files "$BUNDLE_ID" \
+            --type IOS_APP_STORE \
+            --create
+      - name: Add certificates to keychain
+        script: |
+          keychain add-certificates
+      - name: Apply profiles to Xcode project
+        script: |
+          xcode-project use-profiles
       - name: Build ipa
         script: |
           xcode-project build-ipa \
