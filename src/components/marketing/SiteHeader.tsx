@@ -4,7 +4,7 @@ import { MOBILE_APP_ENTRY } from "@/lib/device/mobile-preview";
 
 export function SiteHeader({ signedIn }: { signedIn: boolean }) {
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/5 bg-black/70 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-black/30 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         {/* Official squircle lm + lean(white)/mindset(blue) — replaces old circle + gray */}
         <LeanMindsetLogo variant="lockup" iconSize={28} href="/" />
