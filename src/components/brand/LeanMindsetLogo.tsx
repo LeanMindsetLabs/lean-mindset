@@ -4,26 +4,26 @@ import { NAV_TAB_SLOT_H } from "@/components/nav/nav-metrics";
 
 export { NAV_TAB_SLOT_H };
 
-/** Official brand colors from Logo_leanmindset masters */
+/** Official brand colors — match Logo_leanmindset dark lockup */
 const BRAND_BLUE = "#2F5FD1";
-const BRAND_BLUE_LIGHT = "#5B8DEF";
+/** Icon / “mindset” blue on dark UI (same family as app icon) */
+const BRAND_BLUE_LIGHT = "#4A86E8";
 const BRAND_INK = "#12151A";
 
-/** Master lockup aspect (900×240). */
-const LOCKUP_ASPECT = 900 / 240;
-
-const ICON_SRC = "/brand/icon_180.png";
-const LOCKUP_DARK_SRC = "/brand/lockup_dark_bg_3x.png";
-const LOCKUP_LIGHT_SRC = "/brand/lockup_light_bg_3x.png";
+/**
+ * Official app mark (squircle + white “lm”) — user-provided master.
+ * Replaces the old CSS circle + gray “mindset” header lockup.
+ */
+const ICON_SRC = "/brand/lm-app-icon.png";
 
 type LogoVariant = "icon" | "wordmark" | "lockup" | "app-icon";
 type LogoTone = "dark" | "light";
 
 type LeanMindsetLogoProps = {
   variant?: LogoVariant;
-  /** Lockup / icon height in px — default matches bottom App tab (`NAV_TAB_SLOT_H`). */
+  /** Icon size in px — default matches bottom App tab (`NAV_TAB_SLOT_H`). */
   iconSize?: number;
-  /** dark lockup (white lean) vs light lockup (ink lean) */
+  /** dark = white lean + blue mindset; light = ink lean + brand mindset */
   tone?: LogoTone;
   className?: string;
   href?: string;
@@ -32,9 +32,11 @@ type LeanMindsetLogoProps = {
 function BrandIcon({
   size,
   className = "",
+  priority = false,
 }: {
   size: number;
   className?: string;
+  priority?: boolean;
 }) {
   return (
     <Image
@@ -43,36 +45,34 @@ function BrandIcon({
       width={size}
       height={size}
       className={`shrink-0 ${className}`}
+      style={{ borderRadius: "22%" }}
       draggable={false}
       unoptimized
-      priority={false}
+      priority={priority}
     />
   );
 }
 
-/** Official PNG lockup — exact attached branding. */
-function BrandLockup({
-  height,
+function Wordmark({
   tone = "dark",
+  fontSize,
   className = "",
 }: {
-  height: number;
   tone?: LogoTone;
+  fontSize: number;
   className?: string;
 }) {
-  const width = Math.round(height * LOCKUP_ASPECT);
-  const src = tone === "light" ? LOCKUP_LIGHT_SRC : LOCKUP_DARK_SRC;
+  const leanColor = tone === "light" ? BRAND_INK : "#FFFFFF";
+  const mindsetColor = tone === "light" ? BRAND_BLUE : BRAND_BLUE_LIGHT;
+
   return (
-    <Image
-      src={src}
-      alt="leanmindset"
-      width={width}
-      height={height}
-      className={`shrink-0 ${className}`}
-      draggable={false}
-      unoptimized
-      priority
-    />
+    <span
+      className={`inline-flex items-baseline font-bold lowercase leading-none tracking-[-0.02em] ${className}`}
+      style={{ fontSize, fontFamily: "Arial, Helvetica, sans-serif" }}
+    >
+      <span style={{ color: leanColor }}>lean</span>
+      <span style={{ color: mindsetColor }}>mindset</span>
+    </span>
   );
 }
 
@@ -83,13 +83,20 @@ export function LeanMindsetLogo({
   className = "",
   href,
 }: LeanMindsetLogoProps) {
+  // Lockup masters: word ~46% of icon height; gap ~21% of icon
+  const wordSize = Math.max(13, Math.round(iconSize * 0.46));
+  const gap = Math.max(8, Math.round(iconSize * 0.2));
+
   const content =
     variant === "icon" || variant === "app-icon" ? (
-      <BrandIcon size={iconSize} />
+      <BrandIcon size={iconSize} priority />
     ) : variant === "wordmark" ? (
-      <BrandLockup height={iconSize} tone={tone} className="!w-auto" />
+      <Wordmark tone={tone} fontSize={wordSize} />
     ) : (
-      <BrandLockup height={iconSize} tone={tone} />
+      <span className="inline-flex items-center" style={{ gap }}>
+        <BrandIcon size={iconSize} priority />
+        <Wordmark tone={tone} fontSize={wordSize} />
+      </span>
     );
 
   if (href) {
@@ -104,7 +111,7 @@ export function LeanMindsetLogo({
 }
 
 /**
- * Bottom nav App tab — official icon PNG only (no wordmark).
+ * Bottom nav App tab — official squircle icon only (no wordmark).
  * Height = NAV_TAB_SLOT_H (40).
  */
 export function LeanMindsetNavAppIcon({
@@ -127,7 +134,7 @@ export function LeanMindsetNavAppIcon({
         width: height,
         height,
         borderRadius: "22%",
-        boxShadow: active ? "0 0 14px rgba(91,141,239,0.35)" : undefined,
+        boxShadow: active ? "0 0 14px rgba(74,134,232,0.35)" : undefined,
       }}
       aria-hidden
     >

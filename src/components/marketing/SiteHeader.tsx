@@ -6,7 +6,8 @@ export function SiteHeader({ signedIn }: { signedIn: boolean }) {
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-white/5 bg-black/70 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <LeanMindsetLogo variant="lockup" href="/" />
+        {/* Official squircle lm + lean(white)/mindset(blue) — replaces old circle + gray */}
+        <LeanMindsetLogo variant="lockup" iconSize={28} href="/" />
         <nav className="hidden items-center gap-5 text-sm text-foreground-muted md:flex">
           <Link href="/labs" className="hover:text-accent">
             Labs
