@@ -1,15 +1,12 @@
 import type { CSSProperties, ReactNode } from "react";
+import { IPHONE_15 } from "@/lib/device/iphone-15";
 
-/** iPhone 15 logical viewport — use for all mobile previews shown to the user. */
-export const IPHONE_15 = {
-  width: 393,
-  height: 852,
-  screenRadius: 47,
-  bezelRadius: 55,
-} as const;
+export { IPHONE_15 } from "@/lib/device/iphone-15";
 
 type PhoneFrameProps = {
-  children: ReactNode;
+  children?: ReactNode;
+  /** Embed a live route inside the frame (393×852 logical). */
+  iframeSrc?: string;
   /** Show status bar time + island (default true) */
   statusBar?: boolean;
   /** Optional bottom slot (e.g. nav mock). Adds safe-area padding. */
@@ -27,6 +24,7 @@ type PhoneFrameProps = {
  */
 export function PhoneFrame({
   children,
+  iframeSrc,
   statusBar = true,
   footer,
   screenClassName = "bg-[#080b12]",
@@ -68,12 +66,21 @@ export function PhoneFrame({
         )}
 
         <div
-          className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-4"
+          className="min-h-0 flex-1 overflow-hidden"
           style={{
-            paddingBottom: footer ? 0 : 16,
+            paddingBottom: footer ? 0 : iframeSrc ? 0 : 16,
           }}
         >
-          {children}
+          {iframeSrc ? (
+            <iframe
+              title="LeanMindset mobile preview"
+              src={iframeSrc}
+              className="h-full w-full border-0 bg-[#080b12]"
+              style={{ height: IPHONE_15.height - (statusBar ? IPHONE_15.statusBarHeight : 0) - (footer ? 58 : 0) }}
+            />
+          ) : (
+            <div className="lm-hide-scrollbar h-full overflow-y-auto overflow-x-hidden px-4">{children}</div>
+          )}
         </div>
 
         {footer ? (
