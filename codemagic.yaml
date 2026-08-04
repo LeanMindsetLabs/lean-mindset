@@ -1,0 +1,38 @@
+# Codemagic - Lean Mindset iOS → TestFlight
+# Repo root = web/. Connect GitHub LeanMindsetLabs/lean-mindset + App Store Connect API key in Codemagic UI.
+# Never put Apple passwords in this repo.
+
+workflows:
+  ios-testflight:
+    name: Lean Mindset · TestFlight
+    max_build_duration: 90
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: VeriXLabs
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: app.leanmindset.labs
+      vars:
+        XCODE_PROJECT: ios/App/App.xcodeproj
+        XCODE_SCHEME: App
+      node: 22
+    scripts:
+      - name: Install JS deps
+        script: |
+          npm ci
+      - name: Capacitor sync
+        script: |
+          npx cap sync ios
+      - name: Build ipa
+        script: |
+          xcode-project build-ipa \
+            --project "$XCODE_PROJECT" \
+            --scheme "$XCODE_SCHEME"
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true

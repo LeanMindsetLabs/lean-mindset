@@ -29,6 +29,13 @@ export const LEAN_MINDSET = {
     url: "https://fdsccpcapzgzyxnuweit.supabase.co",
   },
   coachEmails: ["LeanMindsetLabs@gmail.com"] as const,
+  /** App Store / TestFlight - VeriX Labs team (shared with other products). Password never in repo. */
+  apple: {
+    appleIdEmail: "VeriXLabsai@gmail.com",
+    bundleId: "app.leanmindset.labs",
+    appName: "Lean Mindset",
+    capacitorStartUrl: "https://www.leanmindset.app/v2/home",
+  },
 } as const;
 
 /** Accounts that must never be used in this workspace */
