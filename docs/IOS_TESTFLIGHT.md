@@ -49,3 +49,12 @@ Share: https://www.leanmindset.app/app (Safari → Add to Home Screen) - opens V
 ## Sync after web deploys
 
 Native shell always loads live V2 URL. No App Store resubmit needed for most web UI changes. Resubmit when you change bundle ID, permissions, or Capacitor plugins.
+
+## App Store screenshots
+
+PNG captures for App Store Connect live under `store-assets/screenshots/`:
+
+- `1284x2778/` - iPhone 6.5" (5 screens)
+- `1242x2688/` - iPhone 5.5" / alternate 6.5" slot (5 screens)
+
+Regenerate with `node scripts/capture-app-store-screenshots.mjs` (local preview or production URL as configured in the script).
