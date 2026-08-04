@@ -14,7 +14,8 @@ Code source of truth: `config/project-credentials.ts`
 | GitHub org / repo | `LeanMindsetLabs` / `lean-mindset` |
 | Git remote | `https://github.com/LeanMindsetLabs/lean-mindset.git` |
 | Vercel team / project | `lean-mindset-labs` / `leanmindset` |
-| Production | `https://leanmindset.vercel.app` |
+| Production domain | `https://www.leanmindset.app` (Globehost.com) |
+| Vercel alias | `https://leanmindset.vercel.app` |
 | Supabase ref | `fdsccpcapzgzyxnuweit` |
 | Coach allowlist | `LeanMindsetLabs@gmail.com` |
 | Local env file | `.env.local` (gitignored) |

@@ -14,7 +14,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className={isBlog ? "app-frame app-frame--wide" : "app-frame"}
+      className={isBlog ? "app-frame app-frame--wide" : "app-frame lm-hide-scrollbar"}
       style={
         useHomeGradient
           ? {

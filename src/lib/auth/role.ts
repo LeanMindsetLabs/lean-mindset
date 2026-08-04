@@ -1,4 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
+import {
+  getDemoMember,
+} from "@/lib/auth/demo-session";
 
 export type AppRole = "client" | "coach";
 
@@ -33,29 +36,47 @@ export async function getSessionProfile(): Promise<{
   profile: ProfileRow | null;
 } | null> {
   if (
-    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   ) {
-    return null;
+    try {
+      const supabase = await createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("id, full_name, email, role")
+          .eq("id", user.id)
+          .maybeSingle();
+
+        return {
+          userId: user.id,
+          email: user.email ?? profile?.email ?? null,
+          profile: (profile as ProfileRow | null) ?? null,
+        };
+      }
+    } catch {
+      // Supabase unreachable — fall through to demo session when allowed.
+    }
   }
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) return null;
+  const demo = await getDemoMember();
+  if (demo) {
+    return {
+      userId: `demo:${demo.email}`,
+      email: demo.email,
+      profile: {
+        id: `demo:${demo.email}`,
+        full_name: demo.fullName,
+        email: demo.email,
+        role: "client",
+      },
+    };
+  }
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("id, full_name, email, role")
-    .eq("id", user.id)
-    .maybeSingle();
-
-  return {
-    userId: user.id,
-    email: user.email ?? profile?.email ?? null,
-    profile: (profile as ProfileRow | null) ?? null,
-  };
+  return null;
 }
 
 export async function requireCoach(): Promise<{

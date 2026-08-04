@@ -6,26 +6,45 @@ import {
   HealthMetricCard,
   HeartOutlineIcon,
   HeartRateLineIcon,
-  HeroHeartIcon,
-  HeroPlusIcon,
   HOME_CARD_BORDER,
-  HOME_HERO_BORDER,
   MealsMetricIcon,
   SearchOutlineIcon,
   SegmentedActivityRing,
   StreakBadge,
+  WaterDropIcon,
 } from "./home-ui";
+import { TodayLabPlanSection } from "@/components/workflow/TodayLabPlanSection";
+import { HomeScoreHero, type HomeHeroStat } from "./HomeScoreHero";
+
+function buildHeroStat(
+  day: number,
+  totalDays: number,
+  changeLb: number | null | undefined,
+): HomeHeroStat {
+  const daysLeft = Math.max(0, totalDays - day);
+
+  if (changeLb != null && changeLb < -0.05) {
+    const lost = Math.abs(changeLb);
+    const value = lost >= 10 ? lost.toFixed(0) : lost.toFixed(1).replace(/\.0$/, "");
+    return {
+      value,
+      unit: "lb",
+      title: "Lost so far",
+      subtitle: `${daysLeft} days left · day ${day} of ${totalDays}`,
+    };
+  }
+
+  return {
+    value: String(daysLeft),
+    unit: daysLeft === 1 ? "day" : "days",
+    title: "Left in your lab",
+    subtitle: `Day ${day} of ${totalDays} · 6-week focus`,
+  };
+}
 
 function capitalize(name: string) {
   if (!name) return "Member";
   return name.charAt(0).toUpperCase() + name.slice(1);
-}
-
-function scoreLabel(score: number) {
-  if (score >= 80) return "Excellent fitness";
-  if (score >= 60) return "Average fitness";
-  if (score >= 40) return "Building fitness";
-  return "Needs focus";
 }
 
 function formatHeaderDate(d = new Date()) {
@@ -47,14 +66,14 @@ export function HomeReferenceDashboard({
   const m = dashboardMock;
   const day = metrics?.day ?? m.day;
   const totalDays = m.totalDays;
-  const pct = Math.min(100, Math.round((day / totalDays) * 100));
-  const fitnessScore = Math.round(55 + pct * 0.35);
+  const heroStat = buildHeroStat(day, totalDays, metrics?.changeLb);
   const streak = metrics?.streakHint ?? m.streakDays;
   const weightLabel = metrics?.weightLb != null ? `${metrics.weightLb}` : "178.4";
   const waterDone = metrics?.water ?? m.waterLitersDone;
   const waterTarget = m.waterLitersTarget;
   const mealsDone = metrics?.mealsCount || m.mealsDone;
   const mealsTarget = m.mealsTarget;
+  const heartRateBpm = m.restingHeartRateBpm;
   const workoutsDone = m.workoutLogged ? 2 : 1;
   const workoutsTarget = 5;
   const activitiesLeft = Math.max(0, workoutsTarget - workoutsDone);
@@ -94,29 +113,16 @@ export function HomeReferenceDashboard({
         </div>
       </header>
 
-      <Link
-        href="/home/score"
-        className={`mt-4 flex items-center gap-2.5 rounded-[20px] bg-[#2563eb] p-3 ${HOME_HERO_BORDER}`}
-      >
-        <div className="flex h-[66px] w-[66px] shrink-0 items-center justify-center rounded-[13px] border border-[#7dd3fc]/28 bg-[#0a1f4d]">
-          <span className="text-[2rem] font-bold leading-none tracking-tight text-white">{fitnessScore}</span>
-        </div>
-        <div className="min-w-0 flex-1">
-          <p className="text-[15px] font-bold leading-tight text-white">Lean Mindset Score</p>
-          <p className="mt-0.5 text-[12px] text-white/88">{scoreLabel(fitnessScore)}</p>
-          <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px]">
-            <span className="inline-flex items-center gap-1 text-[#bfdbfe]">
-              <HeroHeartIcon />
-              On track
-            </span>
-            <span className="inline-flex items-center gap-1 text-[#bfdbfe]">
-              <HeroPlusIcon />
-              Lab day {day}
-            </span>
-          </div>
-        </div>
-        <span className="pr-0.5 text-[1.2rem] font-light leading-none text-white/85">›</span>
-      </Link>
+      <HomeScoreHero stat={heroStat} day={day} />
+
+      <div className="mt-5">
+        <TodayLabPlanSection
+          serverMealsDone={mealsDone}
+          serverMealsTarget={mealsTarget}
+          workoutsDone={workoutsDone}
+          workoutsTarget={workoutsTarget}
+        />
+      </div>
 
       <section className="mt-6">
         <div className="mb-2.5 flex items-center justify-between">
@@ -133,8 +139,14 @@ export function HomeReferenceDashboard({
             label="Weight"
           />
           <HealthMetricCard
-            href="/program/water"
+            href="/home/score"
             icon={<HeartRateLineIcon />}
+            value={`${heartRateBpm} bpm`}
+            label="Heart rate"
+          />
+          <HealthMetricCard
+            href="/program/water"
+            icon={<WaterDropIcon />}
             value={`${waterDone} / ${waterTarget} L`}
             label="Water"
           />
@@ -177,37 +189,6 @@ export function HomeReferenceDashboard({
           </div>
           <SegmentedActivityRing filled={workoutsDone} total={workoutsTarget} />
         </Link>
-      </section>
-
-      <section
-        className={`mt-5 rounded-[16px] bg-[#0d1118]/90 px-3.5 py-3 ${HOME_CARD_BORDER}`}
-        aria-label="Daily workflow"
-      >
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-[#94a3b8]">
-          Today&apos;s loop
-        </p>
-        <ol className="mt-2 flex flex-col gap-1.5 text-[12px] text-white">
-          <li>
-            <Link href="/nutrition" className="inline-flex items-center gap-2 hover:text-[#60a5fa]">
-              <span className="text-[#64748b]">1.</span> Meals — fuel + schedule
-            </Link>
-          </li>
-          <li>
-            <Link href="/train" className="inline-flex items-center gap-2 hover:text-[#60a5fa]">
-              <span className="text-[#64748b]">2.</span> Train — today&apos;s session
-            </Link>
-          </li>
-          <li>
-            <Link href="/check-in" className="inline-flex items-center gap-2 hover:text-[#60a5fa]">
-              <span className="text-[#64748b]">3.</span> + Check-in — coach chat
-            </Link>
-          </li>
-          <li>
-            <Link href="/profile" className="inline-flex items-center gap-2 hover:text-[#60a5fa]">
-              <span className="text-[#64748b]">4.</span> Profile — program hub
-            </Link>
-          </li>
-        </ol>
       </section>
 
       <p className="mt-5 text-center text-[10px] text-[#64748b]">

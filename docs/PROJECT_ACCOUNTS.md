@@ -10,10 +10,13 @@ Use these **only** for the Lean Mindset Lab app. Never mix with other products (
 | Service | Target |
 |---------|--------|
 | GitHub remote | `https://github.com/LeanMindsetLabs/lean-mindset.git` |
-| Vercel production | `https://leanmindset.vercel.app` |
+| Vercel production | `https://www.leanmindset.app` |
+| Vercel alias | `https://leanmindset.vercel.app` |
 | Vercel team / project | `lean-mindset-labs` / `leanmindset` |
 | Supabase project ref | `fdsccpcapzgzyxnuweit` |
 | Owner email | `LeanMindsetLabs@gmail.com` |
+
+**Custom domain:** `docs/DOMAIN_SETUP.md` (Globehost DNS + Vercel + Supabase).
 
 ## Session (run before push / deploy)
 

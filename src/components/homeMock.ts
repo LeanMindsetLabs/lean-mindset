@@ -6,6 +6,7 @@ export const dashboardMock = {
   waterLitersDone: 2.3,
   waterLitersTarget: 3.5,
   mealsDone: 2,
-  mealsTarget: 4,
+  mealsTarget: 5,
+  restingHeartRateBpm: 72,
   workoutLogged: false,
 };

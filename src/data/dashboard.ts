@@ -30,7 +30,7 @@ export function buildCalendarStrip(anchor = new Date()) {
 
 export const nutritionRingsMock = {
   mealsDone: 2,
-  mealsTarget: 4,
+  mealsTarget: 5,
   proteinPct: 62,
   waterPct: 66,
   timingPct: 80,

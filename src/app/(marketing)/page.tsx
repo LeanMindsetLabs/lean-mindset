@@ -4,6 +4,8 @@ import { getSessionProfile } from "@/lib/auth/role";
 import { SiteHeader } from "@/components/marketing/SiteHeader";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { labs } from "@/data/labs";
+import { ALL_ACCESS_FREE, MEMBERSHIP_PLANS } from "@/data/product-config";
+import { MOBILE_APP_ENTRY, mobilePreviewUrl } from "@/lib/device/mobile-preview";
 import { media } from "@/lib/media";
 
 const STEPS = [
@@ -34,62 +36,9 @@ const LAB_IMAGES: Record<string, string> = {
 };
 
 /**
- * Marketing pricing placeholders — no Stripe prices in repo.
- * Lab price from coaching docs Founder cohort ~$250 / 5 weeks → shown as $250 per Lab (6 weeks).
- * Membership: Monthly $49 / Yearly $399 (Save 32%) until checkout is wired.
+ * Marketing pricing — imported from product-config (single source of truth).
  */
-const PLANS = [
-  {
-    id: "lab",
-    name: "Lab",
-    price: "$250",
-    period: "per lab",
-    highlight: false,
-    badge: null as string | null,
-    features: [
-      "One 6-week lab focus",
-      "Meals, training & water targets",
-      "Daily check-in coaching",
-      "Grocery list + meal swaps",
-    ],
-    cta: "Start lab",
-    note: "One lab. One focus. Six weeks.",
-  },
-  {
-    id: "monthly",
-    name: "Monthly",
-    price: "$49",
-    period: "per month",
-    highlight: false,
-    badge: null as string | null,
-    features: [
-      "Full lab library access",
-      "Daily check-in coaching",
-      "Grocery list + meal swaps",
-      "Workouts & water targets",
-      "Cancel anytime",
-    ],
-    cta: "Start monthly",
-    note: null as string | null,
-  },
-  {
-    id: "yearly",
-    name: "Yearly",
-    price: "$399",
-    period: "per year",
-    highlight: true,
-    badge: "Save 32%",
-    features: [
-      "Everything in Monthly",
-      "Best value (~$33/mo)",
-      "All current & new labs",
-      "Priority coach reviews",
-      "Cancel anytime",
-    ],
-    cta: "Start yearly",
-    note: "Billed annually. Cancel anytime.",
-  },
-] as const;
+const PLANS = MEMBERSHIP_PLANS;
 
 const FAQS = [
   {
@@ -129,10 +78,10 @@ export default async function MarketingPage() {
   }
 
   const primaryCta = signedIn
-    ? { href: "/home", label: "Open app" }
-    : { href: "/signup", label: "Start your lab" };
+    ? { href: MOBILE_APP_ENTRY, label: "Open app" }
+    : { href: "/start", label: "Start your lab" };
   const secondaryCta = signedIn
-    ? { href: "/check-in", label: "Check-in" }
+    ? { href: mobilePreviewUrl("/check-in"), label: "Check-in" }
     : { href: "/login", label: "Log in" };
 
   const featuredLabs = labs.slice(0, 3);
@@ -283,7 +232,9 @@ export default async function MarketingPage() {
             Pricing
           </h2>
           <p className="mx-auto mt-2 max-w-md text-center text-sm text-white/55">
-            Buy a single Lab, or unlock membership monthly or yearly.
+            {ALL_ACCESS_FREE
+              ? "Full access is free while we launch. Pick a lab and start today."
+              : "Buy a single Lab, or unlock membership monthly or yearly."}
           </p>
 
           <ul className="mt-10 grid gap-5 sm:grid-cols-3">
@@ -305,7 +256,14 @@ export default async function MarketingPage() {
                   {plan.name}
                 </p>
                 <p className="mt-3 flex items-baseline gap-2">
-                  <span className="text-4xl font-bold text-white">{plan.price}</span>
+                  {ALL_ACCESS_FREE ? (
+                    <>
+                      <span className="text-lg text-white/40 line-through">{plan.priceLabel}</span>
+                      <span className="text-4xl font-bold text-accent">FREE</span>
+                    </>
+                  ) : (
+                    <span className="text-4xl font-bold text-white">{plan.priceLabel}</span>
+                  )}
                   <span className="text-sm text-white/50">{plan.period}</span>
                 </p>
                 <ul className="mt-6 flex-1 space-y-3 border-t border-white/10 pt-5">
@@ -319,7 +277,7 @@ export default async function MarketingPage() {
                   ))}
                 </ul>
                 <Link
-                  href={signedIn ? "/home" : "/signup"}
+                  href={signedIn ? "/home" : "/start"}
                   className="mt-7 block rounded-full bg-accent py-3 text-center text-sm font-bold text-white transition hover:bg-accent-hover"
                 >
                   {plan.cta}

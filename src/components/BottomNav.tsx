@@ -9,8 +9,8 @@ export function BottomNav({ wide = false }: { wide?: boolean }) {
 
   return (
     <div
-      className={`fixed bottom-0 left-1/2 z-50 w-full -translate-x-1/2 ${
-        wide ? "max-w-[720px] md:max-w-3xl" : "max-w-[430px] md:max-w-lg"
+      className={`fixed bottom-0 left-1/2 z-[100] w-full -translate-x-1/2 ${
+        wide ? "max-w-[720px] md:max-w-3xl" : "max-w-[var(--app-max-width)]"
       }`}
     >
       <BottomNavShell active={active} interactive />

@@ -13,25 +13,26 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#000000",
+          background: "#050508",
         }}
       >
         <div
           style={{
-            width: 360,
-            height: 360,
-            borderRadius: 80,
+            width: 340,
+            height: 340,
+            borderRadius: 170,
             background: "#2563EB",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             color: "#ffffff",
-            fontSize: 160,
+            fontSize: 132,
             fontWeight: 700,
-            letterSpacing: "-0.04em",
+            letterSpacing: "-0.06em",
+            textTransform: "lowercase",
           }}
         >
-          LM
+          lm
         </div>
       </div>
     ),

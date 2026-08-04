@@ -1,5 +1,9 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { ALL_ACCESS_FREE } from "@/data/product-config";
+import {
+  readDemoMemberFromRequest,
+} from "@/lib/auth/demo-session";
 
 function coachEmailAllowlist(): string[] {
   return (process.env.COACH_EMAILS || "")
@@ -23,31 +27,40 @@ export async function updateSession(request: NextRequest) {
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const demoMember = readDemoMemberFromRequest(request);
 
-  if (!url || !key) {
-    return supabaseResponse;
+  let user: { id: string; email?: string | null } | null = null;
+
+  if (url && key) {
+    const supabase = createServerClient(url, key, {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value),
+          );
+          supabaseResponse = NextResponse.next({ request });
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options),
+          );
+        },
+      },
+    });
+
+    try {
+      const {
+        data: { user: supabaseUser },
+      } = await supabase.auth.getUser();
+      user = supabaseUser;
+    } catch {
+      user = null;
+    }
   }
 
-  const supabase = createServerClient(url, key, {
-    cookies: {
-      getAll() {
-        return request.cookies.getAll();
-      },
-      setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value }) =>
-          request.cookies.set(name, value),
-        );
-        supabaseResponse = NextResponse.next({ request });
-        cookiesToSet.forEach(({ name, value, options }) =>
-          supabaseResponse.cookies.set(name, value, options),
-        );
-      },
-    },
-  });
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const isSignedIn = Boolean(user) || (ALL_ACCESS_FREE && Boolean(demoMember));
+  const signedInEmail = user?.email ?? demoMember?.email ?? null;
 
   const path = request.nextUrl.pathname;
   const isAuthPage = path.startsWith("/login") || path.startsWith("/signup");
@@ -60,7 +73,7 @@ export async function updateSession(request: NextRequest) {
     path.startsWith("/logs") ||
     isCoachRoute;
 
-  if (!user && isProtected) {
+  if (!isSignedIn && isProtected) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = "/login";
     redirectUrl.searchParams.set("next", path);
@@ -68,13 +81,37 @@ export async function updateSession(request: NextRequest) {
   }
 
   if (user && isCoachRoute) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", user.id)
-      .maybeSingle();
+    const supabase = createServerClient(url!, key!, {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value),
+          );
+          supabaseResponse = NextResponse.next({ request });
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options),
+          );
+        },
+      },
+    });
 
-    if (!passesCoachGate(profile?.role, user.email)) {
+    try {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      if (!passesCoachGate(profile?.role, user.email)) {
+        const redirectUrl = request.nextUrl.clone();
+        redirectUrl.pathname = "/";
+        redirectUrl.search = "";
+        return NextResponse.redirect(redirectUrl);
+      }
+    } catch {
       const redirectUrl = request.nextUrl.clone();
       redirectUrl.pathname = "/";
       redirectUrl.search = "";
@@ -82,7 +119,7 @@ export async function updateSession(request: NextRequest) {
     }
   }
 
-  if (user && isAuthPage) {
+  if (isSignedIn && isAuthPage) {
     const next = request.nextUrl.searchParams.get("next");
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname =

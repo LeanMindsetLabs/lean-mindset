@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Lean Mindset",
-    short_name: "Lean Mindset",
+    name: "LeanMindset",
+    short_name: "LeanMindset",
     description:
       "6-week structured weight-loss labs — nutrition, training, and daily accountability.",
     start_url: "/",

@@ -34,15 +34,18 @@ Optional: set `COACH_EMAILS=you@example.com` in `.env.local` / Vercel as an extr
 
 ## Vercel deploy
 
+Production domain: **https://www.leanmindset.app** (DNS at Globehost → Vercel). See `../docs/DOMAIN_SETUP.md`.
+
 1. Push this repo (or the `web` folder as root)
 2. Import project in Vercel → set Root Directory to `web` if needed
 3. Add env vars:
+   - `NEXT_PUBLIC_SITE_URL` = `https://www.leanmindset.app`
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 4. Deploy
 5. In Supabase Auth → URL configuration, add:
-   - Site URL: `https://YOUR_VERCEL_DOMAIN`
-   - Redirect URLs: `https://YOUR_VERCEL_DOMAIN/**` and `http://localhost:3000/**`
+   - Site URL: `https://www.leanmindset.app`
+   - Redirect URLs: `https://www.leanmindset.app/**`, `https://leanmindset.app/**`, `https://leanmindset.vercel.app/**`, `http://localhost:3000/**`
 
 ## Routes
 

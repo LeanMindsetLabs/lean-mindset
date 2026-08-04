@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "activate:lean-mindset": "powershell -ExecutionPolicy Bypass -File ./scripts/activate-lean-mindset.ps1",
+    "configure:domain": "powershell -ExecutionPolicy Bypass -File ./scripts/configure-production-domain.ps1",
     "push:lean-mindset": "powershell -ExecutionPolicy Bypass -File ./scripts/push-lean-mindset.ps1"
   },
   "dependencies": {
@@ -24,6 +25,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.11",
+    "playwright": "^1.62.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

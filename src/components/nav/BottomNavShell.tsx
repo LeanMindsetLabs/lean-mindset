@@ -1,9 +1,14 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { LeanMindsetNavAppIcon } from "@/components/brand/LeanMindsetLogo";
 
 export type BottomNavTabId = "home" | "meals" | "checkin" | "train" | "profile";
 
 const PLUS_SIZE_PX = 52;
+/** Shared tab column height: adjacent icon top → label bottom (home lockup uses full height). */
+const NAV_TAB_SLOT_H = 40;
+const NAV_ICON_H = 24;
+const NAV_LABEL_CLASS = "text-[10px] leading-none";
 
 const TABS: {
   id: BottomNavTabId;
@@ -11,7 +16,7 @@ const TABS: {
   href: string;
   icon: (props: { active: boolean }) => ReactNode;
 }[] = [
-  { id: "home", label: "Home", href: "/home", icon: (p) => <HomeNavIcon active={p.active} /> },
+  { id: "home", label: "Home", href: "/home", icon: () => null },
   { id: "meals", label: "Meals", href: "/nutrition", icon: (p) => <MealsNavIcon active={p.active} /> },
   { id: "checkin", label: "Check-in", href: "/check-in", icon: () => null },
   { id: "train", label: "Train", href: "/train", icon: (p) => <TrainNavIcon active={p.active} /> },
@@ -24,7 +29,8 @@ type BottomNavShellProps = {
 };
 
 /**
- * Bottom nav — Variation 1: Home · Meals (cup) · + · Train (crossed) · Profile
+ * Bottom nav — Logo lockup · Meals · + · Train · Profile
+ * Home tab: app-icon squircle (lm only); top/bottom aligned to icon top + label bottom on other tabs.
  */
 export function BottomNavShell({ active, interactive = false }: BottomNavShellProps) {
   return (
@@ -37,12 +43,13 @@ export function BottomNavShell({ active, interactive = false }: BottomNavShellPr
         {TABS.map((tab) => {
           const isActive = active === tab.id;
           const isCenter = tab.id === "checkin";
+          const isHome = tab.id === "home";
 
           if (isCenter) {
             const centerWrap = "flex w-full flex-col items-center";
             const centerInner = (
               <>
-                <span className="flex items-end justify-center" style={{ height: 24 }}>
+                <span className="flex items-end justify-center" style={{ height: NAV_ICON_H }}>
                   <span
                     className="flex items-center justify-center rounded-full bg-[#2563eb] text-white shadow-[0_0_24px_rgba(59,130,246,0.55)]"
                     style={{
@@ -54,12 +61,12 @@ export function BottomNavShell({ active, interactive = false }: BottomNavShellPr
                     <PlusNavIcon />
                   </span>
                 </span>
-                <span className="mt-1 h-[10px]" aria-hidden />
+                <span className={`mt-1 ${NAV_LABEL_CLASS} h-[10px]`} aria-hidden />
               </>
             );
 
             return (
-              <li key={tab.id} className="flex justify-center">
+              <li key={tab.id} className="flex justify-center px-0.5">
                 {interactive ? (
                   <Link href={tab.href} aria-label={tab.label} className={centerWrap}>
                     {centerInner}
@@ -73,26 +80,45 @@ export function BottomNavShell({ active, interactive = false }: BottomNavShellPr
             );
           }
 
-          const tabClass = `flex w-full flex-col items-center gap-1 transition ${
+          const tabClass = `flex w-full flex-col items-center transition ${
             isActive ? "text-[#60a5fa]" : "text-[#8b95a8] hover:text-[#a8b2c4]"
           }`;
-          const tabInner = (
-            <>
-              {tab.icon({ active: isActive })}
-              <span className={`text-[10px] leading-none ${isActive ? "font-semibold" : "font-medium"}`}>
+
+          const tabInner = isHome ? (
+            <div className="flex items-end justify-center" style={{ height: NAV_TAB_SLOT_H }}>
+              <LeanMindsetNavAppIcon height={NAV_TAB_SLOT_H} active={isActive} />
+            </div>
+          ) : (
+            <div
+              className="flex w-full flex-col items-center justify-between"
+              style={{ height: NAV_TAB_SLOT_H }}
+            >
+              <span className="flex items-start justify-center" style={{ height: NAV_ICON_H }}>
+                {tab.icon({ active: isActive })}
+              </span>
+              <span className={`${NAV_LABEL_CLASS} ${isActive ? "font-semibold" : "font-medium"}`}>
                 {tab.label}
               </span>
-            </>
+            </div>
           );
 
           return (
-            <li key={tab.id} className="flex justify-center">
+            <li key={tab.id} className="flex justify-center px-0.5">
               {interactive ? (
-                <Link href={tab.href} className={tabClass} aria-current={isActive ? "page" : undefined}>
+                <Link
+                  href={tab.href}
+                  className={tabClass}
+                  aria-label={isHome ? "Home" : undefined}
+                  aria-current={isActive ? "page" : undefined}
+                >
                   {tabInner}
                 </Link>
               ) : (
-                <span className={tabClass} aria-current={isActive ? "page" : undefined}>
+                <span
+                  className={tabClass}
+                  aria-label={isHome ? "Home" : undefined}
+                  aria-current={isActive ? "page" : undefined}
+                >
                   {tabInner}
                 </span>
               )}
@@ -101,20 +127,6 @@ export function BottomNavShell({ active, interactive = false }: BottomNavShellPr
         })}
       </ul>
     </nav>
-  );
-}
-
-function HomeNavIcon({ active }: { active: boolean }) {
-  return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M5 12.5V19a1.5 1.5 0 0 0 1.5 1.5H9v-5.5h6V20.5h2.5A1.5 1.5 0 0 0 19 19v-6.5L12 5.5 5 12.5Z"
-        fill={active ? "currentColor" : "none"}
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }
 
@@ -205,3 +217,5 @@ export function pathnameToNavTab(pathname: string): BottomNavTabId {
     return "profile";
   return "home";
 }
+
+export { NAV_TAB_SLOT_H };

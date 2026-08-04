@@ -5,6 +5,8 @@ import { getSession, trainingSessions } from "@/data/training";
 import { AiBadge } from "@/components/ui/VisualKit";
 import { ProgressRing } from "@/components/ui/ProgressRing";
 import { trainThumbs } from "@/lib/media";
+import { DailyWorkflowStrip } from "@/components/workflow/DailyWorkflow";
+import { TrainSessionComplete } from "@/components/workflow/TrainSessionComplete";
 
 export default async function TrainSessionPage({
   params,
@@ -18,6 +20,7 @@ export default async function TrainSessionPage({
 
   return (
     <div className="flex flex-col gap-4 pt-2">
+      <DailyWorkflowStrip active="train" />
       <Link href="/train" className="text-sm text-accent">
         ← Training
       </Link>
@@ -83,20 +86,7 @@ export default async function TrainSessionPage({
         </ul>
       </section>
 
-      <div className="grid grid-cols-2 gap-2">
-        <Link
-          href="/music"
-          className="rounded-full border border-border py-3 text-center text-sm font-semibold"
-        >
-          Pick music
-        </Link>
-        <Link
-          href="/logs/workouts"
-          className="rounded-full bg-accent py-3 text-center text-sm font-bold text-white"
-        >
-          Log workout
-        </Link>
-      </div>
+      <TrainSessionComplete sessionId={session.id} sessionName={session.name} />
     </div>
   );
 }

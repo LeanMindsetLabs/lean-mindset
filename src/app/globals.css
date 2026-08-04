@@ -25,6 +25,14 @@
 
   --nav-height: 72px;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
+  /** Matches BottomNavShell outer height (tab row + bottom padding) */
+  --nav-stack-height: calc(var(--nav-height) + max(6px, env(safe-area-inset-bottom, 0px)));
+
+  /* iPhone 15 — hard-coded mobile app width (393×852 logical) */
+  --iphone-15-width: 393px;
+  --iphone-15-height: 852px;
+  --iphone-15-screen-radius: 47px;
+  --app-max-width: var(--iphone-15-width);
 }
 
 html.light {
@@ -150,11 +158,49 @@ body {
 
 .app-frame {
   width: 100%;
-  max-width: 430px;
+  max-width: var(--app-max-width);
   margin-inline: auto;
   min-height: 100dvh;
   background: var(--background);
   position: relative;
+}
+
+/* Member phone app — scroll without visible bars (iOS-like) */
+.lm-hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.lm-hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+html:has(.app-frame:not(.app-frame--wide)),
+body:has(.app-frame:not(.app-frame--wide)) {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html:has(.app-frame:not(.app-frame--wide))::-webkit-scrollbar,
+body:has(.app-frame:not(.app-frame--wide))::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.app-frame:not(.app-frame--wide),
+.app-frame:not(.app-frame--wide) main {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.app-frame:not(.app-frame--wide)::-webkit-scrollbar,
+.app-frame:not(.app-frame--wide) main::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 /* Blog: standard content width — not phone chrome in a black void */
@@ -163,8 +209,8 @@ body {
 }
 
 @media (min-width: 768px) {
-  .app-frame {
-    max-width: 512px;
+  .app-frame:not(.app-frame--wide) {
+    max-width: var(--app-max-width);
     border-inline: 1px solid var(--border);
     box-shadow: 0 0 80px rgba(var(--accent-rgb), 0.06);
   }

@@ -1,12 +1,13 @@
 import Link from "next/link";
+import { LeanMindsetLogo } from "@/components/brand/LeanMindsetLogo";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-white/10 bg-black">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-5 px-4 py-10 sm:flex-row sm:justify-between sm:px-6">
         <div className="text-center sm:text-left">
-          <p className="font-display text-lg uppercase tracking-wide text-accent">Lean Mindset</p>
-          <p className="mt-1 text-xs text-white/40">
+          <LeanMindsetLogo variant="lockup" iconSize={24} href="/" className="justify-center sm:justify-start" />
+          <p className="mt-2 text-xs text-white/40">
             6-week labs. Real food. Daily coaching.
           </p>
         </div>
@@ -21,7 +22,7 @@ export function SiteFooter() {
             Contact
           </a>
           <Link
-            href="/signup"
+            href="/start"
             className="rounded-full bg-accent px-4 py-1.5 text-xs font-bold text-white hover:bg-accent-hover"
           >
             Start lab

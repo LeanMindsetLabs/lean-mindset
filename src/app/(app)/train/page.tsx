@@ -5,6 +5,8 @@ import { AiBadge } from "@/components/ui/VisualKit";
 import { WeekBars } from "@/components/ui/Charts";
 import { trainThumbs } from "@/lib/media";
 import { weekAdherence } from "@/data/dashboard";
+import { DailyWorkflowStrip } from "@/components/workflow/DailyWorkflow";
+import { TrainTodayCard } from "@/components/workflow/TrainTodayCard";
 
 export default function TrainPage() {
   const foundation = sessionsByPhase("foundation");
@@ -12,16 +14,19 @@ export default function TrainPage() {
 
   return (
     <div className="flex flex-col gap-4 pt-1">
+      <DailyWorkflowStrip active="train" />
       <header>
         <h1 className="font-display text-2xl uppercase">Train</h1>
         <p className="text-xs text-[#94a3b8]">Foundation → acceleration · this lab only</p>
       </header>
 
-      <section className="rounded-[18px] border border-[#64748b]/28 bg-[#0d1118] p-3">
-        <p className="text-xs font-bold uppercase tracking-wide text-[#60a5fa]">Weeks 1–2</p>
-        <p className="mt-1 font-semibold text-white">Walk + Core A</p>
-        <p className="text-[10px] text-[#64748b]">25–30 min · Beginner</p>
-      </section>
+      <TrainTodayCard
+        sessionId="walk-core-a"
+        name="Walk + Core A"
+        duration="25–30 min"
+        level="Beginner"
+        focus="NEAT + midline"
+      />
 
       <section className="rounded-[var(--lm-radius-lg)] border border-border bg-background-elevated p-4">
         <p className="mb-2 text-xs font-semibold text-foreground-muted">Training adherence</p>

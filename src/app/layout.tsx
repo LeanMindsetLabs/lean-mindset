@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import { Oswald, Plus_Jakarta_Sans } from "next/font/google";
 import { ThemeApplier } from "@/components/ThemeApplier";
+import { getSiteOrigin } from "@/lib/site-url";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -17,14 +18,15 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
-  title: "Lean Mindset",
+  metadataBase: new URL(getSiteOrigin()),
+  title: "LeanMindset",
   description:
     "6-week structured weight-loss labs — nutrition, training, and daily accountability.",
-  applicationName: "Lean Mindset",
+  applicationName: "LeanMindset",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Lean Mindset",
+    title: "LeanMindset",
   },
   formatDetection: {
     telephone: false,
@@ -32,7 +34,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#2563EB",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,

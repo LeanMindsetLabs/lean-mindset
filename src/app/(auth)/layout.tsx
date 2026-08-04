@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LeanMindsetLogo } from "@/components/brand/LeanMindsetLogo";
 
 export default function AuthLayout({
   children,
@@ -6,10 +7,8 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-[430px] flex-col px-4 py-8 md:max-w-lg">
-      <Link href="/" className="mb-8 text-sm font-semibold text-accent">
-        ← Lean Mindset
-      </Link>
+    <div className="mx-auto flex min-h-dvh w-full max-w-[var(--app-max-width)] flex-col px-4 py-8 lm-hide-scrollbar">
+      <LeanMindsetLogo variant="lockup" iconSize={28} href="/" className="mb-8" />
       {children}
     </div>
   );

@@ -1,12 +1,12 @@
 import Link from "next/link";
+import { LeanMindsetLogo } from "@/components/brand/LeanMindsetLogo";
+import { MOBILE_APP_ENTRY } from "@/lib/device/mobile-preview";
 
 export function SiteHeader({ signedIn }: { signedIn: boolean }) {
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-white/5 bg-black/70 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="font-display text-lg uppercase tracking-wide text-white">
-          Lean Mindset
-        </Link>
+        <LeanMindsetLogo variant="lockup" iconSize={26} href="/" />
         <nav className="hidden items-center gap-5 text-sm text-foreground-muted md:flex">
           <Link href="/labs" className="hover:text-accent">
             Labs
@@ -17,14 +17,14 @@ export function SiteHeader({ signedIn }: { signedIn: boolean }) {
           <Link href="/blog" className="hover:text-accent">
             Blog
           </Link>
-          <Link href={signedIn ? "/check-in" : "/signup"} className="hover:text-accent">
+          <Link href={signedIn ? "/check-in" : "/start"} className="hover:text-accent">
             Coaching
           </Link>
         </nav>
         <div className="flex items-center gap-2">
           {signedIn ? (
             <Link
-              href="/home"
+              href={MOBILE_APP_ENTRY}
               className="rounded-full bg-accent px-3.5 py-1.5 text-xs font-bold text-white hover:bg-accent-hover"
             >
               App
@@ -38,7 +38,7 @@ export function SiteHeader({ signedIn }: { signedIn: boolean }) {
                 Log in
               </Link>
               <Link
-                href="/signup"
+                href="/start"
                 className="rounded-full bg-accent px-3.5 py-1.5 text-xs font-bold text-white hover:bg-accent-hover"
               >
                 Sign up

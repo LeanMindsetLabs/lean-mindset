@@ -12,10 +12,17 @@ export const LEAN_MINDSET = {
     repo: "lean-mindset",
     remote: "https://github.com/LeanMindsetLabs/lean-mindset.git",
   },
+  domain: {
+    apex: "leanmindset.app",
+    primaryHost: "www.leanmindset.app",
+    productionUrl: "https://www.leanmindset.app",
+    registrar: "Globehost.com",
+  },
   vercel: {
     team: "lean-mindset-labs",
     project: "leanmindset",
-    productionUrl: "https://leanmindset.vercel.app",
+    /** Legacy Vercel hostname — keep as alias after custom domain is live */
+    deploymentUrl: "https://leanmindset.vercel.app",
   },
   supabase: {
     ref: "fdsccpcapzgzyxnuweit",

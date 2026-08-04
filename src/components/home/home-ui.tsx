@@ -6,18 +6,11 @@ export const HOME_CARD_BORDER = "border border-[#64748b]/28";
 
 export function StreakBadge({ count }: { count: number }) {
   return (
-    <span className="inline-flex items-center gap-[3px] rounded-[6px] bg-[#dc2626] px-[6px] py-[3px]">
-      <svg width="9" height="11" viewBox="0 0 9 11" fill="none" aria-hidden>
-        <path
-          d="M4.5 0C4.5 3 2.2 3.8 2.2 6.5c0 1.6 1 3 2.3 4.5 1.3-1.5 2.3-2.9 2.3-4.5C6.8 3.8 4.5 3 4.5 0Z"
-          fill="white"
-        />
-        <path
-          d="M4.5 4.8c0 1.4-1 2.1-1 3.5 0 .8.5 1.5 1 2.2.5-.7 1-1.4 1-2.2 0-1.4-1-2.1-1-3.5Z"
-          fill="#fecaca"
-        />
-      </svg>
-      <span className="text-[10px] font-bold leading-none text-white">{count}</span>
+    <span
+      className="inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#ef4444] px-[5px]"
+      aria-label={`${count} day streak`}
+    >
+      <span className="text-[11px] font-bold leading-none text-white">{count}</span>
     </span>
   );
 }
@@ -157,6 +150,20 @@ export function HeartRateLineIcon() {
         strokeWidth="1.75"
         strokeLinecap="round"
         strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/** Water hydration — droplet outline (not the EKG pulse). */
+export function WaterDropIcon() {
+  return (
+    <svg width="20" height="22" viewBox="0 0 20 22" fill="none" aria-hidden>
+      <path
+        d="M10 1.5C10 1.5 3.5 9.2 3.5 13.5a6.5 6.5 0 0 0 13 0C16.5 9.2 10 1.5 10 1.5Z"
+        stroke="#38bdf8"
+        strokeWidth="1.5"
+        fill="none"
       />
     </svg>
   );

@@ -7,10 +7,7 @@ export default function V2HomePage() {
         <div>
           <div className="home-date">
             Mon, Aug 3{" "}
-            <span className="streak-chip">
-              <span className="streak-fire" aria-hidden>
-                🔥
-              </span>
+            <span className="streak-chip" aria-label="4 day streak">
               <span className="streak-count">4</span>
             </span>
           </div>

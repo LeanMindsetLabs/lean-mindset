@@ -2,20 +2,25 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import {
+  GROCERY_STORAGE_KEY,
+  groceryItemKey,
+  parseGroceryItemKey,
+} from "@/lib/grocery/grocery-keys";
+
 type GrocerySection = {
   aisle: string;
   items: string[];
 };
 
-const STORAGE_KEY = "lm-grocery-list";
+const STORAGE_KEY = GROCERY_STORAGE_KEY;
 
 function itemKey(aisle: string, item: string) {
-  return `${aisle}::${item}`;
+  return groceryItemKey(aisle, item);
 }
 
 function parseKey(key: string) {
-  const i = key.indexOf("::");
-  return { aisle: key.slice(0, i), item: key.slice(i + 2) };
+  return parseGroceryItemKey(key);
 }
 
 export function GroceryChecklist({ sections }: { sections: GrocerySection[] }) {
@@ -209,7 +214,7 @@ export function GroceryChecklist({ sections }: { sections: GrocerySection[] }) {
         </section>
       ) : null}
 
-      <div className="pointer-events-none fixed bottom-[calc(var(--nav-height)+var(--safe-bottom)+8px)] left-1/2 z-40 w-full max-w-[430px] -translate-x-1/2 px-4">
+      <div className="pointer-events-none fixed bottom-[calc(var(--nav-height)+var(--safe-bottom)+8px)] left-1/2 z-40 w-full max-w-[var(--app-max-width)] -translate-x-1/2 px-4">
         <button
           type="button"
           onClick={() => setTab("yours")}
