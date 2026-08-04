@@ -6,10 +6,10 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "LeanMindset",
     description:
       "6-week structured weight-loss labs - nutrition, training, and daily accountability.",
-    start_url: "/",
+    start_url: "/v2/home",
     display: "standalone",
     background_color: "#000000",
-    theme_color: "#000000",
+    theme_color: "#2563EB",
     orientation: "portrait-primary",
     categories: ["health", "fitness", "lifestyle"],
     icons: [
