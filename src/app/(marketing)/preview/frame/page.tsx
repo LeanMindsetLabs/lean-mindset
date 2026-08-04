@@ -29,9 +29,9 @@ export default async function PreviewFramePage({
 }: {
   searchParams: Promise<{ path?: string }>;
 }) {
-  const { path: rawPath = "/home" } = await searchParams;
-  const pathOnly = rawPath.split("?")[0] ?? "/home";
-  const path = isAllowedPath(pathOnly) ? rawPath : "/home";
+  const { path: rawPath = "/v2/home" } = await searchParams;
+  const pathOnly = rawPath.split("?")[0] ?? "/v2/home";
+  const path = isAllowedPath(pathOnly) ? rawPath : "/v2/home";
 
   // Meals A/B toggle lives in chrome outside the phone — client wrapper.
   if (pathOnly === "/v2/meals") {

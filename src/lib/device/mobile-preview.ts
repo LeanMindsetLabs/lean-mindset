@@ -4,4 +4,6 @@ export function mobilePreviewUrl(path: string): string {
   return `/preview/frame?path=${encodeURIComponent(normalized)}`;
 }
 
-export const MOBILE_APP_ENTRY = mobilePreviewUrl("/home");
+/** Production member app = V2 (V1 kept under `/home` etc. for rollback). */
+export const MEMBER_APP_HOME = "/v2/home";
+export const MOBILE_APP_ENTRY = mobilePreviewUrl(MEMBER_APP_HOME);

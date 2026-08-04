@@ -3,10 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LeanMindsetNavAppIcon } from "@/components/brand/LeanMindsetLogo";
+import { NAV_TAB_SLOT_H } from "@/components/nav/nav-metrics";
 import { useV2Ui } from "./V2UiContext";
-
-/** Icon top → label bottom slot (matches V1 BottomNavShell). */
-const NAV_TAB_SLOT_H = 40;
 
 export function V2BottomNav() {
   const pathname = usePathname();

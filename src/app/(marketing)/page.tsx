@@ -81,7 +81,7 @@ export default async function MarketingPage() {
     ? { href: MOBILE_APP_ENTRY, label: "Open app" }
     : { href: "/start", label: "Start your lab" };
   const secondaryCta = signedIn
-    ? { href: mobilePreviewUrl("/check-in"), label: "Check-in" }
+    ? { href: mobilePreviewUrl("/v2/check-in"), label: "Check-in" }
     : { href: "/login", label: "Log in" };
 
   const featuredLabs = labs.slice(0, 3);
@@ -277,7 +277,7 @@ export default async function MarketingPage() {
                   ))}
                 </ul>
                 <Link
-                  href={signedIn ? "/home" : "/start"}
+                  href={signedIn ? MOBILE_APP_ENTRY : "/start"}
                   className="mt-7 block rounded-full bg-accent py-3 text-center text-sm font-bold text-white transition hover:bg-accent-hover"
                 >
                   {plan.cta}

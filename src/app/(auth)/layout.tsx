@@ -8,7 +8,7 @@ export default function AuthLayout({
 }) {
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-[var(--app-max-width)] flex-col px-4 py-8 lm-hide-scrollbar">
-      <LeanMindsetLogo variant="lockup" iconSize={28} href="/" className="mb-8" />
+      <LeanMindsetLogo variant="lockup" href="/" className="mb-8" />
       {children}
     </div>
   );

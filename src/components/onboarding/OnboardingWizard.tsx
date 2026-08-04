@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { AuthForm } from "@/components/AuthForm";
-import { LeanMindsetLogo } from "@/components/brand/LeanMindsetLogo";
+import { LeanMindsetLogo, LeanMindsetNavAppIcon } from "@/components/brand/LeanMindsetLogo";
 import { labs } from "@/data/labs";
 import {
   ALL_ACCESS_FREE,
@@ -55,7 +55,7 @@ export function OnboardingWizard({
   }
 
   function finishReady() {
-    window.location.href = "/preview/frame?path=%2Fhome%3Fwelcome%3D1";
+    window.location.href = "/preview/frame?path=%2Fv2%2Fhome%3Fwelcome%3D1";
   }
 
   return (
@@ -77,7 +77,7 @@ export function OnboardingWizard({
 
       {step === 0 && (
         <section className="flex flex-col gap-4">
-          <LeanMindsetLogo variant="lockup" iconSize={32} className="justify-center" />
+          <LeanMindsetLogo variant="lockup" className="justify-center" />
           <h1 className="text-center text-2xl font-bold text-white">Welcome to your lab</h1>
           <p className="text-center text-sm leading-relaxed text-[#94a3b8]">
             Six weeks. Four meals a day. Daily coach check-ins. No crash diets — just a clear plan
@@ -203,7 +203,7 @@ export function OnboardingWizard({
           </button>
           <p className="text-center text-xs text-[#64748b]">
             Already joined?{" "}
-            <Link href="/login?next=/home" className="text-[#60a5fa]">
+            <Link href="/login?next=/v2/home" className="text-[#60a5fa]">
               Log in
             </Link>
           </p>
@@ -212,7 +212,7 @@ export function OnboardingWizard({
 
       {step === 4 && (
         <section className="flex flex-col items-center gap-4 py-4 text-center">
-          <LeanMindsetNavAppIconLarge />
+          <LeanMindsetNavAppIcon height={64} />
           <h2 className="text-xl font-bold text-white">You&apos;re in</h2>
           <p className="max-w-xs text-sm text-[#94a3b8]">
             {selectedLab?.name} is ready. Your daily loop: Meals → Train → Check-in.
@@ -253,19 +253,5 @@ export function OnboardingWizard({
         )}
       </div>
     </div>
-  );
-}
-
-function LeanMindsetNavAppIconLarge() {
-  return (
-    <span
-      className="inline-flex h-16 w-16 items-center justify-center rounded-[22%] text-2xl font-bold lowercase text-white"
-      style={{
-        background: "linear-gradient(180deg, #3b82f6 0%, #2563eb 100%)",
-        letterSpacing: "-0.05em",
-      }}
-    >
-      lm
-    </span>
   );
 }

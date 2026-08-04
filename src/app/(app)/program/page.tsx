@@ -10,7 +10,7 @@ export default function ProgramHubPage() {
 
       <header className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <LeanMindsetLogo variant="icon" iconSize={32} className="mb-2" />
+          <LeanMindsetLogo variant="icon" className="mb-2" />
           <p className="text-xs text-[#94a3b8]">Your lab materials</p>
           <h1 className="text-xl font-bold text-white">{programMeta.name}</h1>
           <p className="mt-1 text-sm text-[#64748b]">{programMeta.promise}</p>

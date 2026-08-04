@@ -6,7 +6,7 @@ export function SiteFooter() {
     <footer className="border-t border-white/10 bg-black">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-5 px-4 py-10 sm:flex-row sm:justify-between sm:px-6">
         <div className="text-center sm:text-left">
-          <LeanMindsetLogo variant="lockup" iconSize={24} href="/" className="justify-center sm:justify-start" />
+          <LeanMindsetLogo variant="lockup" href="/" className="justify-center sm:justify-start" />
           <p className="mt-2 text-xs text-white/40">
             6-week labs. Real food. Daily coaching.
           </p>

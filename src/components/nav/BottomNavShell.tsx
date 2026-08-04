@@ -1,14 +1,14 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { LeanMindsetNavAppIcon } from "@/components/brand/LeanMindsetLogo";
+import { NAV_ICON_H, NAV_TAB_SLOT_H } from "@/components/nav/nav-metrics";
 
 export type BottomNavTabId = "home" | "meals" | "checkin" | "train" | "profile";
 
 const PLUS_SIZE_PX = 52;
-/** Shared tab column height: adjacent icon top → label bottom (home lockup uses full height). */
-const NAV_TAB_SLOT_H = 40;
-const NAV_ICON_H = 24;
 const NAV_LABEL_CLASS = "text-[10px] leading-none";
+
+export { NAV_TAB_SLOT_H };
 
 const TABS: {
   id: BottomNavTabId;
@@ -217,5 +217,3 @@ export function pathnameToNavTab(pathname: string): BottomNavTabId {
     return "profile";
   return "home";
 }
-
-export { NAV_TAB_SLOT_H };

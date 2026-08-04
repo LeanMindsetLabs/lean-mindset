@@ -1,4 +1,5 @@
 import { AuthForm } from "@/components/AuthForm";
+import { MEMBER_APP_HOME } from "@/lib/device/mobile-preview";
 
 export default async function LoginPage({
   searchParams,
@@ -15,7 +16,7 @@ export default async function LoginPage({
           Log in to access your Lean Mindset lab materials.
         </p>
       </div>
-      <AuthForm mode="login" next={next || "/"} />
+      <AuthForm mode="login" next={next || MEMBER_APP_HOME} />
     </div>
   );
 }

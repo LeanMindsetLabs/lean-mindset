@@ -1,131 +1,139 @@
+import Image from "next/image";
 import Link from "next/link";
+import { NAV_TAB_SLOT_H } from "@/components/nav/nav-metrics";
 
-const BRAND_BLUE = "#2563EB";
-const MINDSET_MUTED = "#64748b";
+export { NAV_TAB_SLOT_H };
+
+/** Official brand colors from Logo_leanmindset masters */
+const BRAND_BLUE = "#2F5FD1";
+const BRAND_BLUE_LIGHT = "#5B8DEF";
+const BRAND_INK = "#12151A";
+
+/** Master lockup aspect (900×240). */
+const LOCKUP_ASPECT = 900 / 240;
+
+const ICON_SRC = "/brand/icon_180.png";
+const LOCKUP_DARK_SRC = "/brand/lockup_dark_bg_3x.png";
+const LOCKUP_LIGHT_SRC = "/brand/lockup_light_bg_3x.png";
 
 type LogoVariant = "icon" | "wordmark" | "lockup" | "app-icon";
+type LogoTone = "dark" | "light";
 
 type LeanMindsetLogoProps = {
   variant?: LogoVariant;
-  /** Icon / lockup circle size in px */
+  /** Lockup / icon height in px — default matches bottom App tab (`NAV_TAB_SLOT_H`). */
   iconSize?: number;
+  /** dark lockup (white lean) vs light lockup (ink lean) */
+  tone?: LogoTone;
   className?: string;
   href?: string;
 };
 
-function LmMark({ size, squircle = false }: { size: number; squircle?: boolean }) {
-  const fontSize = Math.round(size * 0.38);
-  const inner = (
-    <span
-      className="inline-flex shrink-0 items-center justify-center rounded-full font-bold lowercase leading-none text-white"
-      style={{
-        width: size,
-        height: size,
-        background: BRAND_BLUE,
-        fontSize,
-        letterSpacing: "-0.04em",
-      }}
-      aria-hidden
-    >
-      lm
-    </span>
-  );
-
-  if (!squircle) return inner;
-
-  const pad = Math.round(size * 0.22);
+function BrandIcon({
+  size,
+  className = "",
+}: {
+  size: number;
+  className?: string;
+}) {
   return (
-    <span
-      className="inline-flex shrink-0 items-center justify-center rounded-[22%]"
-      style={{
-        width: size + pad * 2,
-        height: size + pad * 2,
-        background: BRAND_BLUE,
-      }}
-    >
-      {inner}
-    </span>
+    <Image
+      src={ICON_SRC}
+      alt=""
+      width={size}
+      height={size}
+      className={`shrink-0 ${className}`}
+      draggable={false}
+      unoptimized
+      priority={false}
+    />
   );
 }
 
-function Wordmark({ className = "" }: { className?: string }) {
+/** Official PNG lockup — exact attached branding. */
+function BrandLockup({
+  height,
+  tone = "dark",
+  className = "",
+}: {
+  height: number;
+  tone?: LogoTone;
+  className?: string;
+}) {
+  const width = Math.round(height * LOCKUP_ASPECT);
+  const src = tone === "light" ? LOCKUP_LIGHT_SRC : LOCKUP_DARK_SRC;
   return (
-    <span
-      className={`inline-flex items-baseline font-semibold lowercase tracking-[-0.02em] ${className}`}
-    >
-      <span className="text-white">lean</span>
-      <span style={{ color: MINDSET_MUTED }}>mindset</span>
-    </span>
+    <Image
+      src={src}
+      alt="leanmindset"
+      width={width}
+      height={height}
+      className={`shrink-0 ${className}`}
+      draggable={false}
+      unoptimized
+      priority
+    />
   );
 }
 
 export function LeanMindsetLogo({
   variant = "lockup",
-  iconSize = 28,
+  iconSize = NAV_TAB_SLOT_H,
+  tone = "dark",
   className = "",
   href,
 }: LeanMindsetLogoProps) {
   const content =
-    variant === "icon" ? (
-      <LmMark size={iconSize} />
-    ) : variant === "app-icon" ? (
-      <LmMark size={iconSize} squircle />
+    variant === "icon" || variant === "app-icon" ? (
+      <BrandIcon size={iconSize} />
     ) : variant === "wordmark" ? (
-      <Wordmark className="text-lg" />
+      <BrandLockup height={iconSize} tone={tone} className="!w-auto" />
     ) : (
-      <span className={`inline-flex items-center gap-2.5 ${className}`}>
-        <LmMark size={iconSize} />
-        <Wordmark className="text-[1.05rem] sm:text-lg" />
-      </span>
+      <BrandLockup height={iconSize} tone={tone} />
     );
 
   if (href) {
     return (
-      <Link href={href} className={`inline-flex items-center ${className}`} aria-label="LeanMindset home">
+      <Link href={href} className={`inline-flex items-center ${className}`} aria-label="Lean Mindset home">
         {content}
       </Link>
     );
   }
 
-  return <span className={className}>{content}</span>;
+  return <span className={`inline-flex items-center ${className}`}>{content}</span>;
 }
 
 /**
- * Bottom nav app icon — blue squircle + lm only (no wordmark).
- * Height = NAV_TAB_SLOT_H: top aligns with adjacent icon tops, bottom with label bottoms.
+ * Bottom nav App tab — official icon PNG only (no wordmark).
+ * Height = NAV_TAB_SLOT_H (40).
  */
 export function LeanMindsetNavAppIcon({
-  height,
+  height = NAV_TAB_SLOT_H,
   active = true,
   className = "",
-  /** Fraction of box height for “lm” (default 0.36; V2 nav uses ~0.5). */
-  fontRatio = 0.36,
 }: {
-  height: number;
+  height?: number;
   active?: boolean;
   className?: string;
+  /** @deprecated Official PNG has fixed “lm” scale; ignored. */
   fontRatio?: number;
 }) {
-  const fontSize = Math.round(height * fontRatio);
-
   return (
     <span
-      className={`inline-flex shrink-0 items-center justify-center rounded-[22%] font-bold lowercase leading-none text-white transition ${
+      className={`inline-flex shrink-0 items-center justify-center overflow-hidden transition ${
         active ? "opacity-100" : "opacity-45"
       } ${className}`}
       style={{
         width: height,
         height,
-        background: `linear-gradient(180deg, #3b82f6 0%, ${BRAND_BLUE} 100%)`,
-        fontSize,
-        letterSpacing: "-0.05em",
-        boxShadow: active ? "0 0 14px rgba(59,130,246,0.35)" : undefined,
+        borderRadius: "22%",
+        boxShadow: active ? "0 0 14px rgba(91,141,239,0.35)" : undefined,
       }}
       aria-hidden
     >
-      lm
+      <BrandIcon size={height} className="h-full w-full object-cover" />
     </span>
   );
 }
 
-export { BRAND_BLUE, MINDSET_MUTED };
+export { BRAND_BLUE, BRAND_BLUE_LIGHT, BRAND_INK };
