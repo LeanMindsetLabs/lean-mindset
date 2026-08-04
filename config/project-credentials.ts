@@ -1,5 +1,5 @@
 /**
- * Lean Mindset Lab — hardcoded project identity.
+ * Lean Mindset Lab - hardcoded project identity.
  * This workspace uses ONLY this block. Do not import other product credential files.
  */
 export const LEAN_MINDSET = {
@@ -21,7 +21,7 @@ export const LEAN_MINDSET = {
   vercel: {
     team: "lean-mindset-labs",
     project: "leanmindset",
-    /** Legacy Vercel hostname — keep as alias after custom domain is live */
+    /** Legacy Vercel hostname - keep as alias after custom domain is live */
     deploymentUrl: "https://leanmindset.vercel.app",
   },
   supabase: {

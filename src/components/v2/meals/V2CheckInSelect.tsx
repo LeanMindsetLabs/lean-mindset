@@ -12,7 +12,7 @@ type Props = {
   title?: string;
 };
 
-/** Dark in-app select — avoids ugly native OS option menus. */
+/** Dark in-app select - avoids ugly native OS option menus. */
 export function V2CheckInSelect({ label, value, options, onChange, title }: Props) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);

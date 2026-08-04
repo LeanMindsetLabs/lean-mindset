@@ -42,7 +42,7 @@ export const playlists: Playlist[] = [
     mood: "Meal prep",
     tracks: 16,
     minutes: 40,
-    vibe: "Upbeat grooves while you batch Meal 2–4",
+    vibe: "Upbeat grooves while you batch Meal 2-4",
     gradient: "linear-gradient(130deg,#0a2a14,#1a4a28,var(--accent))",
   },
   {

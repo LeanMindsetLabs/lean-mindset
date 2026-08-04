@@ -28,7 +28,7 @@ function PhoneChrome({ children, width }: { children: ReactNode; width: string }
   );
 }
 
-/** Circular score orb — matches hero mock */
+/** Circular score orb - matches hero mock */
 function ScoreOrb({ score = 72 }: { score?: number }) {
   return (
     <div className="relative mx-auto flex h-[7.25rem] w-[7.25rem] items-center justify-center">
@@ -162,7 +162,7 @@ export function MarketingPhoneMock({
             <span className="font-display text-4xl text-white">✓</span>
           </div>
           <p className="mt-3 text-base font-bold text-white">2,187 kcal</p>
-          <p className="mt-1 text-[10px] text-white/60">Daily target hit — keep the streak.</p>
+          <p className="mt-1 text-[10px] text-white/60">Daily target hit - keep the streak.</p>
           <span className="mt-3 rounded-full bg-white px-4 py-1.5 text-[10px] font-bold text-black">
             Got it
           </span>
@@ -210,7 +210,7 @@ export function MarketingPhoneMock({
               <p className="text-[10px] font-bold text-white">Amazingly Talented!</p>
             </div>
             <p className="mt-1 text-[8px] leading-snug text-white/55">
-              Insightful coaching — improved my patterns fast.
+              Insightful coaching - improved my patterns fast.
             </p>
             <p className="mt-1 text-[8px] text-accent">★★★★★ · Verified</p>
           </div>

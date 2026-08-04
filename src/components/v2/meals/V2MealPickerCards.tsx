@@ -12,7 +12,7 @@ function isSnackId(id: V2MealId) {
   return id === "snack1" || id === "snack2";
 }
 
-/** Overview-style meal cards — mains wide, snacks narrow vertical; all 5 fit. */
+/** Overview-style meal cards - mains wide, snacks narrow vertical; all 5 fit. */
 export function V2MealPickerCards({ meals, activeId, onSelect }: Props) {
   return (
     <div className="meal-card-row" role="listbox" aria-label="Meal times">

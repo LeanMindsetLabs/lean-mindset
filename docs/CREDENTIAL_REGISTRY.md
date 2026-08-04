@@ -1,4 +1,4 @@
-# Credential registry — one block per product
+# Credential registry - one block per product
 
 **Rule:** Each product has its own hardcoded block. In the **Lean Mindset** workspace, use **only** `lean-mindset`. Never reuse another product’s GitHub, Vercel, Supabase, or email.
 
@@ -6,7 +6,7 @@ Code source of truth: `config/project-credentials.ts`
 
 ---
 
-## ACTIVE — `lean-mindset` (this workspace)
+## ACTIVE - `lean-mindset` (this workspace)
 
 | Field | Value |
 |-------|--------|
@@ -21,9 +21,9 @@ Code source of truth: `config/project-credentials.ts`
 | Local env file | `.env.local` (gitignored) |
 | Git identity (repo-local) | `Lean Mindset Labs <LeanMindsetLabs@gmail.com>` |
 
-Secrets (anon key, service role, tokens): **only** in `.env.local` — never committed.
+Secrets (anon key, service role, tokens): **only** in `.env.local` - never committed.
 
-Login passwords: **only** in Supabase Auth dashboard — never in env or git.
+Login passwords: **only** in Supabase Auth dashboard - never in env or git.
 
 ---
 

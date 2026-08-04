@@ -58,7 +58,7 @@ export async function getSessionProfile(): Promise<{
         };
       }
     } catch {
-      // Supabase unreachable — fall through to demo session when allowed.
+      // Supabase unreachable - fall through to demo session when allowed.
     }
   }
 

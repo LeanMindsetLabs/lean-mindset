@@ -115,7 +115,7 @@ export function V2Sheets() {
             <div className="sheet-handle" />
             <div className="sheet-head">
               <div>
-                <div className="sheet-time">FOUNDATION · WEEKS 1–2</div>
+                <div className="sheet-time">FOUNDATION · WEEKS 1-2</div>
                 <div className="sheet-title" style={{ fontSize: 18 }}>
                   Grocery list
                 </div>
@@ -124,7 +124,7 @@ export function V2Sheets() {
             </div>
             <div className="sheet-instructions">
               Your done-for-you shopping blueprint for this lab phase. These are the items your bowls
-              are built from — swap within a category any time.
+              are built from - swap within a category any time.
             </div>
             {(
               [

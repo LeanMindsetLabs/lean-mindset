@@ -92,7 +92,7 @@ export const recipes: Recipe[] = [
     proteinG: 40,
     imageGradient: "linear-gradient(120deg,#0a1a2a,#1a3a4a,var(--accent-hover))",
     ingredients: [
-      "5–6 oz salmon",
+      "5-6 oz salmon",
       "Broccoli + zucchini",
       "Optional small sweet potato",
       "Lemon, herbs, salt/pepper",
@@ -181,7 +181,7 @@ export const recipes: Recipe[] = [
     steps: [
       "Sauté paneer cubes until golden.",
       "Add vegetables and spices.",
-      "Serve with side salad — skip heavy sauces.",
+      "Serve with side salad - skip heavy sauces.",
     ],
     tags: ["vegetarian", "meal-4"],
   },

@@ -43,7 +43,7 @@ export type MealLogEntry = {
   bowlPicks: MealBowlPick[];
   extras: MealExtraItem[];
   bowls: MealBowls;
-  /** @deprecated legacy — derived from bowls on save */
+  /** @deprecated legacy - derived from bowls on save */
   proteinId: string | null;
   proteinLabel: string | null;
   ingredientIds: string[];

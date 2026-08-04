@@ -21,7 +21,7 @@ export default async function PrivacyPage() {
         <h1 className="mt-6 font-display text-3xl uppercase tracking-wide text-white">Privacy</h1>
         <p className="mt-4 text-sm leading-relaxed text-white/65">
           Lean Mindset collects account and check-in data only to run labs and coaching. We do not
-          sell personal information. Full policy TBD — contact us with questions.
+          sell personal information. Full policy TBD - contact us with questions.
         </p>
       </main>
       <SiteFooter />

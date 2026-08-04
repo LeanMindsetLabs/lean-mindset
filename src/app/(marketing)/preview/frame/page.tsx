@@ -33,7 +33,7 @@ export default async function PreviewFramePage({
   const pathOnly = rawPath.split("?")[0] ?? "/v2/home";
   const path = isAllowedPath(pathOnly) ? rawPath : "/v2/home";
 
-  // Meals A/B toggle lives in chrome outside the phone — client wrapper.
+  // Meals A/B toggle lives in chrome outside the phone - client wrapper.
   if (pathOnly === "/v2/meals") {
     return <PreviewFrameClient initialPath={path} />;
   }

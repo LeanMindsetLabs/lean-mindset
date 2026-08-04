@@ -7,7 +7,7 @@ const OPTIONS: { id: MealsVariant; label: string }[] = [
   { id: "log2", label: "Log 2" },
 ];
 
-/** Self-contained styles — works in preview chrome (outside `.lm-v2`) and in-app. */
+/** Self-contained styles - works in preview chrome (outside `.lm-v2`) and in-app. */
 export function MealsVariantToggle({
   variant,
   onPick,

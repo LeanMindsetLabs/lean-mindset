@@ -155,7 +155,7 @@ export function HeartRateLineIcon() {
   );
 }
 
-/** Water hydration — droplet outline (not the EKG pulse). */
+/** Water hydration - droplet outline (not the EKG pulse). */
 export function WaterDropIcon() {
   return (
     <svg width="20" height="22" viewBox="0 0 20 22" fill="none" aria-hidden>

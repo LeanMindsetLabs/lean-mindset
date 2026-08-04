@@ -32,7 +32,7 @@ function V2MealsPageInner() {
   );
 }
 
-/** Variant chosen via `?variant=` (preview chrome) — no in-screen toggle. */
+/** Variant chosen via `?variant=` (preview chrome) - no in-screen toggle. */
 export default function V2MealsPage() {
   return (
     <Suspense fallback={<div className="meals-compare" />}>

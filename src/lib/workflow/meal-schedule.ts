@@ -1,4 +1,4 @@
-/** User's daily meal plan — order, time, and slot type (local until Supabase sync). */
+/** User's daily meal plan - order, time, and slot type (local until Supabase sync). */
 
 export type MealSlotType = "breakfast" | "lunch" | "dinner" | "snack";
 

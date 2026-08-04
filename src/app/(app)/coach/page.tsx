@@ -55,7 +55,7 @@ export default async function CoachInboxPage() {
                 <time className="shrink-0 text-[10px] text-foreground-subtle">
                   {item.last_check_in_at
                     ? formatShort(item.last_check_in_at)
-                    : "—"}
+                    : "-"}
                 </time>
               </div>
               <div className="mt-1.5 flex flex-wrap gap-1">

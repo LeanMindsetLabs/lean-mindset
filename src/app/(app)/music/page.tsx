@@ -143,7 +143,7 @@ export default function MusicPage() {
       </ul>
 
       <p className="text-center text-[10px] text-foreground-subtle">
-        Mock playlists — selection saved on this device. Spotify link later.
+        Mock playlists - selection saved on this device. Spotify link later.
       </p>
     </div>
   );

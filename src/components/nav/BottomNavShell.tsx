@@ -29,7 +29,7 @@ type BottomNavShellProps = {
 };
 
 /**
- * Bottom nav — Logo lockup · Meals · + · Train · Profile
+ * Bottom nav - Logo lockup · Meals · + · Train · Profile
  * Home tab: app-icon squircle (lm only); top/bottom aligned to icon top + label bottom on other tabs.
  */
 export function BottomNavShell({ active, interactive = false }: BottomNavShellProps) {
@@ -130,7 +130,7 @@ export function BottomNavShell({ active, interactive = false }: BottomNavShellPr
   );
 }
 
-/** Steaming cup — Variation 1 Meals icon */
+/** Steaming cup - Variation 1 Meals icon */
 function MealsNavIcon({ active }: { active: boolean }) {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -158,7 +158,7 @@ function MealsNavIcon({ active }: { active: boolean }) {
   );
 }
 
-/** Crossed dumbbells — Variation 1 Train icon */
+/** Crossed dumbbells - Variation 1 Train icon */
 function TrainNavIcon({ active }: { active: boolean }) {
   const fill = active ? "currentColor" : "none";
   const fillOpacity = active ? 0.15 : 0;

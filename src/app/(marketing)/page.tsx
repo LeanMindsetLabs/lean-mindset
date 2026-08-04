@@ -12,13 +12,13 @@ const STEPS = [
   {
     n: "01",
     title: "Pick a lab",
-    body: "Choose a 6-week focus — fat loss, energy, or composition.",
+    body: "Choose a 6-week focus - fat loss, energy, or composition.",
     img: "/marketing/sections/step-pick-lab.jpg",
   },
   {
     n: "02",
     title: "Follow the plan",
-    body: "Meals, training, and water targets — structured, not extreme.",
+    body: "Meals, training, and water targets - structured, not extreme.",
     img: "/marketing/sections/step-follow-plan.jpg",
   },
   {
@@ -36,14 +36,14 @@ const LAB_IMAGES: Record<string, string> = {
 };
 
 /**
- * Marketing pricing — imported from product-config (single source of truth).
+ * Marketing pricing - imported from product-config (single source of truth).
  */
 const PLANS = MEMBERSHIP_PLANS;
 
 const FAQS = [
   {
     q: "How long is a lab?",
-    a: "A Lab is a 6-week program (same idea as a challenge) — structured meals, training, water targets, and daily check-ins from day one.",
+    a: "A Lab is a 6-week program (same idea as a challenge) - structured meals, training, water targets, and daily check-ins from day one.",
   },
   {
     q: "Is this just another calorie tracker?",
@@ -51,7 +51,7 @@ const FAQS = [
   },
   {
     q: "Who is Lean Mindset for?",
-    a: "Busy adults who want fat loss or composition change with real food — not crash diets or endless spreadsheet tracking.",
+    a: "Busy adults who want fat loss or composition change with real food - not crash diets or endless spreadsheet tracking.",
   },
   {
     q: "What does coaching include?",
@@ -67,7 +67,7 @@ const FAQS = [
   },
 ] as const;
 
-/** Marketing `/` — hero, how it works, labs, pricing, FAQ, short footer */
+/** Marketing `/` - hero, how it works, labs, pricing, FAQ, short footer */
 export default async function MarketingPage() {
   let signedIn = false;
   try {
@@ -118,7 +118,7 @@ export default async function MarketingPage() {
             Mindset
           </h1>
           <p className="mt-4 max-w-md text-base font-medium leading-relaxed text-white/80 sm:text-lg">
-            Drop up to 20 lb in 6 weeks — real food, structured training, daily check-ins.
+            Drop up to 20 lb in 6 weeks - real food, structured training, daily check-ins.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">

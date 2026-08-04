@@ -1,4 +1,4 @@
-/** Lean Mindset color iterations — violet & blue palettes (industry references). */
+/** Lean Mindset color iterations - violet & blue palettes (industry references). */
 export type ThemeId = "a" | "b" | "c";
 
 export const themeClass: Record<ThemeId, string> = {
@@ -17,7 +17,7 @@ export const themes = {
     accentHover: "#8B5CF6",
     accentSoft: "rgba(124, 58, 237, 0.16)",
     description:
-      "Tailwind violet-600 — confident, premium, and common in coaching and membership products.",
+      "Tailwind violet-600 - confident, premium, and common in coaching and membership products.",
   },
   b: {
     id: "b" as const,
@@ -28,7 +28,7 @@ export const themes = {
     accentHover: "#3B82F6",
     accentSoft: "rgba(37, 99, 235, 0.16)",
     description:
-      "Tailwind blue-600 — active default. Health, productivity, and high-trust SaaS interfaces.",
+      "Tailwind blue-600 - active default. Health, productivity, and high-trust SaaS interfaces.",
     isDefault: true,
   },
   c: {
@@ -40,7 +40,7 @@ export const themes = {
     accentHover: "#818CF8",
     accentSoft: "rgba(99, 102, 241, 0.16)",
     description:
-      "Tailwind indigo-500 — bridges violet and blue; polished and widely used in top product teams.",
+      "Tailwind indigo-500 - bridges violet and blue; polished and widely used in top product teams.",
   },
 } as const;
 

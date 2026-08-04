@@ -36,7 +36,7 @@ export function QtyStepper({
         className="flex h-7 w-7 items-center justify-center rounded-full border border-border bg-background-elevated text-sm font-bold text-white hover:border-accent/50"
         aria-label="Decrease quantity"
       >
-        −
+        -
       </button>
       <span className="min-w-[1.75rem] text-center text-xs font-bold text-white">{formatQty(value)}</span>
       <button

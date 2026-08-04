@@ -22,7 +22,7 @@ export default async function MemberHomePage() {
           <p className="text-sm font-semibold">Start your 6-week lab</p>
           <p className="mt-0.5 text-xs text-foreground-muted">
             {founderOffer.active
-              ? "Pick a lab, choose a plan — join free."
+              ? "Pick a lab, choose a plan - join free."
               : "Pick a lab and choose a plan to get started."}
           </p>
           <div className="mt-2 flex gap-2">

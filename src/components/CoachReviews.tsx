@@ -76,7 +76,7 @@ function Stars({ n }: { n: number }) {
   );
 }
 
-/** Coach reviews UI — rating bars, filter pills, review cards */
+/** Coach reviews UI - rating bars, filter pills, review cards */
 export function CoachReviews({ compact = false }: { compact?: boolean }) {
   const [query, setQuery] = useState("");
   const [tag, setTag] = useState<string | null>(null);

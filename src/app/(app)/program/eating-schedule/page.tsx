@@ -17,7 +17,7 @@ export default function EatingSchedulePage() {
                 </span>
                 <span className="text-xs font-semibold text-accent">{meal.time}</span>
               </div>
-              <h2 className="mt-2 text-lg font-semibold">{meal.name.replace(/^Meal \d+ — /, "")}</h2>
+              <h2 className="mt-2 text-lg font-semibold">{meal.name.replace(/^Meal \d+ - /, "")}</h2>
               <p className="mt-0.5 text-xs text-foreground-subtle">{meal.focus}</p>
             </div>
 

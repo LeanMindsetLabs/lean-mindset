@@ -1,4 +1,4 @@
-/** Mock dashboard visuals — replaced by live trackers where wired */
+/** Mock dashboard visuals - replaced by live trackers where wired */
 
 export const weekAdherence = [
   { day: "M", pct: 90 },

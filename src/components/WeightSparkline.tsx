@@ -5,7 +5,7 @@ type Props = {
   label?: string;
 };
 
-/** Minimal SVG sparkline — no chart library. */
+/** Minimal SVG sparkline - no chart library. */
 export function WeightSparkline({
   weights,
   className = "",

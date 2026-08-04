@@ -1,9 +1,9 @@
-/** Program content derived from Weight-Loss-Coaching docs — UI/mock seed */
+/** Program content derived from Weight-Loss-Coaching docs - UI/mock seed */
 
 export const programMeta = {
   name: "Lean Mindset 6-Week Lab",
   promise:
-    "A 6-week high-touch program to drop up to 20 lb using structured 4-meal plans and daily accountability — no starving, no extremes.",
+    "A 6-week high-touch program to drop up to 20 lb using structured 4-meal plans and daily accountability - no starving, no extremes.",
   durationWeeks: 6,
   mealsPerDay: 4,
   waterLitersTarget: 3.5,
@@ -13,7 +13,7 @@ export const programGuide = {
   title: "Program Guide",
   phases: [
     {
-      name: "Phase 0 — Preparation",
+      name: "Phase 0 - Preparation",
       days: "2 pre-plan days",
       goal: "Get ready",
       bullets: [
@@ -25,8 +25,8 @@ export const programGuide = {
       ],
     },
     {
-      name: "Phase 1 — Foundation & Reset",
-      days: "Days 1–2",
+      name: "Phase 1 - Foundation & Reset",
+      days: "Days 1-2",
       goal: "Detox and reset",
       bullets: [
         "2-day structured reset plan",
@@ -36,8 +36,8 @@ export const programGuide = {
       ],
     },
     {
-      name: "Phase 2 — Start",
-      days: "Weeks 1–2",
+      name: "Phase 2 - Start",
+      days: "Weeks 1-2",
       goal: "Lock the rhythm",
       bullets: [
         "4-meal structure + portion control",
@@ -47,8 +47,8 @@ export const programGuide = {
       ],
     },
     {
-      name: "Phase 3 — Acceleration",
-      days: "Weeks 3–6",
+      name: "Phase 3 - Acceleration",
+      days: "Weeks 3-6",
       goal: "Fine-tune and sustain",
       bullets: [
         "Adjust portions based on progress",
@@ -62,17 +62,17 @@ export const programGuide = {
     "Follow meal times as closely as possible",
     "No skipping meals to “make up” for off-plan eating",
     "Drink your water target daily",
-    "Check in on schedule — consistency beats perfection",
+    "Check in on schedule - consistency beats perfection",
     "This is educational wellness guidance, not medical advice",
   ],
 };
 
 export const eatingSchedule = {
   title: "Eating Schedule",
-  subtitle: "4-Meal Precision Plan — sample day (customize per lab)",
+  subtitle: "4-Meal Precision Plan - sample day (customize per lab)",
   meals: [
     {
-      name: "Meal 1 — Breakfast",
+      name: "Meal 1 - Breakfast",
       time: "8:00 AM",
       focus: "Protein + complex carb",
       example: "Egg whites / tofu scramble, oats or fruit, black coffee or tea",
@@ -82,7 +82,7 @@ export const eatingSchedule = {
       ],
     },
     {
-      name: "Meal 2 — Midday",
+      name: "Meal 2 - Midday",
       time: "12:00 PM",
       focus: "Protein + vegetables",
       example: "Grilled chicken or lentils, large salad, olive oil drizzle",
@@ -92,7 +92,7 @@ export const eatingSchedule = {
       ],
     },
     {
-      name: "Meal 3 — Afternoon",
+      name: "Meal 3 - Afternoon",
       time: "3:30 PM",
       focus: "Protein + controlled carb",
       example: "Greek yogurt or cottage cheese, berries, handful of nuts",
@@ -102,7 +102,7 @@ export const eatingSchedule = {
       ],
     },
     {
-      name: "Meal 4 — Evening",
+      name: "Meal 4 - Evening",
       time: "7:00 PM",
       focus: "Protein + vegetables",
       example: "Fish or paneer, steamed veggies, optional small sweet potato",
@@ -159,7 +159,7 @@ export const groceryList = {
       aisle: "Pantry & fats",
       items: [
         "Extra virgin olive oil",
-        "Nuts (almonds, walnuts) — measured",
+        "Nuts (almonds, walnuts) - measured",
         "Spices / herbs / hot sauce",
         "Vinegar / lemon",
         "Herbal tea / black coffee",
@@ -170,7 +170,7 @@ export const groceryList = {
 
 export const supplements = {
   title: "Supplement Guide",
-  subtitle: "Evidence-informed suggestions — not medical advice",
+  subtitle: "Evidence-informed suggestions - not medical advice",
   disclaimer:
     "Consult your doctor before starting supplements, especially if pregnant, nursing, or on medication.",
   core: [
@@ -194,7 +194,7 @@ export const supplements = {
     {
       name: "Whey / plant protein",
       why: "Convenient protein when whole food is hard.",
-      how: "Use to hit protein at a meal — not a meal replacement lifestyle",
+      how: "Use to hit protein at a meal - not a meal replacement lifestyle",
     },
     {
       name: "Electrolytes (no sugar)",
@@ -206,45 +206,45 @@ export const supplements = {
 
 export const workouts = {
   title: "Workout List",
-  subtitle: "Schedule-adaptive plan — light early, HIIT later",
+  subtitle: "Schedule-adaptive plan - light early, HIIT later",
   weeks: [
     {
-      label: "Weeks 1–2 · Foundation",
+      label: "Weeks 1-2 · Foundation",
       sessions: [
         {
           name: "Walk + Core A",
-          duration: "25–30 min",
-          detail: "Brisk walk 20 min + 5–10 min plank variations / dead bugs",
+          duration: "25-30 min",
+          detail: "Brisk walk 20 min + 5-10 min plank variations / dead bugs",
         },
         {
           name: "Full Body Light",
           duration: "30 min",
-          detail: "Squats, push-ups (or incline), rows, glute bridges — 3 rounds",
+          detail: "Squats, push-ups (or incline), rows, glute bridges - 3 rounds",
         },
         {
           name: "Mobility Reset",
           duration: "20 min",
-          detail: "Hips, T-spine, hamstrings — recovery focus",
+          detail: "Hips, T-spine, hamstrings - recovery focus",
         },
       ],
     },
     {
-      label: "Weeks 3–6 · Acceleration",
+      label: "Weeks 3-6 · Acceleration",
       sessions: [
         {
           name: "HIIT Circuit A",
           duration: "25 min",
-          detail: "40s work / 20s rest × 8 — burpees, mountain climbers, squat jumps, punches",
+          detail: "40s work / 20s rest × 8 - burpees, mountain climbers, squat jumps, punches",
         },
         {
           name: "Strength Circuit B",
           duration: "35 min",
-          detail: "Lower + upper split emphasis — controlled tempo",
+          detail: "Lower + upper split emphasis - controlled tempo",
         },
         {
           name: "NEAT Day",
-          duration: "45–60 min",
-          detail: "Steps goal day — walk meetings, evening stroll",
+          duration: "45-60 min",
+          detail: "Steps goal day - walk meetings, evening stroll",
         },
       ],
     },
@@ -256,10 +256,10 @@ export const waterPlan = {
   subtitle: `Daily target: ~${programMeta.waterLitersTarget} L (adjust to your coach plan)`,
   checkpoints: [
     { time: "Upon waking", amount: "500 ml" },
-    { time: "Between Meal 1–2", amount: "750 ml" },
-    { time: "Between Meal 2–3", amount: "750 ml" },
-    { time: "Between Meal 3–4", amount: "750 ml" },
-    { time: "Evening (finish 60–90 min before bed)", amount: "500–750 ml" },
+    { time: "Between Meal 1-2", amount: "750 ml" },
+    { time: "Between Meal 2-3", amount: "750 ml" },
+    { time: "Between Meal 3-4", amount: "750 ml" },
+    { time: "Evening (finish 60-90 min before bed)", amount: "500-750 ml" },
   ],
   tips: [
     "Front-load water earlier in the day if evenings disrupt sleep",
@@ -275,12 +275,12 @@ export const trackers = {
     {
       name: "Weight",
       cadence: "Weekly (same day, morning, after bathroom)",
-      note: "Expect non-linear progress — trends matter more than single days",
+      note: "Expect non-linear progress - trends matter more than single days",
     },
     {
       name: "Measurements",
       cadence: "Every 2 weeks",
-      note: "Waist, hips, chest — optional photos with consent",
+      note: "Waist, hips, chest - optional photos with consent",
     },
     {
       name: "Meal adherence",
@@ -288,7 +288,7 @@ export const trackers = {
       note: "Yes/No or % for completing all 4 meals",
     },
     {
-      name: "Energy (1–10)",
+      name: "Energy (1-10)",
       cadence: "Daily",
       note: "Used in weekly review adjustments",
     },

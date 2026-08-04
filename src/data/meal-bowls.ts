@@ -69,7 +69,7 @@ function primaryBowlType(ref: GroceryItemRef): BowlTypeId | null {
   return null;
 }
 
-/** Oils, sauce, condiments, spices, nuts, seeds — add-ons for any bowl. */
+/** Oils, sauce, condiments, spices, nuts, seeds - add-ons for any bowl. */
 export function isBowlExtra(ref: GroceryItemRef): boolean {
   return ref.aisle === "Pantry & fats";
 }

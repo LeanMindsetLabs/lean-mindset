@@ -1,4 +1,4 @@
-/** Contextual marketing & product imagery — cropped card media, not full mockup collages */
+/** Contextual marketing & product imagery - cropped card media, not full mockup collages */
 
 export const media = {
   marketing: {
@@ -61,7 +61,7 @@ export const trainThumbs = [
   media.marketing.lift,
 ] as const;
 
-/** Moody B&W editorial covers — no UI screenshots, no baked-in title text */
+/** Moody B&W editorial covers - no UI screenshots, no baked-in title text */
 export const blogThumbs = [
   "/marketing/blog/editorial-01-athlete.jpg",
   "/marketing/blog/editorial-02-water.jpg",

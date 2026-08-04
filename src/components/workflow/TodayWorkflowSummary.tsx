@@ -33,7 +33,7 @@ export function TodayWorkflowSummary() {
           className="rounded-[10px] border border-border bg-background-elevated px-2.5 py-2 transition hover:border-accent/40"
         >
           <p className="font-bold text-white">
-            Train {progress.trainCompleted ? "✓" : "—"}
+            Train {progress.trainCompleted ? "✓" : "-"}
           </p>
           <p className="text-[10px] text-foreground-muted">
             {progress.trainCompleted ? "Done today" : "Not logged"}

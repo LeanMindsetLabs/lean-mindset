@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Lean Mindset — dark primary; light optional via html.light */
+/* Lean Mindset - dark primary; light optional via html.light */
 :root {
   --background: #000000;
   --background-elevated: #121212;
@@ -8,7 +8,7 @@
   --foreground: #ffffff;
   --foreground-muted: #a3a3a3;
   --foreground-subtle: #6b6b6b;
-  /* Trust Blue — default accent (Linear / iOS lane). Override with ?theme=a|c for previews. */
+  /* Trust Blue - default accent (Linear / iOS lane). Override with ?theme=a|c for previews. */
   --accent: #2563eb;
   --accent-hover: #3b82f6;
   --accent-soft: rgba(37, 99, 235, 0.16);
@@ -28,7 +28,7 @@
   /** Matches BottomNavShell outer height (tab row + bottom padding) */
   --nav-stack-height: calc(var(--nav-height) + max(6px, env(safe-area-inset-bottom, 0px)));
 
-  /* iPhone 15 — hard-coded mobile app width (393×852 logical) */
+  /* iPhone 15 - hard-coded mobile app width (393×852 logical) */
   --iphone-15-width: 393px;
   --iphone-15-height: 852px;
   --iphone-15-screen-radius: 47px;
@@ -50,7 +50,7 @@ html.light {
   --ring: #2563eb;
 }
 
-/* Iteration A — Royal Violet (Discord / Notion lane) */
+/* Iteration A - Royal Violet (Discord / Notion lane) */
 :root.theme-a,
 .lm-theme-a {
   --accent: #7c3aed;
@@ -68,7 +68,7 @@ html.light.theme-a {
   --ring: #7c3aed;
 }
 
-/* Iteration B — Trust Blue (Linear / iOS lane) */
+/* Iteration B - Trust Blue (Linear / iOS lane) */
 :root.theme-b,
 .lm-theme-b {
   --accent: #2563eb;
@@ -86,7 +86,7 @@ html.light.theme-b {
   --ring: #2563eb;
 }
 
-/* Iteration C — Indigo Pro (Figma / Stripe lane) */
+/* Iteration C - Indigo Pro (Figma / Stripe lane) */
 :root.theme-c,
 .lm-theme-c {
   --accent: #6366f1;
@@ -165,7 +165,7 @@ body {
   position: relative;
 }
 
-/* Member phone app — scroll without visible bars (iOS-like) */
+/* Member phone app - scroll without visible bars (iOS-like) */
 .lm-hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -203,7 +203,7 @@ body:has(.app-frame:not(.app-frame--wide))::-webkit-scrollbar {
   height: 0;
 }
 
-/* Blog: standard content width — not phone chrome in a black void */
+/* Blog: standard content width - not phone chrome in a black void */
 .app-frame.app-frame--wide {
   max-width: 720px;
 }
@@ -242,7 +242,7 @@ body:has(.app-frame:not(.app-frame--wide))::-webkit-scrollbar {
   background: radial-gradient(circle, rgba(var(--accent-rgb), 0.4) 0%, transparent 70%);
 }
 
-/* Moody B&W editorial thumbs — cohesive with dark + accent UI */
+/* Moody B&W editorial thumbs - cohesive with dark + accent UI */
 .lm-editorial-thumb {
   filter: grayscale(1) contrast(1.2) brightness(0.92);
 }

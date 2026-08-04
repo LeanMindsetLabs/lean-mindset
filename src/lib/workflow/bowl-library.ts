@@ -1,4 +1,4 @@
-/** User's saved bowl templates — build once, pick when logging meals. */
+/** User's saved bowl templates - build once, pick when logging meals. */
 
 import {
   BOWL_TYPES,

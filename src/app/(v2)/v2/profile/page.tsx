@@ -56,7 +56,7 @@ export default function V2ProfilePage() {
           <span>Adherence</span>
         </div>
         <div className="qstat">
-          <b>−1.6lb</b>
+          <b>-1.6lb</b>
           <span>This week</span>
         </div>
       </div>

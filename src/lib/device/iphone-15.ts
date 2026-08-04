@@ -1,4 +1,4 @@
-/** iPhone 15 — single source of truth for mobile app width and preview frame. */
+/** iPhone 15 - single source of truth for mobile app width and preview frame. */
 export const IPHONE_15 = {
   width: 393,
   height: 852,

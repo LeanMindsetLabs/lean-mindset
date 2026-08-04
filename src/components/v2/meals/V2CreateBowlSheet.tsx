@@ -89,7 +89,7 @@ export function V2CreateBowlSheet({ open, bowls, onClose, onSave }: Props) {
         </div>
 
         <span className="eyebrow muted" style={{ marginTop: 2 }}>
-          From your lab&apos;s grocery list — tap to add (1–2 items)
+          From your lab&apos;s grocery list - tap to add (1-2 items)
         </span>
         <div className="chip-row">
           {V2_BOWL_GROCERY[cat].map((item) => (

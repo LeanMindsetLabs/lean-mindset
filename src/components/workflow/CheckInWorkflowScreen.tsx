@@ -62,7 +62,7 @@ export function CheckInWorkflowScreen(props: AuthProps | GuestProps) {
             {previewMessage}
           </div>
           <div className="mt-2 max-w-[90%] rounded-2xl rounded-tl-sm bg-[#1a2438] px-3 py-2.5 text-xs text-[#94a3b8]">
-            Solid day — log in to send this to your coach and get feedback.
+            Solid day - log in to send this to your coach and get feedback.
           </div>
         </section>
 

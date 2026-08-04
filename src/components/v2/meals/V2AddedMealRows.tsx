@@ -28,7 +28,7 @@ function QtyBox({
       </div>
       <div className="qty-ctrl">
         <button type="button" className="step-btn" onClick={() => onSetQty(a.id, a.qty - 1)}>
-          −
+          -
         </button>
         <b>{a.qty}</b>
         <button type="button" className="step-btn plus" onClick={() => onSetQty(a.id, a.qty + 1)}>
@@ -45,7 +45,7 @@ export function V2AddedMealRows({ added, onSetQty }: Props) {
     return (
       <div className="added-layout">
         <div className="card-sub" style={{ padding: "2px 2px" }}>
-          Nothing added yet — tap a bowl or slide to pick foods.
+          Nothing added yet - tap a bowl or slide to pick foods.
         </div>
       </div>
     );

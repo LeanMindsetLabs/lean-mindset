@@ -103,14 +103,14 @@ export default function V2CheckInPage() {
               }
             >
               {changeToday == null
-                ? "—"
+                ? "-"
                 : `${changeToday > 0 ? "+" : ""}${changeToday.toFixed(1)} lb`}
             </b>
           </div>
           <div className="checkin-kv-row">
             <span>Total Lost</span>
             <b className="checkin-calc">
-              {lostTotal == null ? "—" : `${lostTotal.toFixed(1)} lb`}
+              {lostTotal == null ? "-" : `${lostTotal.toFixed(1)} lb`}
             </b>
           </div>
         </div>

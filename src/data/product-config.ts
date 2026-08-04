@@ -1,6 +1,6 @@
 /**
  * Single source of truth for pricing, plans, and access.
- * Marketing, onboarding, and checkout must import from here — do not duplicate.
+ * Marketing, onboarding, and checkout must import from here - do not duplicate.
  */
 
 /** Flip to false when Stripe checkout goes live. */
@@ -8,18 +8,18 @@ export const ALL_ACCESS_FREE = true;
 
 export const FREE_ACCESS = {
   label: "Free access",
-  pitch: "Join free — full access while we launch",
+  pitch: "Join free - full access while we launch",
   memberNote: "No charge while we're in launch",
 } as const;
 
-/** Used when ALL_ACCESS_FREE is false — first N members join free. */
+/** Used when ALL_ACCESS_FREE is false - first N members join free. */
 export const FOUNDER_OFFER = {
   freeMemberLimit: Number(process.env.NEXT_PUBLIC_FOUNDER_FREE_LIMIT ?? 5),
   label: "Founder offer",
   pitch: (remaining: number) =>
     remaining === 1
-      ? "Founder offer — 1 spot left · join FREE"
-      : `Founder offer — ${remaining} of ${FOUNDER_OFFER.freeMemberLimit} spots left · join FREE`,
+      ? "Founder offer - 1 spot left · join FREE"
+      : `Founder offer - ${remaining} of ${FOUNDER_OFFER.freeMemberLimit} spots left · join FREE`,
 } as const;
 
 export function isFreeAccess(): boolean {

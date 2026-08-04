@@ -18,7 +18,7 @@ npm run dev
 
 5. In Supabase SQL Editor, run `supabase/schema.sql`, then `supabase/checkin.sql`
 
-## Promote coach (v1 — one account owner)
+## Promote coach (v1 - one account owner)
 
 ```sql
 update public.profiles

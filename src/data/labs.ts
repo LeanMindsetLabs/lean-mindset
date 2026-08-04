@@ -16,7 +16,7 @@ export const labs: Lab[] = [
   {
     slug: "summer-lab",
     name: "Summer Lab",
-    tagline: "Drop 15–20 lb before vacation — structured, social-life friendly.",
+    tagline: "Drop 15-20 lb before vacation - structured, social-life friendly.",
     durationWeeks: 6,
     focus: "Fat loss + energy",
     level: "All levels",
@@ -35,7 +35,7 @@ export const labs: Lab[] = [
   {
     slug: "bikini-body-lab",
     name: "Bikini Body Lab",
-    tagline: "Tone, tighten, and feel confident — real food, no extremes.",
+    tagline: "Tone, tighten, and feel confident - real food, no extremes.",
     durationWeeks: 6,
     focus: "Body composition",
     level: "Intermediate",
@@ -92,7 +92,7 @@ export const labs: Lab[] = [
   {
     slug: "post-holiday-reset",
     name: "Post-Holiday Reset",
-    tagline: "Reset after the season — structure, hydration, and quick wins.",
+    tagline: "Reset after the season - structure, hydration, and quick wins.",
     durationWeeks: 6,
     focus: "Reset + habits",
     level: "Beginner",
@@ -111,7 +111,7 @@ export const labs: Lab[] = [
   {
     slug: "foundation-lab",
     name: "Foundation Lab",
-    tagline: "The core Lean Mindset 6-week system — no starving, no chemicals.",
+    tagline: "The core Lean Mindset 6-week system - no starving, no chemicals.",
     durationWeeks: 6,
     focus: "Core program",
     level: "All levels",

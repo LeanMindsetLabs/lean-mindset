@@ -1,4 +1,4 @@
-/** Per-meal logging options — proteins, sides, bowl size in cups. */
+/** Per-meal logging options - proteins, sides, bowl size in cups. */
 
 export type MealLogOption = { id: string; label: string };
 

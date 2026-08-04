@@ -106,7 +106,7 @@ export default function WorkoutLogsPage() {
           <input
             value={rpe}
             onChange={(e) => setRpe(e.target.value)}
-            placeholder="RPE 1–10"
+            placeholder="RPE 1-10"
             inputMode="numeric"
             className="rounded-[var(--lm-radius-md)] border border-border bg-background px-3 py-2 text-sm outline-none focus:border-accent"
           />

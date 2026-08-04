@@ -169,7 +169,7 @@ async function trySoftParseCheckIn(
       water: parsed.water,
       meals: parsed.meals,
     });
-    // Ignore parse/insert failures — raw message already saved
+    // Ignore parse/insert failures - raw message already saved
     void error;
   } catch {
     // Soft-parse must never block send

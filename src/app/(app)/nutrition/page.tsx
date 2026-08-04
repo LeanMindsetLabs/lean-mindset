@@ -8,7 +8,7 @@ import { DailyWorkflowStrip } from "@/components/workflow/DailyWorkflow";
 import { MealsDaySection } from "@/components/workflow/MealsDaySection";
 import { NutritionMealStats } from "@/components/workflow/NutritionMealStats";
 
-/** Sandow-style nutrition + honest recovery card — compact phone viewport */
+/** Sandow-style nutrition + honest recovery card - compact phone viewport */
 export default async function NutritionPage() {
   const metrics = await getMemberMetrics();
   const mealsDone = metrics.mealsCount || nutritionRingsMock.mealsDone;
@@ -58,10 +58,10 @@ export default async function NutritionPage() {
             </p>
             <p className="mt-1 text-xs text-foreground-muted">
               {kcalPct >= 85 && kcalPct <= 110
-                ? "You're on track for your calorie goal today — keep it up."
+                ? "You're on track for your calorie goal today - keep it up."
                 : kcalPct < 85
                   ? "Room left in today's fuel budget."
-                  : "Slightly over target — fine if protein is solid."}
+                  : "Slightly over target - fine if protein is solid."}
             </p>
             <Link href="/check-in" className="mt-2 inline-flex text-xs font-bold text-accent">
               Log meals →

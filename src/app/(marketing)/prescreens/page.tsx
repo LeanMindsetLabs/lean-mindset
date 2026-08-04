@@ -1,5 +1,5 @@
 /**
- * Pre-screens only — static mocks for review. Not wired to app data.
+ * Pre-screens only - static mocks for review. Not wired to app data.
  * All frames use iPhone 15 dimensions (393×852) via PhoneFrame.
  */
 import type { CSSProperties } from "react";
@@ -38,23 +38,23 @@ export default function PrescreensPage() {
         </p>
 
         <div className="mt-10 flex flex-col gap-16">
-          <ScreenBlock id="home" title="Home — reference layout (Lean Mindset labels)" note="Exact structure: date + streak, hello, search + avatar, hero score card, horizontal metric cards, activity ring.">
+          <ScreenBlock id="home" title="Home - reference layout (Lean Mindset labels)" note="Exact structure: date + streak, hello, search + avatar, hero score card, horizontal metric cards, activity ring.">
             <HomeReferenceMock />
           </ScreenBlock>
 
-          <ScreenBlock id="meals" title="Meals — nutrition day" note="Calorie ring + macro bars + photo + short ellipse meal rows (as built).">
+          <ScreenBlock id="meals" title="Meals - nutrition day" note="Calorie ring + macro bars + photo + short ellipse meal rows (as built).">
             <MealsMock />
           </ScreenBlock>
 
-          <ScreenBlock id="checkin" title="Check-in — daily chat" note="Center + action; structured coach thread.">
+          <ScreenBlock id="checkin" title="Check-in - daily chat" note="Center + action; structured coach thread.">
             <CheckInMock />
           </ScreenBlock>
 
-          <ScreenBlock id="train" title="Train — this lab only" note="Phase sections + adherence + session cards.">
+          <ScreenBlock id="train" title="Train - this lab only" note="Phase sections + adherence + session cards.">
             <TrainMock />
           </ScreenBlock>
 
-          <ScreenBlock id="program" title="Program — 6-week lab hub" note="Grocery, guide, water, eating schedule.">
+          <ScreenBlock id="program" title="Program - 6-week lab hub" note="Grocery, guide, water, eating schedule.">
             <ProgramMock />
           </ScreenBlock>
         </div>
@@ -303,7 +303,7 @@ function HeroPlusIcon() {
   );
 }
 
-/** Reference: blue outline heart — no badge background */
+/** Reference: blue outline heart - no badge background */
 function HeartOutlineIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden>
@@ -317,7 +317,7 @@ function HeartOutlineIcon() {
   );
 }
 
-/** Reference: red EKG line — no badge background */
+/** Reference: red EKG line - no badge background */
 function HeartRateLineIcon() {
   return (
     <svg width="24" height="16" viewBox="0 0 24 16" fill="none" aria-hidden>
@@ -404,7 +404,7 @@ function CheckInMock() {
           Weight 178.4 · Meals 2/4 · Water 2.3L
         </div>
         <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-[#1a2438] px-3 py-2 text-xs text-white/70">
-          Solid day — protein at midday was light. Add eggs at afternoon meal.
+          Solid day - protein at midday was light. Add eggs at afternoon meal.
         </div>
       </div>
       <div className="mt-4 rounded-full border border-white/15 bg-[#141e32] px-4 py-3 text-xs text-white/40">
@@ -420,9 +420,9 @@ function TrainMock() {
       <h1 className="font-display text-2xl uppercase">Train</h1>
       <p className="text-xs text-white/45">Foundation → acceleration</p>
       <div className="mt-3 rounded-2xl bg-[#141e32] p-3">
-        <p className="text-xs text-[#60a5fa]">WEEKS 1–2</p>
+        <p className="text-xs text-[#60a5fa]">WEEKS 1-2</p>
         <p className="font-semibold">Walk + Core A</p>
-        <p className="text-[10px] text-white/45">25–30 min · Beginner</p>
+        <p className="text-[10px] text-white/45">25-30 min · Beginner</p>
       </div>
       <div className="mt-2 rounded-2xl bg-[#141e32] p-3 opacity-80">
         <p className="font-semibold">Full Body Light</p>

@@ -1,4 +1,4 @@
-/** Mock lab-day dashboard metrics — live check_ins overlay when available */
+/** Mock lab-day dashboard metrics - live check_ins overlay when available */
 export const dashboardMock = {
   day: 12,
   totalDays: 42,

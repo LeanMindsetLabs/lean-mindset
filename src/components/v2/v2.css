@@ -1,4 +1,4 @@
-/* Lean Mindset v2 — scoped from leanmindset-redesign-v2.html */
+/* Lean Mindset v2 - scoped from leanmindset-redesign-v2.html */
 
 .lm-v2 {
   --bg: #05070d;
@@ -29,7 +29,7 @@
   max-height: 100dvh;
   display: flex;
   flex-direction: column;
-  /* V1 AppShell blue wash — slightly stronger top so it reads behind dense cards */
+  /* V1 AppShell blue wash - slightly stronger top so it reads behind dense cards */
   background:
     radial-gradient(ellipse 100% 70% at 50% -5%, rgba(59, 130, 246, 0.55), transparent 58%),
     linear-gradient(
@@ -1476,7 +1476,7 @@ html:has(.lm-v2) body > div {
   top: 0;
   left: 0;
   right: 0;
-  /* Leave bottom nav clear — sheets sit above it */
+  /* Leave bottom nav clear - sheets sit above it */
   bottom: var(--v2-nav-h);
   background: rgba(0, 0, 0, 0.6);
   z-index: 50;
@@ -1755,7 +1755,7 @@ html:has(.lm-v2) body > div {
   margin-top: 2px;
 }
 
-/* Compact fuel-card on New · Log only — reclaim height without crunching body gaps */
+/* Compact fuel-card on New · Log only - reclaim height without crunching body gaps */
 .lm-v2 .screen.meals-log .fuel-card {
   padding: 5px 10px;
   gap: 8px;
@@ -1883,7 +1883,7 @@ html:has(.lm-v2) body > div {
   flex-shrink: 0;
 }
 
-/* Log · v3: no bowl chips / added rows — roomier top + larger fuel ring */
+/* Log · v3: no bowl chips / added rows - roomier top + larger fuel ring */
 .lm-v2 .screen.meals-log-v3 {
   overflow: hidden;
   gap: 14px;
@@ -2021,7 +2021,7 @@ html:has(.lm-v2) body > div {
   padding-bottom: 11px;
 }
 
-/* Meals Log (New · Log + Log · v3) — no white outlines on dark chrome */
+/* Meals Log (New · Log + Log · v3) - no white outlines on dark chrome */
 .lm-v2 .screen.meals-log .fuel-card .ring,
 .lm-v2 .screen.meals-log-v3 .fuel-card .ring {
   background: conic-gradient(
@@ -2111,7 +2111,7 @@ html:has(.lm-v2) body > div {
   pointer-events: none;
 }
 
-/* Meal time pickers — 3 mains + 2 narrow snacks; all 5 fit, no hscroll */
+/* Meal time pickers - 3 mains + 2 narrow snacks; all 5 fit, no hscroll */
 .lm-v2 .meal-card-row {
   display: flex;
   gap: 6px;
@@ -2121,7 +2121,7 @@ html:has(.lm-v2) body > div {
   min-height: 0;
 }
 
-/* Pre–fuel-chrome picker look: 14px radius, blue-tint stroke (inherits --card bg) */
+/* Pre-fuel-chrome picker look: 14px radius, blue-tint stroke (inherits --card bg) */
 .lm-v2 .meal-card.meal-card-pick {
   height: 128px;
   cursor: pointer;
@@ -2150,7 +2150,7 @@ html:has(.lm-v2) body > div {
   height: 10px;
 }
 
-/* Breakfast / Lunch / Dinner — share remaining width */
+/* Breakfast / Lunch / Dinner - share remaining width */
 .lm-v2 .meal-card.meal-card-pick.meal-card-main {
   flex: 1.2 1 0;
   padding: 10px 8px 8px;
@@ -2194,7 +2194,7 @@ html:has(.lm-v2) body > div {
   flex-shrink: 0;
 }
 
-/* Snacks — fixed narrow columns; two-row sideways vertical (Snack | time) */
+/* Snacks - fixed narrow columns; two-row sideways vertical (Snack | time) */
 .lm-v2 .meal-card.meal-card-pick.meal-card-snack {
   flex: 0 0 44px;
   width: 44px;
@@ -2225,7 +2225,7 @@ html:has(.lm-v2) body > div {
   width: 100%;
 }
 
-/* Shrink-to-fit stack — tight gap, not stretched to card edges */
+/* Shrink-to-fit stack - tight gap, not stretched to card edges */
 .lm-v2 .meal-card.meal-card-pick.meal-card-snack .meal-body-snack-stack {
   display: flex;
   flex-direction: column;
@@ -2298,7 +2298,7 @@ html:has(.lm-v2) body > div {
   color: var(--text-faint);
 }
 
-/* Deprecated: never use food-grid for meal food pickers — keep as hscroll alias */
+/* Deprecated: never use food-grid for meal food pickers - keep as hscroll alias */
 .lm-v2 .food-grid {
   display: flex;
   flex-direction: row;

@@ -1,4 +1,4 @@
-/** Shared grocery item keys — same format as GroceryChecklist. */
+/** Shared grocery item keys - same format as GroceryChecklist. */
 
 export const GROCERY_STORAGE_KEY = "lm-grocery-list";
 

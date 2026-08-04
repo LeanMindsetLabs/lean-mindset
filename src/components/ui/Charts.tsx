@@ -108,7 +108,7 @@ export function SparkBars({
   );
 }
 
-/** Area sparkline — weight / score trend */
+/** Area sparkline - weight / score trend */
 export function AreaSparkline({
   values,
   width = 280,
@@ -226,7 +226,7 @@ export function CalorieGauge({
   );
 }
 
-/** Radar / spider score — Sandow-style breakdown */
+/** Radar / spider score - Sandow-style breakdown */
 export function RadarScore({
   axes,
   size = 200,

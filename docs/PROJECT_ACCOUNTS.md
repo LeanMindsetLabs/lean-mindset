@@ -1,4 +1,4 @@
-# Lean Mindset — project accounts (this repo only)
+# Lean Mindset - project accounts (this repo only)
 
 **Hardcoded identity:** `config/project-credentials.ts`  
 **Full registry:** `../docs/CREDENTIAL_REGISTRY.md` (workspace root)
@@ -50,6 +50,6 @@ npm run push:lean-mindset
 - `COACH_EMAILS=LeanMindsetLabs@gmail.com`
 - `LEAN_MINDSET_GITHUB_CLI_USER` (after first `gh auth login`)
 
-Passwords: Supabase Dashboard only — not in env or git.
+Passwords: Supabase Dashboard only - not in env or git.
 
 Supabase SQL: `supabase/SETUP_README.md`

@@ -23,7 +23,7 @@ export default function TrainPage() {
       <TrainTodayCard
         sessionId="walk-core-a"
         name="Walk + Core A"
-        duration="25–30 min"
+        duration="25-30 min"
         level="Beginner"
         focus="NEAT + midline"
       />
@@ -33,8 +33,8 @@ export default function TrainPage() {
         <WeekBars data={weekAdherence} />
       </section>
 
-      <PhaseBlock label="Weeks 1–2 · Foundation" sessions={foundation} offset={0} />
-      <PhaseBlock label="Weeks 3–6 · Acceleration" sessions={acceleration} offset={3} />
+      <PhaseBlock label="Weeks 1-2 · Foundation" sessions={foundation} offset={0} />
+      <PhaseBlock label="Weeks 3-6 · Acceleration" sessions={acceleration} offset={3} />
     </div>
   );
 }

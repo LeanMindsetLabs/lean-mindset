@@ -126,7 +126,7 @@ export function MetricTile({
   return <div className={cls}>{inner}</div>;
 }
 
-/** Photo or gradient card — never empty gray */
+/** Photo or gradient card - never empty gray */
 export function MediaCard({
   gradient,
   image,

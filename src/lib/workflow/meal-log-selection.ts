@@ -1,4 +1,4 @@
-/** Meal log selection — bowl picks + individual items with quantities. */
+/** Meal log selection - bowl picks + individual items with quantities. */
 
 import { bowlsToLegacyFields, emptyMealBowls, type MealBowls } from "@/data/meal-bowls";
 import type { GroceryItemRef } from "@/lib/grocery/grocery-keys";

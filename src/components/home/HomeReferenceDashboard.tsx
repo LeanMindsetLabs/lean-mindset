@@ -55,7 +55,7 @@ function formatHeaderDate(d = new Date()) {
   }).format(d);
 }
 
-/** Approved home layout — wired to lab metrics for daily workflow */
+/** Approved home layout - wired to lab metrics for daily workflow */
 export function HomeReferenceDashboard({
   firstName,
   metrics,

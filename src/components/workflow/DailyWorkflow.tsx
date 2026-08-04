@@ -9,7 +9,7 @@ const STEPS: { id: WorkflowStepId; label: string; href: string; short: string }[
   { id: "program", label: "Program", href: "/program", short: "Lab" },
 ];
 
-/** Compact daily loop strip — highlights current step */
+/** Compact daily loop strip - highlights current step */
 export function DailyWorkflowStrip({ active }: { active: WorkflowStepId }) {
   const activeIndex = STEPS.findIndex((s) => s.id === active);
 

@@ -20,7 +20,7 @@ type PhoneFrameProps = {
 
 /**
  * iPhone 15 device chrome for pre-screens, demos, and agent-driven UI previews.
- * Not used for production app shell — preview/documentation only.
+ * Not used for production app shell - preview/documentation only.
  */
 export function PhoneFrame({
   children,

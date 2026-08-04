@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(getSiteOrigin()),
   title: "LeanMindset",
   description:
-    "6-week structured weight-loss labs — nutrition, training, and daily accountability.",
+    "6-week structured weight-loss labs - nutrition, training, and daily accountability.",
   applicationName: "LeanMindset",
   appleWebApp: {
     capable: true,

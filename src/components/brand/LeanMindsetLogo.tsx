@@ -4,14 +4,14 @@ import { NAV_TAB_SLOT_H } from "@/components/nav/nav-metrics";
 
 export { NAV_TAB_SLOT_H };
 
-/** Official brand colors — match Logo_leanmindset dark lockup */
+/** Official brand colors - match Logo_leanmindset dark lockup */
 const BRAND_BLUE = "#2F5FD1";
 /** Icon / “mindset” blue on dark UI (same family as app icon) */
 const BRAND_BLUE_LIGHT = "#4A86E8";
 const BRAND_INK = "#12151A";
 
 /**
- * Official app mark (squircle + white “lm”) — user-provided master.
+ * Official app mark (squircle + white “lm”) - user-provided master.
  * Replaces the old CSS circle + gray “mindset” header lockup.
  */
 const ICON_SRC = "/brand/lm-app-icon.png";
@@ -21,7 +21,7 @@ type LogoTone = "dark" | "light";
 
 type LeanMindsetLogoProps = {
   variant?: LogoVariant;
-  /** Icon size in px — default matches bottom App tab (`NAV_TAB_SLOT_H`). */
+  /** Icon size in px - default matches bottom App tab (`NAV_TAB_SLOT_H`). */
   iconSize?: number;
   /** dark = white lean + blue mindset; light = ink lean + brand mindset */
   tone?: LogoTone;
@@ -111,7 +111,7 @@ export function LeanMindsetLogo({
 }
 
 /**
- * Bottom nav App tab — official squircle icon only (no wordmark).
+ * Bottom nav App tab - official squircle icon only (no wordmark).
  * Height = NAV_TAB_SLOT_H (40).
  */
 export function LeanMindsetNavAppIcon({

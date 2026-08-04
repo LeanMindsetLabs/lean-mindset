@@ -80,13 +80,13 @@ export function OnboardingWizard({
           <LeanMindsetLogo variant="lockup" className="justify-center" />
           <h1 className="text-center text-2xl font-bold text-white">Welcome to your lab</h1>
           <p className="text-center text-sm leading-relaxed text-[#94a3b8]">
-            Six weeks. Four meals a day. Daily coach check-ins. No crash diets — just a clear plan
+            Six weeks. Four meals a day. Daily coach check-ins. No crash diets - just a clear plan
             you can follow.
           </p>
           <ul className="space-y-2 rounded-[18px] border border-[#64748b]/28 bg-[#0d1118] p-4 text-sm text-[#94a3b8]">
             <li>✓ Pick your 6-week lab focus</li>
             <li>✓ Choose how you join</li>
-            <li>✓ Create your account — then your daily loop opens</li>
+            <li>✓ Create your account - then your daily loop opens</li>
           </ul>
           {founderFree && (
             <p className="rounded-full border border-[#2563eb]/40 bg-[#2563eb]/10 px-3 py-2 text-center text-xs font-semibold text-[#60a5fa]">
@@ -132,19 +132,19 @@ export function OnboardingWizard({
               {ALL_ACCESS_FREE ? (
                 <>
                   <strong className="text-white">Everything is free for now.</strong> Pick any plan
-                  — no payment required.
+                  - no payment required.
                 </>
               ) : (
                 <>
                   You&apos;re in the first {founderOffer.remaining} founder spot
-                  {founderOffer.remaining === 1 ? "" : "s"} —{" "}
+                  {founderOffer.remaining === 1 ? "" : "s"} -{" "}
                   <strong className="text-white">$0 today</strong>. Regular pricing applies after the
                   first {founderOffer.limit} members.
                 </>
               )}
             </p>
           ) : (
-            <p className="text-sm text-[#64748b]">Founder spots are full — standard pricing.</p>
+            <p className="text-sm text-[#64748b]">Founder spots are full - standard pricing.</p>
           )}
           <ul className="flex flex-col gap-2">
             {MEMBERSHIP_PLANS.map((plan) => {

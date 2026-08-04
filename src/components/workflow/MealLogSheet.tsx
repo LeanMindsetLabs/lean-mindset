@@ -195,7 +195,7 @@ function MealLogSheetForm({
         {readyBowls.length > 0 ? (
           <ol className="mt-2 list-decimal space-y-0.5 pl-4 text-[10px] text-foreground-muted">
             <li>Tap a saved bowl (or + Bowl)</li>
-            <li>Use − / + for how many</li>
+            <li>Use - / + for how many</li>
             <li>Add fruit, nuts, or snacks below</li>
           </ol>
         ) : null}
@@ -215,7 +215,7 @@ function MealLogSheetForm({
                     items={availableBowls.map((b) => ({
                       key: b.id,
                       aisle: b.type,
-                      label: `${savedBowlTitle(b, library)} — ${savedBowlSubtitle(b)}`,
+                      label: `${savedBowlTitle(b, library)} - ${savedBowlSubtitle(b)}`,
                     }))}
                     onPick={(ref) => addBowlPick(ref.key)}
                     disabled={!availableBowls.length}
@@ -284,7 +284,7 @@ function MealLogSheetForm({
                   </div>
                   {activeExtras.filter((e) => !isBowlExtra(e)).length === 0 ? (
                     <p className="rounded-[10px] border border-dashed border-border px-3 py-2 text-center text-[10px] text-foreground-muted">
-                      Banana ½, apple, berries — tap + Fruit.
+                      Banana ½, apple, berries - tap + Fruit.
                     </p>
                   ) : (
                     <div className="flex flex-col gap-1.5">
@@ -316,7 +316,7 @@ function MealLogSheetForm({
                   </div>
                   {activeExtras.filter((e) => isBowlExtra(e)).length === 0 ? (
                     <p className="rounded-[10px] border border-dashed border-border px-3 py-2 text-center text-[10px] text-foreground-muted">
-                      Almonds, walnuts, seeds — tap + Nuts (count by 1).
+                      Almonds, walnuts, seeds - tap + Nuts (count by 1).
                     </p>
                   ) : (
                     <div className="flex flex-col gap-1.5">

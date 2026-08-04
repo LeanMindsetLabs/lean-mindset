@@ -74,7 +74,7 @@ export function BowlLibrarySheet({
                 My bowls
               </h2>
               <p className="mt-0.5 text-[10px] text-foreground-muted">
-                Build bowls once — pick them when you log meals.
+                Build bowls once - pick them when you log meals.
               </p>
             </div>
             <button
